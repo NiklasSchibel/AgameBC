@@ -29,19 +29,10 @@ public class BackendApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-<<<<<<< HEAD
         final String encodedPassword = encoder.encode("basti");
 
         final UserMongo user = UserMongo.builder()
                 .username("basti")
-=======
-
-        final String encodedPassword = encoder.encode("niels");
-
-        final UserMongo user = UserMongo.builder()
-                .username("niels")
-
->>>>>>> 99051e78162ae21141e0a60a00bd52f7af2231bd
                 .password(encodedPassword)
                 .rights(List.of(MongoUserDetailsService.AUTHORITY_API_READWRITE)).build();
 
