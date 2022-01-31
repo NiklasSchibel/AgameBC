@@ -14,6 +14,7 @@ import {LoginData} from "../models/LoginData";
 import {loginRequest} from "../services/RequestService";
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../context/AuthProvider";
+import NavBar from "../components/NavBar";
 
 
 interface State {
@@ -83,6 +84,7 @@ export default function LoginPage() {
 
     return (
         <div className="LoginPage">
+            <NavBar/>
             <h1>Login:</h1>
             <div className="InputData">
                 <TextField
