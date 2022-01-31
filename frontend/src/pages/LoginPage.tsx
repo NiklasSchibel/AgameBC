@@ -11,7 +11,7 @@ import React, {
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import './LoginPage.scss';
 import {LoginData} from "../models/LoginData";
-import {loginRequest} from "../service/requestserviceTest";
+import {loginRequest} from "../services/RequestService";
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../context/AuthProvider";
 
