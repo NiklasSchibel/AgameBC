@@ -28,11 +28,11 @@ public class BackendApplication {
 //    PasswordEncoder encoder = new Argon2PasswordEncoder();
 //
 //    @Override
-//    public void run(String... args) {
-//        final String encodedPassword = encoder.encode("basti");
+//    public void run(String... args) throws Exception {
+//        final String encodedPassword = encoder.encode("klaus");
 //
 //        final UserMongo user = UserMongo.builder()
-//                .username("basti")
+//                .username("klaus")
 //                .password(encodedPassword)
 //                .rights(List.of(MongoUserDetailsService.AUTHORITY_API_READWRITE)).build();
 //
