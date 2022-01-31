@@ -16,11 +16,6 @@ import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../context/AuthProvider";
 
 
-interface LoginPageProps {
-    token: String,
-    setToken: Dispatch<SetStateAction<string>>
-}
-
 interface State {
     amount: string;
     password: string;
@@ -67,14 +62,12 @@ export default function LoginPage() {
     };
 
     const onSubmitButton: () => void = () => {
-        console.log("This is the Username: " + usernameValue)
+        console.log("This is the Username: " + usernameValue + ", for the LoginRequest")
         const login: LoginData = {
             name: usernameValue,
             password: values.password,
         };
         loginRequest(login)
-            // .then((response: string)=>(setToken(response)))
-            // .then(response => response.data)
             .then((data)=>{
                 setJwt(data)
                 navigate('/main')
