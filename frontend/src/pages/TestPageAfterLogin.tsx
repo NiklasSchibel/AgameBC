@@ -6,6 +6,9 @@ import {AuthContext} from "../context/AuthProvider";
 export default function TestPageAfterLogin () {
     const {jwtDecoded} = useContext(AuthContext)
 
+    //@ts-ignore
+    const ExpirationDate = new Date(jwtDecoded?.exp * 1000);
+
     return (
         <div className="App">
             <NavBar/>
@@ -14,6 +17,8 @@ export default function TestPageAfterLogin () {
             </header>
             <div>Expiration Token number:</div>
             <div> {jwtDecoded?.exp}</div>
+            <div>Expiration Date:</div>
+            <div> {ExpirationDate.toTimeString()}</div>
         </div>
     )
 }
