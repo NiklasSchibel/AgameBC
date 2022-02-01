@@ -5,9 +5,13 @@ import {AuthContext} from "../context/AuthProvider";
 
 export default function TestPageAfterLogin () {
     const {jwtDecoded} = useContext(AuthContext)
-
     //@ts-ignore
-    const ExpirationDate = new Date(jwtDecoded?.exp * 1000);
+    const DateNumber: number = jwtDecoded?.exp *1000
+    //@ts-ignore
+    const ExpirationDate = new Date(DateNumber);
+
+    //paseInt wahrscheinlich falsch
+    // const ExpirationNumber = parseInt(ExpirationDate.toString());
 
     return (
         <div className="App">
@@ -16,9 +20,13 @@ export default function TestPageAfterLogin () {
                 TestPage for Login
             </header>
             <div>Expiration Token number:</div>
-            <div> {jwtDecoded?.exp}</div>
-            <div>Expiration Date:</div>
+            <div> {DateNumber}</div>
+            <div>Expiration Date.toTimeString:</div>
             <div> {ExpirationDate.toTimeString()}</div>
+            <div>Expiration Date.toString:</div>
+            <div> {ExpirationDate.toString()}</div>
+            <div>Expiration Token number:</div>
+            <div>{ExpirationDate.getTime()}</div>
         </div>
     )
 }
