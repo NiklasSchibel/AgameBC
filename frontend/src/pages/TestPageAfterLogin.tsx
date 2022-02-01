@@ -10,6 +10,8 @@ export default function TestPageAfterLogin () {
     //@ts-ignore
     const ExpirationDate = new Date(DateNumber);
 
+    const now = new Date();
+
     //paseInt wahrscheinlich falsch
     // const ExpirationNumber = parseInt(ExpirationDate.toString());
 
@@ -27,6 +29,12 @@ export default function TestPageAfterLogin () {
             <div> {ExpirationDate.toString()}</div>
             <div>Expiration Token number:</div>
             <div>{ExpirationDate.getTime()}</div>
+            <div>Date now date:</div>
+            <div>{now.toString()}</div>
+            <div>Date now number:</div>
+            <div>{now.getTime()}</div>
+            <div>Date now diff number:</div>
+            <div>{ExpirationDate.getTime() - now.getTime()}</div>
         </div>
     )
 }
