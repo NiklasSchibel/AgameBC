@@ -1,20 +1,17 @@
 import Card from "./Card";
 import "./Gallery.scss"
 import {useEffect, useState} from "react";
-import {fetch10Characters, fetch1Characters} from "../services/apiService";
+import {fetch10Characters, fetch1Characters} from "../services/RequestService";
 
 export default function Gallery(){
-    // const [chars ,setChars] = useState()
     const [Animals10, setAnimals10] = useState<any>([]);
     const [Animals1, setAnimals1] = useState<any>([]);
 
     useEffect( () => {
-        // setupChars().catch(e => console.log(e.message))
         setupAnimals1().catch(e => console.log(e.message))
         setupAnimals10().catch(e => console.log(e.message))
     },[])
 
-    // const setupChars = () => getCharacters().then(data => setChars(data.results))
 
     const setupAnimals1 = () => fetch1Characters().then(data => setAnimals1(data))
     const setupAnimals10 = () => fetch10Characters().then(data => setAnimals10(data))
