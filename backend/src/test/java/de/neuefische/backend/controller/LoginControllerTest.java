@@ -40,7 +40,7 @@ class LoginControllerTest {
 
 
     //Hilfsfunktionen
-    private UserMongo setupValidUser(){
+    private UserMongo setupUser(){
         return UserMongo.builder()
                 .username("some-user")
                 .password(passwordEncoder.encode("secretPassword"))
@@ -57,7 +57,7 @@ class LoginControllerTest {
         //Given
         when(mongoUserRepository
                 .findByUsername("some-user"))
-                .thenReturn(Optional.of(setupValidUser()));
+                .thenReturn(Optional.of(setupUser()));
 
         LoginData loginData = new LoginData("some-user","secretPassword",15);
 
@@ -75,32 +75,34 @@ class LoginControllerTest {
         //THEN
         assertNotNull(token);
     }
+
+
+    @Test
+    void loginContollerTestGetBadRequestHTTPStatusWithInValidCredentials() {
+        //Given
+        when(mongoUserRepository
+                .findByUsername("some-user"))
+                .thenReturn(Optional.of(setupUser()));
+
+        LoginData loginData = new LoginData("some-wrong-user","someWrongPassword",15);
+
+        //WHEN
+        ResponseEntity<Error> loginError = webTestClient.post()
+                .uri("http://localhost:"+port+"/auth/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(loginData)
+                .retrieve()
+                .onStatus(httpStatus -> httpStatus.equals(HttpStatus.BAD_REQUEST),
+                        clientResponse -> Mono.empty())
+                .toEntity(Error.class)
+                .block();
+
+        //THEN
+        assertThat(loginError.getStatusCode(),is(HttpStatus.BAD_REQUEST));
+    }
+
 }
 
-//    @Test
-//    void getHalloWithValidCredentialsButNoAuthority() {
-//
-//        //Given
-//        when(mongoUserRepository.findByUsername("some-user")).thenReturn(Optional.of(UserMongo.builder()
-//                .username("some-user")
-//                .password(passwordEncoder.encode("secretPassword"))
-//                .accountNonExpired(true)
-//                .rights(List.of())
-//                .credentialsNonExpired(true)
-//                .accountNonLocked(true)
-//                .enabled(true)
-//                .build()));
-//        LoginData loginData = new LoginData("some-user","secretPassword");
-//
-//        ResponseEntity<String> login = webTestClient.post()
-//                .uri("http://localhost:"+port+"/auth/login")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .bodyValue(loginData)
-//                .retrieve()
-//                .toEntity(String.class)
-//                .block();
-//
-//        String token = login.getBody();
 //        //WHEN
 //        ResponseEntity<String> getHello = webTestClient.get()
 //                .uri("http://localhost:"+port+"/api/jwt")
@@ -111,23 +113,3 @@ class LoginControllerTest {
 //        //THEN
 //        assertThat(getHello.getStatusCode(),is(HttpStatus.OK));
 //        assertThat(getHello.getBody(),is("Darfst du nicht!!!"));
-//    }
-//
-//    @Test
-//    void getHalloWithInValidToken() {
-//        //Given
-//        when(mongoUserRepository.findByUsername("some-user")).thenReturn(Optional.of(setupUser()));
-//        LoginData loginData = new LoginData("some-user","secretPassword");
-//
-//        //WHEN
-//        ResponseEntity<String> getHello = webTestClient.get()
-//                .uri("http://localhost:"+port+"/api/jwt")
-//                .header("Authorization","Bearer"+ "random token")
-//                .retrieve()
-//                .onStatus(httpStatus -> httpStatus.equals(HttpStatus.FORBIDDEN),
-//                        clientResponse -> Mono.empty())
-//                .toEntity(String.class)
-//                .block();
-//        //THEN
-//        assertThat(getHello.getStatusCode(),is(HttpStatus.FORBIDDEN));
-//    }
