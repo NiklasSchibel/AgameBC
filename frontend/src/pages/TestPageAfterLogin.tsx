@@ -5,15 +5,14 @@ import {AuthContext} from "../context/AuthProvider";
 
 export default function TestPageAfterLogin () {
     const {jwtDecoded} = useContext(AuthContext)
+
+    //returns just different formats of time maybe usefull for further feature
     //@ts-ignore
     const DateNumber: number = jwtDecoded?.exp *1000
     //@ts-ignore
     const ExpirationDate = new Date(DateNumber);
 
     const now = new Date();
-
-    //paseInt wahrscheinlich falsch
-    // const ExpirationNumber = parseInt(ExpirationDate.toString());
 
     return (
         <div className="App">
