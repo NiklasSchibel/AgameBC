@@ -24,16 +24,16 @@ export default function Gallery(){
 
     return(
         <div className="gallery">
-            {Animals10.map((animal: any, index: number) => (
+            {/*{Animals10.map((animal: any, index: number) => (*/}
                 <Card
-                    id = {animal.id}
-                    key = {animal.id}
-                    image_link = {animal.image_link}
-                    name = {animal.name}
-                    animal_type = {animal.animal_type}
-                    latin_name = {animal.latin_name}
+                    id = {Animals1.id}
+                    key = {Animals1.id}
+                    image_link = {Animals1.image_link}
+                    name = {Animals1.name}
+                    animal_type = {Animals1.animal_type}
+                    latin_name = {Animals1.latin_name}
                 />
-            ))}
+            {/*))}*/}
         </div>
     )
 }
