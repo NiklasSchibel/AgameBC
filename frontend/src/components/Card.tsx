@@ -16,6 +16,8 @@ export default function Card(props: cardProps) {
     //todo: set key later in environment
     const key: string = "a7aae25de0b446c7adc2571316a7ddfc&";
 
+    const firstNameOfAnimal = props.latin_name.split(" ")[0];
+
     //todo: this works for the first time clicking on the picture than only clicking on the play button
     const onClickHandle = () => {
         setText(srcString);
@@ -23,12 +25,12 @@ export default function Card(props: cardProps) {
 
     //todo: images load to slow
 
-    const srcString: string = "https://api.voicerss.org/?key="+key+"hl="+language+"&src=" + props.latin_name;
+    const srcString: string = "https://api.voicerss.org/?key="+key+"hl="+language+"&src=" + firstNameOfAnimal;
     return (
         <div onClick={onClickHandle} className="card">
             <img className="image" src={props.image_link} alt="Ein Bild"/>
             <React.Fragment>
-                <h4>{props.latin_name}</h4>
+                <h4>{firstNameOfAnimal}</h4>
                 <audio autoPlay src={text} controls />
             </React.Fragment>
         </div>
