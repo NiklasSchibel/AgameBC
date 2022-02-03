@@ -31,6 +31,7 @@ export default function Gallery(){
                     image_link = {animal.image_link}
                     name = {animal.name}
                     animal_type = {animal.animal_type}
+                    latin_name = {animal.latin_name}
                 />
             ))}
         </div>
