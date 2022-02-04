@@ -1,5 +1,5 @@
 import "./Card.scss"
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button} from "@mui/material";
 
 interface cardProps {
@@ -16,16 +16,36 @@ export default function Card(props: cardProps) {
 
     const LANGUAGE: string = "de-de";
     const STANDARDTEXTVOICE: string = "Ich heiße ";
-    const [text, setText] = useState<string>('');
-    const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const firstLetterOfAnimalName = getFirstLetter(animal_type);
-    const firstRandomLetter = generateNewRandomLetter(ALPHABET, firstLetterOfAnimalName);
-    const secondRandomLetter = generateNewRandomLetter(ALPHABET, firstLetterOfAnimalName, firstRandomLetter);
-    const choices: string[] = [firstLetterOfAnimalName, firstRandomLetter, secondRandomLetter]
-    const choicesShuffled: string[] = shuffleArray(choices);
+    const [text, setText] = useState<string>('');
+    const [firstRandomLetter, setFirstRandomLetter] = useState<string>("");
+    const [secondRandomLetter, setSecondRandomLetter] = useState<string>("");
+    const [answer, setAnswer] = useState<boolean>(false);
+    const [choices, setChoices] = useState<Array<string>>([]);
+    const [choicesShuffled, setChoicesShuffled] = useState<Array<string>>([]);
+    //before with constants leaded to Bug that there were choices shuffling
+    // const firstRandomLetter = generateNewRandomLetter(ALPHABET, firstLetterOfAnimalName);
+    // const secondRandomLetter = generateNewRandomLetter(ALPHABET, firstLetterOfAnimalName, firstRandomLetter);
+    // const choices: string[] = [firstLetterOfAnimalName, firstRandomLetter, secondRandomLetter]
+    // const choicesShuffled: string[] = shuffleArray(choices);
 
     //todo: set key later in environment
     const key: string = "a7aae25de0b446c7adc2571316a7ddfc&";
+    const srcString: string = "https://api.voicerss.org/?key="
+        + key + "hl=" + LANGUAGE + "&src="
+        + STANDARDTEXTVOICE + getFirstWord(animal_type);
+
+
+    useEffect(() => {
+        setFirstRandomLetter(generateNewRandomLetter(ALPHABET, firstLetterOfAnimalName));
+        setSecondRandomLetter(generateNewRandomLetter(ALPHABET, firstLetterOfAnimalName, firstRandomLetter));
+    }, [])
+
+    useEffect(() => {
+        setChoices([firstLetterOfAnimalName,firstRandomLetter,secondRandomLetter])
+        setChoicesShuffled(shuffleArray(choices))
+    }, [firstRandomLetter])
 
 
     /**
@@ -33,7 +53,7 @@ export default function Card(props: cardProps) {
      * @param array of type string
      * returns the array in shuffeld order
      * */
-    function shuffleArray(array:string[]) {
+    function shuffleArray(array: string[]) {
         let curId = array.length;
         // There remain elements to shuffle
         while (0 !== curId) {
@@ -72,7 +92,6 @@ export default function Card(props: cardProps) {
         }
     }
 
-
     /**
      * returns a random Capital Letter of the Alphabet which is different from other provided letters
      * @params ALPHABET CONST in Capital Letters, Letter from which the return value should differ from
@@ -90,27 +109,58 @@ export default function Card(props: cardProps) {
 
 
     //todo: this works for the first time clicking on the picture than only clicking on the play button
-    const onClickHandle = () => {
+    const onClickHandleCard = () => {
         setText(srcString);
+    }
+
+    /**
+     * this function checks if clicked Button is the correct answer and setAnswer true, if it is the case
+     * @param string
+     */
+    const onClickHandleButton = (string: string) => {
+        if (string === firstLetterOfAnimalName) {
+            setAnswer(true)
+        }
+    }
+
+    /**
+     * this function returns a smile when
+     * @param givenAnswer is true
+     */
+    const AnswerTrueComponent = (givenAnswer: boolean) => {
+        if (givenAnswer) {
+            return (
+                <div>
+                    "happy":)
+                </div>)
+        }
     }
 
 
     //todo: images load to slow
 
-    const srcString: string = "https://api.voicerss.org/?key=" + key + "hl=" + LANGUAGE + "&src=" + STANDARDTEXTVOICE + getFirstWord(animal_type);
+    // if (!Animals1){
+    //     return <div className="gallery">
+    //         <h1>loading...</h1>
+    //     </div>
+    // }
+
     return (
-        <div onClick={onClickHandle} className="card">
+        <div onClick={onClickHandleCard} className="card">
             <img className="image" src={image_link} alt="Ein Bild"/>
             <React.Fragment>
                 <h4>{getFirstWord(animal_type)}</h4>
                 <audio autoPlay src={text} controls/>
             </React.Fragment>
-
             <div className="ButtonsSelection">
-                <Button className="ButtonText" variant="outlined" color="success">{choicesShuffled[0]}</Button>
-                <Button className="ButtonText" variant="outlined" color="success">{choicesShuffled[1]}</Button>
-                <Button className="ButtonText" variant="outlined" color="success">{choicesShuffled[2]}</Button>
+                <Button onClick={() => onClickHandleButton(choicesShuffled[0])}
+                        className="ButtonText" variant="outlined" color="success">{choicesShuffled[0]}</Button>
+                <Button onClick={() => onClickHandleButton(choicesShuffled[1])}
+                        className="ButtonText" variant="outlined" color="success">{choicesShuffled[1]}</Button>
+                <Button onClick={() => onClickHandleButton(choicesShuffled[2])}
+                        className="ButtonText" variant="outlined" color="success">{choicesShuffled[2]}</Button>
             </div>
+            {AnswerTrueComponent(answer)}
         </div>
     )
 }
