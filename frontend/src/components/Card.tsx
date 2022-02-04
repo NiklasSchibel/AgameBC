@@ -18,16 +18,16 @@ export default function Card(props: cardProps) {
     const LANGUAGE: string = "de-de";
     const STANDARDTEXTVOICE: string = "mit welchem Buchstaben beginnt mein Name, ich heiße";
     const [text, setText] = useState<string>('');
-    const firstLetterOfAnimalName = animal_type.slice(0, 1);
+    const firstLetterOfAnimalName = getFirstLetter(animal_type);
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    const firstRandomLetter = generateFirstRandomLetter(ALPHABET);
-    const secondRandomLetter = generateSecondRandomLetter(firstRandomLetter,ALPHABET);
+    const firstRandomLetter = generateNewRandomLetter(ALPHABET,firstLetterOfAnimalName);
+    const secondRandomLetter = generateNewRandomLetter(ALPHABET,firstLetterOfAnimalName,firstRandomLetter);
 
     //todo: set key later in environment
     const key: string = "a7aae25de0b446c7adc2571316a7ddfc&";
 
     /**
-     * returns a new string with the first word of the
+     * returns a new string with the first word of the sentence provided
      * @param sentence
      * */
     function getFirstWord(sentence: string): string {
@@ -38,25 +38,31 @@ export default function Card(props: cardProps) {
         }
     }
 
-
     /**
-     * returns a random Capital Letter of the Alphabet
-     * @params ALPHABET CONST in Capital Letters
+     * returns the first letter of the word provided
+     * @param word
      * */
-    function generateFirstRandomLetter(ALPHABET: string) {
-        return ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
+    function getFirstLetter(word: string): string {
+        if (word !== undefined && word.length > 2) {
+            return word.slice(0,1);
+        } else {
+            return word;
+        }
     }
 
+
     /**
-     * returns a random Capital Letter of the Alphabet which is different from the FirstRandomLetter
-     * @params FirstRandomLetter, ALPHABET CONST
+     * returns a random Capital Letter of the Alphabet which is different from other provided letters
+     * @params ALPHABET CONST in Capital Letters, Letter from which the return value should differ from
      * */
-    function generateSecondRandomLetter(FirstRandomLetter: string, alphabet: string) {
-        const secondRandomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
-        while (secondRandomLetter === FirstRandomLetter) {
-            const secondRandomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+    function generateNewRandomLetter(alphabet: string, letter: string, secondLetter?: string) {
+        const randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+        while (randomLetter === letter || randomLetter === secondLetter) {
+            const randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+            if (randomLetter === letter || randomLetter === secondLetter) {
+                return randomLetter;
+            }
         }
-        return secondRandomLetter;
     }
 
 
@@ -78,9 +84,9 @@ export default function Card(props: cardProps) {
             </React.Fragment>
 
             <div className="ButtonsSelection">
-                <Button className="ButtonText" variant="outlined">A</Button>
-                <Button className="ButtonText" variant="contained" color="success">B</Button>
-                <Button className="ButtonText" variant="text" color="success">C</Button>
+                <Button className="ButtonText" variant="outlined">{firstRandomLetter}</Button>
+                <Button className="ButtonText" variant="contained" color="success">{firstLetterOfAnimalName}</Button>
+                <Button className="ButtonText" variant="text" color="success">{secondRandomLetter}</Button>
             </div>
         </div>
     )
