@@ -40,12 +40,14 @@ export default function Card(props: cardProps) {
     useEffect(() => {
         setFirstRandomLetter(generateNewRandomLetter(ALPHABET, firstLetterOfAnimalName));
         setSecondRandomLetter(generateNewRandomLetter(ALPHABET, firstLetterOfAnimalName, firstRandomLetter));
-    }, [])
+        setChoices([firstLetterOfAnimalName,firstRandomLetter,secondRandomLetter]);
+        setChoicesShuffled(shuffleArray(choices));
+    }, [firstLetterOfAnimalName])
 
-    useEffect(() => {
-        setChoices([firstLetterOfAnimalName,firstRandomLetter,secondRandomLetter])
-        setChoicesShuffled(shuffleArray(choices))
-    }, [firstRandomLetter])
+    // useEffect(() => {
+    //     setChoices([firstLetterOfAnimalName,firstRandomLetter,secondRandomLetter])
+    //     setChoicesShuffled(shuffleArray(choices))
+    // }, [])
 
 
     /**
