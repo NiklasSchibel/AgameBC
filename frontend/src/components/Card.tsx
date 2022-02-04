@@ -21,12 +21,32 @@ export default function Card(props: cardProps) {
     const firstLetterOfAnimalName = getFirstLetter(animal_type);
     const firstRandomLetter = generateNewRandomLetter(ALPHABET, firstLetterOfAnimalName);
     const secondRandomLetter = generateNewRandomLetter(ALPHABET, firstLetterOfAnimalName, firstRandomLetter);
-    // const firstButtonField =
-    // const secondButtonField =
-    // const thirdButtonField =
+    const choices: string[] = [firstLetterOfAnimalName, firstRandomLetter, secondRandomLetter]
+    const choicesShuffled: string[] = shuffleArray(choices);
 
     //todo: set key later in environment
     const key: string = "a7aae25de0b446c7adc2571316a7ddfc&";
+
+
+    /**
+     * shuffle Function from W3 Schools
+     * @param array of type string
+     * returns the array in shuffeld order
+     * */
+    function shuffleArray(array:string[]) {
+        let curId = array.length;
+        // There remain elements to shuffle
+        while (0 !== curId) {
+            // Pick a remaining element
+            let randId = Math.floor(Math.random() * curId);
+            curId -= 1;
+            // Swap it with the current element.
+            let tmp = array[curId];
+            array[curId] = array[randId];
+            array[randId] = tmp;
+        }
+        return array;
+    }
 
     /**
      * returns a new string with the first word of the sentence provided
@@ -69,7 +89,6 @@ export default function Card(props: cardProps) {
     }
 
 
-
     //todo: this works for the first time clicking on the picture than only clicking on the play button
     const onClickHandle = () => {
         setText(srcString);
@@ -88,9 +107,9 @@ export default function Card(props: cardProps) {
             </React.Fragment>
 
             <div className="ButtonsSelection">
-                <Button className="ButtonText" variant="outlined" color="success">{firstLetterOfAnimalName}</Button>
-                <Button className="ButtonText" variant="outlined" color="success">{firstRandomLetter}</Button>
-                <Button className="ButtonText" variant="outlined" color="success">{secondRandomLetter}</Button>
+                <Button className="ButtonText" variant="outlined" color="success">{choicesShuffled[0]}</Button>
+                <Button className="ButtonText" variant="outlined" color="success">{choicesShuffled[1]}</Button>
+                <Button className="ButtonText" variant="outlined" color="success">{choicesShuffled[2]}</Button>
             </div>
         </div>
     )
