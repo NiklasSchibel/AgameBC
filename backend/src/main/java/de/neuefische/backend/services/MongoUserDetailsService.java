@@ -1,7 +1,6 @@
 package de.neuefische.backend.services;
 
 import de.neuefische.backend.models.UserMongo;
-import de.neuefische.backend.repositories.MongoUserRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

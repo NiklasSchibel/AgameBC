@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class AnimalData {
 
     String id;
-    String name;
-    String image_url;
+    String deName;
+    String imageLink;
     String startingLetter;
 }
