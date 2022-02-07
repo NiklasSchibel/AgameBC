@@ -1,6 +1,8 @@
 import "./Card.scss"
+
 import React, {useState} from "react";
 import AnswerButtonChoice from "./AnswerButtonChoice";
+
 
 interface cardProps {
     key: string
