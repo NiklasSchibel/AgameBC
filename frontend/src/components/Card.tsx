@@ -11,8 +11,7 @@ interface cardProps {
     latin_name: string
 }
 
-export default function Card(props: cardProps) {
-    const {animal_type, image_link} = props
+export default function Card({animal_type, image_link}: cardProps) {
     const LANGUAGE: string = "de-de";
     const STANDARDTEXTVOICE: string = " ";
     const firstLetterOfAnimalName = getFirstLetter(animal_type);
