@@ -19,12 +19,12 @@ export default function Gallery(){
 
     return(
         <div className="gallery">
-                <Card
+            {animal? <Card
                     id = {animal.id}
                     key = {animal.id}
                     imageLink = {animal.imageLink}
                     animalName = {animal.deName}
-                />
+                /> : "No animal to show"}
         </div>
     )
 }
