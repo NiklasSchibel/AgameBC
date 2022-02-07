@@ -11,7 +11,7 @@ interface AnswerButtonChoiceProps {
 }
 
 export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
-    const {level} = useContext(AuthContext)
+    const {level, setNewLevel} = useContext(AuthContext)
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     const [answer, setAnswer] = useState<boolean>(false);
@@ -23,7 +23,7 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
     useEffect(() => {
         setFirstRandomLetter(generateNewRandomLetter(ALPHABET,
             props.firstLetterOfAnimalName));
-        }, [])
+    }, [])
 
     useEffect(() => {
         setSecondRandomLetter(generateNewRandomLetter(ALPHABET,
@@ -35,7 +35,6 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
     useEffect(() => {
         setChoicesShuffled(shuffleArray(choices));
     }, [secondRandomLetter])
-
 
 
     /**
@@ -79,8 +78,12 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
     const onClickHandleButton = (letter: string) => {
         if (letter === props.firstLetterOfAnimalName) {
             setAnswer(true)
-            console.log(level)
-            // setLevel()
+            if (level === undefined) {
+                setNewLevel(1)
+            } else {
+                const newLevel: number = level + 1;
+                setNewLevel(newLevel)
+            }
         }
     }
 
@@ -89,11 +92,11 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
      * @param givenAnswer is true
      */
     const AnswerTrueComponent = () => {
-            return (
-                <div>
-                    "happy":)
-                </div>)
-        }
+        return (
+            <div>
+                "happy":)
+            </div>)
+    }
 
 
     return (

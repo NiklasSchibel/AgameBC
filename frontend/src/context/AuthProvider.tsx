@@ -5,8 +5,8 @@ export interface AuthContextType {
     token?: string
     jwtDecoded?: { sub?: string, exp?: number }
     setJwt: (jwt: string) => void
-    level?: string
-    setNewLevel: (newLevel: string) => void
+    level?: number
+    setNewLevel: (newLevel: number) => void
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -22,14 +22,14 @@ export default function AuthProvider({children}: { children: ReactElement<any, a
 
     const [token, setToken] = useState<string>()
     const [jwtDecoded, setJwtDecoded] = useState({})
-    const [level, setLevel] = useState<string>()
+    const [level, setLevel] = useState<number>(1)
 
     const setJwt = (jwt: string) => {
         setToken(jwt)
         setJwtDecoded(jwt_decode(jwt.toString()))
     }
 
-    const setNewLevel = (newLevel: string) => {
+    const setNewLevel = (newLevel: number) => {
         setLevel(newLevel)
     }
 
