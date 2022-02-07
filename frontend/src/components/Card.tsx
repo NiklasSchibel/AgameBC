@@ -59,7 +59,7 @@ export default function Card({animalName, imageLink}: cardProps) {
 
     return (
         <div onClick={onClickHandleCard} className="card">
-            <img className="image" src={imageLink} alt="Ein Bild"/>
+            <img className="image" loading="lazy" src={imageLink} alt="Ein Bild"/>
             <h4>{getFirstWord(animalName)}</h4>
             <audio autoPlay src={text} controls/>
             <AnswerButtonChoice
