@@ -13,17 +13,10 @@ interface cardProps {
 
 export default function Card(props: cardProps) {
     const {animal_type, image_link} = props
-
     const LANGUAGE: string = "de-de";
-    const STANDARDTEXTVOICE: string = "Ich heiße ";
+    const STANDARDTEXTVOICE: string = " ";
     const firstLetterOfAnimalName = getFirstLetter(animal_type);
     const [text, setText] = useState<string>('');
-
-
-    //before with constants leaded to Bug that there were choices shuffling
-    // const firstRandomLetter = generateNewRandomLetter(ALPHABET, firstLetterOfAnimalName);
-    // const secondRandomLetter = generateNewRandomLetter(ALPHABET, firstLetterOfAnimalName, firstRandomLetter);
-
 
 
     //todo: set key later in environment
@@ -31,15 +24,6 @@ export default function Card(props: cardProps) {
     const srcString: string = "https://api.voicerss.org/?key="
         + key + "hl=" + LANGUAGE + "&src="
         + STANDARDTEXTVOICE + getFirstWord(animal_type);
-
-
-
-
-    // useEffect(() => {
-    //     setChoices([firstLetterOfAnimalName,firstRandomLetter,secondRandomLetter])
-    //     setChoicesShuffled(shuffleArray(choices))
-    // }, [])
-
 
 
     /**
@@ -67,22 +51,15 @@ export default function Card(props: cardProps) {
     }
 
 
-
     //todo: this works for the first time clicking on the picture than only clicking on the play button
     const onClickHandleCard = () => {
         setText(srcString);
     }
 
 
-
-
     //todo: images load to slow
 
-    // if (!Animals1){
-    //     return <div className="gallery">
-    //         <h1>loading...</h1>
-    //     </div>
-    // }
+
 
     return (
         <div onClick={onClickHandleCard} className="card">
@@ -95,15 +72,6 @@ export default function Card(props: cardProps) {
                 animal_type={animal_type}
                 firstLetterOfAnimalName={firstLetterOfAnimalName}
             />
-            {/*<div className="ButtonsSelection">*/}
-            {/*    <Button onClick={() => onClickHandleButton(choicesShuffled[0])}*/}
-            {/*            className="ButtonText" variant="outlined" color="success">{choicesShuffled[0]}</Button>*/}
-            {/*    <Button onClick={() => onClickHandleButton(choicesShuffled[1])}*/}
-            {/*            className="ButtonText" variant="outlined" color="success">{choicesShuffled[1]}</Button>*/}
-            {/*    <Button onClick={() => onClickHandleButton(choicesShuffled[2])}*/}
-            {/*            className="ButtonText" variant="outlined" color="success">{choicesShuffled[2]}</Button>*/}
-            {/*</div>*/}
-            {/*{AnswerTrueComponent(answer)}*/}
         </div>
     )
 }

@@ -19,10 +19,13 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
     useEffect(() => {
         setFirstRandomLetter(generateNewRandomLetter(ALPHABET,
             props.firstLetterOfAnimalName));
+        }, [])
+
+    useEffect(() => {
         setSecondRandomLetter(generateNewRandomLetter(ALPHABET,
             props.firstLetterOfAnimalName,
             firstRandomLetter));
-        }, [])
+    }, [firstRandomLetter])
 
 
     useEffect(() => {
@@ -54,12 +57,9 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
      * */
     function shuffleArray(array: string[]) {
         let curId = array.length;
-        // There remain elements to shuffle
         while (0 !== curId) {
-            // Pick a remaining element
             let randId = Math.floor(Math.random() * curId);
             curId -= 1;
-            // Swap it with the current element.
             let tmp = array[curId];
             array[curId] = array[randId];
             array[randId] = tmp;
