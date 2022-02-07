@@ -1,5 +1,7 @@
+import "./AnswerButtonChoice.scss"
 import {Button} from "@mui/material";
 import React, {useEffect, useState} from "react";
+
 
 interface AnswerButtonChoiceProps {
     animal_name: string

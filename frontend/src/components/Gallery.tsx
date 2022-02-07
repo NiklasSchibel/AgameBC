@@ -11,7 +11,6 @@ export default function Gallery(){
 
     },[])
 
-    console.log(animal)
     if (!animal){
         return <div className="gallery">
             <h1>loading...</h1>

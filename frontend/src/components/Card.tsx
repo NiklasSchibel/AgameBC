@@ -1,5 +1,5 @@
 import "./Card.scss"
-import react, {useState} from "react";
+import {useState} from "react";
 import AnswerButtonChoice from "./AnswerButtonChoice";
 
 interface cardProps {
@@ -9,7 +9,7 @@ interface cardProps {
     imageLink: string
 }
 
-export default function Card({animalName,imageLink}: cardProps) {
+export default function Card({animalName, imageLink}: cardProps) {
     const LANGUAGE: string = "de-de";
     const STANDARDTEXTVOICE: string = " ";
     const firstLetterOfAnimalName = getFirstLetter(animalName);
@@ -57,14 +57,11 @@ export default function Card({animalName,imageLink}: cardProps) {
     //todo: images load to slow
 
 
-
     return (
         <div onClick={onClickHandleCard} className="card">
             <img className="image" src={imageLink} alt="Ein Bild"/>
-            {/*<react.Fragment>*/}
-                <h4>{getFirstWord(animalName)}</h4>
-                <audio autoPlay src={text} controls/>
-            {/*</react.Fragment>*/}
+            <h4>{getFirstWord(animalName)}</h4>
+            <audio autoPlay src={text} controls/>
             <AnswerButtonChoice
                 animal_name={animalName}
                 firstLetterOfAnimalName={firstLetterOfAnimalName}
