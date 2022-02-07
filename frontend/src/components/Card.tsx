@@ -1,4 +1,7 @@
 import "./Card.scss"
+import React, {useState} from "react";
+import {Button} from "@mui/material";
+
 
 import React, {useState} from "react";
 import AnswerButtonChoice from "./AnswerButtonChoice";
@@ -15,6 +18,7 @@ interface cardProps {
 
 export default function Card(props: cardProps) {
     const {animal_type, image_link} = props
+
     const LANGUAGE: string = "de-de";
     const STANDARDTEXTVOICE: string = " ";
     const firstLetterOfAnimalName = getFirstLetter(animal_type);
@@ -39,6 +43,7 @@ export default function Card(props: cardProps) {
             return sentence;
         }
     }
+
 
     /**
      * returns the first letter of the word provided
@@ -65,6 +70,7 @@ export default function Card(props: cardProps) {
 
     return (
         <div onClick={onClickHandleCard} className="card">
+
             <img className="image" src={image_link} alt="Ein Bild"/>
             <React.Fragment>
                 <h4>{getFirstWord(animal_type)}</h4>
@@ -74,6 +80,7 @@ export default function Card(props: cardProps) {
                 animal_type={animal_type}
                 firstLetterOfAnimalName={firstLetterOfAnimalName}
             />
+
         </div>
     )
 }

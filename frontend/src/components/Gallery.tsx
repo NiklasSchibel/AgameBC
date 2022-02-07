@@ -13,6 +13,7 @@ export default function Gallery(){
 
     const setupAnimals1 = () => fetch1Characters().then(data => setAnimals1(data))
 
+
     if (!Animals1){
         return <div className="gallery">
             <h1>loading...</h1>
