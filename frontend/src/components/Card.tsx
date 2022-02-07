@@ -1,5 +1,5 @@
 import "./Card.scss"
-import React, {useState} from "react";
+import react, {useState} from "react";
 import AnswerButtonChoice from "./AnswerButtonChoice";
 
 interface cardProps {
@@ -63,10 +63,10 @@ export default function Card({animal_type, image_link}: cardProps) {
     return (
         <div onClick={onClickHandleCard} className="card">
             <img className="image" src={image_link} alt="Ein Bild"/>
-            <React.Fragment>
+            <react.Fragment>
                 <h4>{getFirstWord(animal_type)}</h4>
                 <audio autoPlay src={text} controls/>
-            </React.Fragment>
+            </react.Fragment>
             <AnswerButtonChoice
                 animal_type={animal_type}
                 firstLetterOfAnimalName={firstLetterOfAnimalName}
