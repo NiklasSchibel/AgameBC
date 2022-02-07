@@ -29,3 +29,4 @@ export const fetchRandomAnimal = (token?: string) =>
         .catch((error) => {
             console.log(error);
         })
+

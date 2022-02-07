@@ -1,6 +1,7 @@
 import "./AnswerButtonChoice.scss"
 import {Button} from "@mui/material";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
+import {AuthContext} from "../context/AuthProvider";
 
 
 interface AnswerButtonChoiceProps {
@@ -10,6 +11,7 @@ interface AnswerButtonChoiceProps {
 }
 
 export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
+    const {level} = useContext(AuthContext)
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     const [answer, setAnswer] = useState<boolean>(false);
@@ -77,6 +79,8 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
     const onClickHandleButton = (letter: string) => {
         if (letter === props.firstLetterOfAnimalName) {
             setAnswer(true)
+            console.log(level)
+            // setLevel()
         }
     }
 
