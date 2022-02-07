@@ -2,7 +2,7 @@ import {Button} from "@mui/material";
 import React, {useEffect, useState} from "react";
 
 interface AnswerButtonChoiceProps {
-    animal_type: string
+    animal_name: string
     firstLetterOfAnimalName: string
 
 }

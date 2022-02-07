@@ -4,17 +4,15 @@ import AnswerButtonChoice from "./AnswerButtonChoice";
 
 interface cardProps {
     key: string
-    name: string
+    animalName: string
     id: string
-    animal_type: string
-    image_link: string
-    latin_name: string
+    imageLink: string
 }
 
-export default function Card({animal_type, image_link}: cardProps) {
+export default function Card({animalName,imageLink}: cardProps) {
     const LANGUAGE: string = "de-de";
     const STANDARDTEXTVOICE: string = " ";
-    const firstLetterOfAnimalName = getFirstLetter(animal_type);
+    const firstLetterOfAnimalName = getFirstLetter(animalName);
     const [text, setText] = useState<string>('');
 
 
@@ -22,7 +20,7 @@ export default function Card({animal_type, image_link}: cardProps) {
     const key: string = "a7aae25de0b446c7adc2571316a7ddfc&";
     const srcString: string = "https://api.voicerss.org/?key="
         + key + "hl=" + LANGUAGE + "&src="
-        + STANDARDTEXTVOICE + getFirstWord(animal_type);
+        + STANDARDTEXTVOICE + getFirstWord(animalName);
 
 
     /**
@@ -62,13 +60,13 @@ export default function Card({animal_type, image_link}: cardProps) {
 
     return (
         <div onClick={onClickHandleCard} className="card">
-            <img className="image" src={image_link} alt="Ein Bild"/>
+            <img className="image" src={imageLink} alt="Ein Bild"/>
             {/*<react.Fragment>*/}
-                <h4>{getFirstWord(animal_type)}</h4>
+                <h4>{getFirstWord(animalName)}</h4>
                 <audio autoPlay src={text} controls/>
             {/*</react.Fragment>*/}
             <AnswerButtonChoice
-                animal_type={animal_type}
+                animal_name={animalName}
                 firstLetterOfAnimalName={firstLetterOfAnimalName}
             />
         </div>
