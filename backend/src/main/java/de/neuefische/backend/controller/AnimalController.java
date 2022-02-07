@@ -31,6 +31,17 @@ public class AnimalController {
         return ok(allAnimals);
     }
 
+    @GetMapping(path = "/rand")
+    public ResponseEntity<AnimalData> getRandomAnimal() throws Exception {
+        Optional<AnimalData> animal = animalService.getRandomAnimal();
+        if (animal.isPresent()) {
+            return new ResponseEntity<>(animal.get(), HttpStatus.OK);
+        } else {
+            throw new Exception("random animal could not be found");
+        }
+    }
+
+
     @GetMapping(path = "/{id}")
     public ResponseEntity<AnimalData> getAnimalByID(@PathVariable("id") String id) throws Exception {
         Optional<AnimalData> animal = animalService.getAnimalByID(id);

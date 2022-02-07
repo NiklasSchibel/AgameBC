@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class AnimalService {
@@ -16,6 +17,8 @@ public class AnimalService {
     private static final Log LOG = LogFactory.getLog(BackendApplication.class);
 
     private final AnimalRepository animalRepository;
+
+    Random random = new Random();
 
     public AnimalService(AnimalRepository animalRepository) {
         this.animalRepository = animalRepository;
@@ -30,4 +33,11 @@ public class AnimalService {
 
     }
 
+    public Optional<AnimalData> getRandomAnimal() {
+        int min = 1;
+        int max = animalRepository.findAll().size()-1;
+        int value = random.nextInt(max + min) + min;
+        String searchID = Integer.toString(value);
+        return animalRepository.findById(searchID);
+    }
 }

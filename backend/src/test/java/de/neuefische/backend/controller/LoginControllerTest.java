@@ -2,6 +2,7 @@ package de.neuefische.backend.controller;
 
 import de.neuefische.backend.models.LoginData;
 import de.neuefische.backend.models.UserMongo;
+import de.neuefische.backend.repositories.MongoUserRepository;
 import de.neuefische.backend.services.MongoUserDetailsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
