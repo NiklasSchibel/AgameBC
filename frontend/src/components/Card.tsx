@@ -2,6 +2,7 @@ import "./Card.scss"
 import React, {useState} from "react";
 import {Button} from "@mui/material";
 
+
 interface cardProps {
     key: string
     name: string

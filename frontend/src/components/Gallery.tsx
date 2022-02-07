@@ -1,6 +1,7 @@
 import Card from "./Card";
 import "./Gallery.scss"
 import {useEffect, useState} from "react";
+
 import {fetch1Characters} from "../services/RequestService";
 
 export default function Gallery(){
@@ -12,6 +13,7 @@ export default function Gallery(){
 
 
     const setupAnimals1 = () => fetch1Characters().then(data => setAnimals1(data))
+
 
     if (!Animals1){
         return <div className="gallery">
