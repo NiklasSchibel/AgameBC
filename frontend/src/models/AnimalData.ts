@@ -1,6 +1,6 @@
 export interface AnimalData {
-    id: String;
-    name: String;
-    image_url: String;
-    startingLetter: String;
+    id: string;
+    name: string;
+    image_url: string;
+    startingLetter: string;
 }
