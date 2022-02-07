@@ -84,6 +84,10 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
                 const newLevel: number = level + 1;
                 setNewLevel(newLevel)
             }
+        } else {
+            const newReducedChoices = [...choicesShuffled]
+            // vielleicht Array oben nach ArrayList umwandeln
+            setChoicesShuffled(newReducedChoices);
         }
     }
 
@@ -101,9 +105,9 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
 
     return (
         <div className="ButtonsSelection">
-            {/*{choicesShuffled[0] ? <Button onClick={() => onClickHandleButton(choicesShuffled[0])}*/}
-            {/*                              className="ButtonText" variant="outlined"*/}
-            {/*                              color="success">{choicesShuffled[0]}</Button> : {}}*/}
+            {choicesShuffled[0] ? <Button onClick={() => onClickHandleButton(choicesShuffled[0])}
+                                          className="ButtonText" variant="outlined"
+                                          color="success">{choicesShuffled[0]}</Button> : <div> </div>}
             <Button onClick={() => onClickHandleButton(choicesShuffled[1])}
                     className="ButtonText" variant="outlined" color="success">{choicesShuffled[1]}</Button>
             <Button onClick={() => onClickHandleButton(choicesShuffled[2])}
