@@ -2,6 +2,7 @@ import "./AnswerButtonChoice.scss"
 import {Button} from "@mui/material";
 import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/AuthProvider";
+import smile from "../images/iconSmile.png";
 
 
 interface AnswerButtonChoiceProps {
@@ -18,7 +19,7 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
     const [firstRandomLetter, setFirstRandomLetter] = useState<string>("");
     const [secondRandomLetter, setSecondRandomLetter] = useState<string>("");
     const choices: string[] = [props.firstLetterOfAnimalName, firstRandomLetter, secondRandomLetter]
-    const [choicesShuffled, setChoicesShuffled] = useState<Array<string>>([]);
+    const [choicesShuffled, setChoicesShuffled] = useState<Array<string | undefined>>([]);
 
     useEffect(() => {
         setFirstRandomLetter(generateNewRandomLetter(ALPHABET,
@@ -75,7 +76,7 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
      * this function checks if clicked Button is the correct answer and setAnswer true, if that is the case
      * @param letter
      */
-    const onClickHandleButton = (letter: string) => {
+    const onClickHandleButton = (letter: string | undefined) => {
         if (letter === props.firstLetterOfAnimalName) {
             setAnswer(true)
             if (level === undefined) {
@@ -86,7 +87,8 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
             }
         } else {
             const newReducedChoices = [...choicesShuffled]
-            // vielleicht Array oben nach ArrayList umwandeln
+            const index = choicesShuffled.indexOf(letter)
+            newReducedChoices[index] = undefined;
             setChoicesShuffled(newReducedChoices);
         }
     }
@@ -98,21 +100,26 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
     const AnswerTrueComponent = () => {
         return (
             <div>
-                "happy":)
+                <img className="SmileImage" src={smile} alt = "smile"/>
             </div>)
     }
 
 
     return (
-        <div className="ButtonsSelection">
-            {choicesShuffled[0] ? <Button onClick={() => onClickHandleButton(choicesShuffled[0])}
-                                          className="ButtonText" variant="outlined"
-                                          color="success">{choicesShuffled[0]}</Button> : <div> </div>}
-            <Button onClick={() => onClickHandleButton(choicesShuffled[1])}
-                    className="ButtonText" variant="outlined" color="success">{choicesShuffled[1]}</Button>
-            <Button onClick={() => onClickHandleButton(choicesShuffled[2])}
-                    className="ButtonText" variant="outlined" color="success">{choicesShuffled[2]}</Button>
+        <div className="ButtonsAndAnswerTrueComponent">
+            <div className="ButtonsSelection">
+                {choicesShuffled[0] ? <Button onClick={() => onClickHandleButton(choicesShuffled[0])}
+                                              className="ButtonText" variant="outlined"
+                                              color="success">{choicesShuffled[0]}</Button> : <div></div>}
+                {choicesShuffled[1] ? <Button onClick={() => onClickHandleButton(choicesShuffled[1])}
+                                              className="ButtonText" variant="outlined"
+                                              color="success">{choicesShuffled[1]}</Button> : <div></div>}
+                {choicesShuffled[2] ? <Button onClick={() => onClickHandleButton(choicesShuffled[2])}
+                                              className="ButtonText" variant="outlined"
+                                              color="success">{choicesShuffled[2]}</Button> : <div></div>}
+            </div>
             {answer && <AnswerTrueComponent/>}
+
         </div>
     )
 }
