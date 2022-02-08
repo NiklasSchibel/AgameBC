@@ -89,9 +89,9 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
                 setNewLevel(newLevel)
             }
             setTimeout(function(){
-                // console.log("Ready")
-            }, 5000);
-            props.setRightAnswer(letter)
+                props.setRightAnswer(letter)
+            }, 2000);
+
         } else {
             const newReducedChoices = [...choicesShuffled]
             const index = choicesShuffled.indexOf(letter)
