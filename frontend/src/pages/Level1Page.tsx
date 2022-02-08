@@ -1,16 +1,18 @@
 import './Level1Page.scss';
-import React, {ChangeEventHandler, useContext, useEffect, useState} from "react";
+import React, {ChangeEventHandler, Dispatch, useContext, useEffect, useState} from "react";
 import {TextField} from "@mui/material";
 import smile from "../images/iconSmile.png";
 import {AuthContext} from "../context/AuthProvider";
 
 export interface Level1PageProps {
+    rightAnswer: string
+    setRightAnswer: Dispatch<React.SetStateAction<string>>
 }
 
 export default function Level1Page(props: Level1PageProps) {
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const [randomLetter, setRandomLetter] = useState<string>("")
-    const [inputText, setInputText] = useState<string>(" ");
+    const [randomLetter, setRandomLetter] = useState<string>(" ")
+    const [inputText, setInputText] = useState<string>("");
     const [answer, setAnswer] = useState<boolean>(false);
     const {level, setNewLevel} = useContext(AuthContext)
 
@@ -20,10 +22,20 @@ export default function Level1Page(props: Level1PageProps) {
 
     useEffect(() => {
         setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
-    }, [answer])
+    }, [])
 
     useEffect(() => {
-        checkTypedAnswer();
+        if(checkTypedAnswerNew()){
+            setAnswer(true)
+            levelUp()
+            setTimeout(function () {
+                setAnswer(false)
+                setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
+                setInputText("")
+            }, 3000);
+        } else {
+            setInputText("")
+        }
     }, [inputText])
 
 
@@ -33,35 +45,25 @@ export default function Level1Page(props: Level1PageProps) {
         + key + "hl=" + LANGUAGE + "&src="
         + STANDARDTEXTVOICE + randomLetter + ".schreibe ihn in dem Feld unten selbst";
 
-    // //todo: this works for the first time clicking on the picture than only clicking on the play button
-    // const onClickHandleCard = () => {
-    //     setText(srcString);
-    // }
 
     const handleChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
         = (event) => {
         event.preventDefault();
-        setInputText(event.target.value);
-
+        setInputText(event.target.value.toUpperCase());
     }
 
-    const checkTypedAnswer = () => {
-        console.log("check was started")
-        if (inputText === randomLetter) {
-            console.log("check was right")
+    const checkTypedAnswerNew = ():boolean => {
+        return (inputText===randomLetter)
+    }
+
+    const levelUp = () => {
             if (level === undefined) {
                 setNewLevel(1)
             } else {
                 const newLevel: number = level + 1;
                 setNewLevel(newLevel)
             }
-            setTimeout(function () {
-                setAnswer(true)
-            }, 2000);
-        } else {
-        console.log("checkedTypedAnswer war falsch")
         }
-    }
 
 
     /**
@@ -84,7 +86,6 @@ export default function Level1Page(props: Level1PageProps) {
             <TextField
                 id="outlined"
                 placeholder={randomLetter}
-                // label={randomLetter}
                 value={inputText}
                 color="success"
                 onChange={handleChange}
