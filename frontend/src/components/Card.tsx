@@ -1,5 +1,5 @@
 import "./Card.scss"
-import {useState} from "react";
+import {Dispatch, useState} from "react";
 import AnswerButtonChoice from "./AnswerButtonChoice";
 
 interface cardProps {
@@ -7,9 +7,11 @@ interface cardProps {
     animalName: string
     id: string
     imageLink: string
+    rightAnswer: string
+    setRightAnswer:  Dispatch<React.SetStateAction<string>>
 }
 
-export default function Card({animalName, imageLink}: cardProps) {
+export default function Card({animalName, imageLink, rightAnswer, setRightAnswer}: cardProps) {
     const LANGUAGE: string = "de-de";
     const STANDARDTEXTVOICE: string = " ";
     const firstLetterOfAnimalName = getFirstLetter(animalName);
@@ -65,6 +67,8 @@ export default function Card({animalName, imageLink}: cardProps) {
             <AnswerButtonChoice
                 animal_name={animalName}
                 firstLetterOfAnimalName={firstLetterOfAnimalName}
+                rightAnswer={rightAnswer}
+                setRightAnswer={setRightAnswer}
             />
         </div>
     )

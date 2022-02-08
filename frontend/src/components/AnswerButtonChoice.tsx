@@ -1,17 +1,20 @@
 import "./AnswerButtonChoice.scss"
 import {Button} from "@mui/material";
-import React, {useContext, useEffect, useState} from "react";
+import React, {Dispatch, useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/AuthProvider";
 import smile from "../images/iconSmile.png";
+// import {useNavigate} from "react-router-dom";
 
 
 interface AnswerButtonChoiceProps {
     animal_name: string
     firstLetterOfAnimalName: string
-
+    rightAnswer: string
+    setRightAnswer:  Dispatch<React.SetStateAction<string>>
 }
 
 export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
+    // const navigate = useNavigate();
     const {level, setNewLevel} = useContext(AuthContext)
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -85,6 +88,10 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
                 const newLevel: number = level + 1;
                 setNewLevel(newLevel)
             }
+            setTimeout(function(){
+                // console.log("Ready")
+            }, 5000);
+            props.setRightAnswer(letter)
         } else {
             const newReducedChoices = [...choicesShuffled]
             const index = choicesShuffled.indexOf(letter)

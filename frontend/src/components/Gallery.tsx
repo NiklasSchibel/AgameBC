@@ -5,11 +5,12 @@ import {fetchRandomAnimal} from "../services/RequestService";
 
 export default function Gallery(){
     const [animal, setAnimal] = useState<any>([]);
+    const [rightAnswer,setRightAnswer] =useState<string>("");
 
     useEffect( () => {
         fetchRandomAnimal().then(data => setAnimal(data)).catch(e => console.log(e.message))
-
-    },[])
+        setRightAnswer("")
+    },[rightAnswer])
 
     if (!animal){
         return <div className="gallery">
@@ -24,6 +25,8 @@ export default function Gallery(){
                     key = {animal.id}
                     imageLink = {animal.imageLink}
                     animalName = {animal.deName}
+                    rightAnswer = {rightAnswer}
+                    setRightAnswer = {setRightAnswer}
                 /> : "No animal to show"}
         </div>
     )
