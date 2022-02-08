@@ -23,6 +23,7 @@ export default function Card({animalName, imageLink}: cardProps) {
         + STANDARDTEXTVOICE + getFirstWord(animalName);
 
 
+
     /**
      * returns a new string with the first word of the sentence provided
      * @param sentence
@@ -57,6 +58,7 @@ export default function Card({animalName, imageLink}: cardProps) {
     //todo: images load to slow
 
 
+
     return (
         <div onClick={onClickHandleCard} className="card">
             <img className="image" loading="lazy" src={imageLink} alt="Ein Bild"/>
@@ -66,6 +68,7 @@ export default function Card({animalName, imageLink}: cardProps) {
                 animal_name={animalName}
                 firstLetterOfAnimalName={firstLetterOfAnimalName}
             />
+
         </div>
     )
 }

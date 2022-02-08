@@ -64,6 +64,7 @@ export default function LoginPage() {
     const onSubmitButton: () => void = () => {
         console.log("This is the Username: " + usernameValue + ", for the LoginRequest")
         console.log("Timelimit for Login: " + timevalue)
+
         const login: LoginData = {
             name: usernameValue,
             password: values.password,

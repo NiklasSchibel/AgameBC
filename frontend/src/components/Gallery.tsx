@@ -1,6 +1,7 @@
 import Card from "./Card";
 import "./Gallery.scss"
 import {useEffect, useState} from "react";
+
 import {fetchRandomAnimal} from "../services/RequestService";
 
 export default function Gallery(){

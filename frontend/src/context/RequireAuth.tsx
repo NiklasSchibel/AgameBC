@@ -7,6 +7,7 @@ export default function RequireAuth({children}: { children: ReactElement<any, an
     const {jwtDecoded} = useContext(AuthContext)
 
     function isExpirationValid(): boolean {
+      
         if (!jwtDecoded?.exp) return false
 
         const Now = new Date();
@@ -16,6 +17,7 @@ export default function RequireAuth({children}: { children: ReactElement<any, an
     }
 
     if (isExpirationValid()) {
+
         return children;
     } else {
         return <LoginPage/>
