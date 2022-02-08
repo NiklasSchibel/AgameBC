@@ -10,8 +10,8 @@ export default function MainPage(){
     if(level === undefined){
         setNewLevel(1)
         return<div>reload Page please</div>
-    } else if(level < 10) {
-        return <Level2Page/>
-    } else return <Level1Page/>
+    } else if(level < 2) {
+        return <Level1Page/>
+    } else return <Level2Page/>
 
 }
