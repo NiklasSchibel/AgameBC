@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import AuthProvider from "./context/AuthProvider";
-import LoginPage from "./pages/LoginPage";
+import Login from "./pages/Login";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import RequireAuth from "./context/RequireAuth";
 import TestPageAfterLogin from "./pages/TestPageAfterLogin";
@@ -15,8 +15,8 @@ export default function App() {
                 <BrowserRouter>
                     <Routes>
 
-                        <Route path="*" element={<LoginPage/>}/>
-                        <Route path="/Login" element={<LoginPage/>}/>
+                        <Route path="*" element={<Login/>}/>
+                        <Route path="/Login" element={<Login/>}/>
                         <Route path="/AgameBC" element={
                             <RequireAuth>
                                 <AgameBC/>

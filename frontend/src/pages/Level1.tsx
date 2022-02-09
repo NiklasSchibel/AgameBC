@@ -1,4 +1,4 @@
-import './Level1.scss';
+import './stylingPages/Level1.scss';
 import React, {ChangeEventHandler, useContext, useEffect, useState} from "react";
 import {TextField} from "@mui/material";
 import smile from "../images/iconSmile.png";
@@ -71,11 +71,14 @@ export default function Level1(props: Level1PageProps) {
     }
 
     return (
-        <div className="Level1Page">
-            <NavBar></NavBar>
+        <div>
+            {/*<NavBar></NavBar>*/}
             <div>levelpoints and time Left to play Feature</div>
-            <h1>{requiredLetter}</h1>
-            <audio src={srcString} controls/>
+            <div className="Level1Page">
+
+
+                <h1>{requiredLetter}</h1>
+                <audio src={srcString} controls/>
                 <TextField
                     id="outlined"
                     autoComplete="new-password"
@@ -91,7 +94,8 @@ export default function Level1(props: Level1PageProps) {
                         },
                     }}
                 />
-            {answer && <AnswerTrueComponent/>}
+                {answer && <AnswerTrueComponent/>}
+            </div>
         </div>
     )
 }

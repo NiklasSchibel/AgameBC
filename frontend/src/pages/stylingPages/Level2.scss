@@ -1,7 +1,10 @@
 .Level2Page{
-  margin: 0 1rem;
+  //margin: 0 1rem;
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffaa00;
 }

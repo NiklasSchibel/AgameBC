@@ -1,18 +1,17 @@
-import "./stylingPages/Level2.scss"
-import {useContext, useEffect, useState} from "react";
+import "./stylingPages/Level3.scss"
+import React, {useEffect, useState} from 'react';
+import DragableItems from "../components/DragableItems";
 import {fetchRandomAnimal} from "../services/RequestService";
-import Card from "../components/Card";
-import {LevelContext} from "../context/LevelProvider";
 import NavBar from "../components/NavBar";
 
-export default function Level2() {
 
+export default function Level3() {
     const [animal, setAnimal] = useState<any>([]);
-    const {levelOfPlayer} = useContext(LevelContext)
+
 
     useEffect(() => {
         fetchRandomAnimal().then(data => setAnimal(data)).catch(e => console.log(e.message))
-    }, [levelOfPlayer])
+    }, [])
 
     if (!animal) {
         return <div className="gallery">
@@ -22,15 +21,16 @@ export default function Level2() {
 
     return (
         <div>
-            <NavBar/>
-            <div className="Level2Page">
-                {animal ? <Card
+            <NavBar></NavBar>
+            <div className={"Level3Page"}>
+                <DragableItems
                     id={animal.id}
                     key={animal.id}
                     imageLink={animal.imageLink}
                     animalName={animal.deName}
-                /> : "No animal to show"}
+                />
             </div>
         </div>
     )
 }
+

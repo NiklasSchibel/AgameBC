@@ -7,7 +7,7 @@ import React, {
     useState
 } from "react";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-import './LoginPage.scss';
+import './stylingPages/Login.scss';
 import {LoginData} from "../models/LoginData";
 import {loginRequest} from "../services/RequestService";
 import {useNavigate} from "react-router-dom";
@@ -25,7 +25,7 @@ interface State {
 }
 
 
-export default function LoginPage() {
+export default function Login() {
     const now = new Date();
     const [values, setValues] = useState<State>({
         amount: '',

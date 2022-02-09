@@ -1,6 +1,6 @@
 import {ReactElement, useContext} from "react";
 import {AuthContext} from "./AuthProvider";
-import LoginPage from "../pages/LoginPage";
+import Login from "../pages/Login";
 
 export default function RequireAuth({children}: { children: ReactElement<any, any> }) {
 
@@ -18,7 +18,7 @@ export default function RequireAuth({children}: { children: ReactElement<any, an
     if (isExpirationValid()) {
         return children;
     } else {
-        return <LoginPage/>
+        return <Login/>
     }
 }
 
