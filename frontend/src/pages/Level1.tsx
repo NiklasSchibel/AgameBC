@@ -3,7 +3,6 @@ import React, {ChangeEventHandler, useContext, useEffect, useState} from "react"
 import {TextField} from "@mui/material";
 import smile from "../images/iconSmile.png";
 import {LevelContext} from "../context/LevelProvider";
-import NavBar from "../components/NavBar";
 
 export interface Level1PageProps {
 }
@@ -17,6 +16,7 @@ export default function Level1(props: Level1PageProps) {
     const [randomLetter, setRandomLetter] = useState<string>(" ")
     const requiredLetter: string = randomLetter;
     const [answer, setAnswer] = useState<boolean>(false)
+    const [text, setText] = useState<string>('');
 
 
     const [inputText] = useState<string>("")
@@ -58,6 +58,11 @@ export default function Level1(props: Level1PageProps) {
         }
     }
 
+    //todo: this works for the first time clicking on the picture than only clicking on the play button
+    const onClickHandleCard = () => {
+        setText(srcString);
+    }
+
 
     /**
      * this function returns a smile when
@@ -74,11 +79,9 @@ export default function Level1(props: Level1PageProps) {
         <div>
             {/*<NavBar></NavBar>*/}
             <div>levelpoints and time Left to play Feature</div>
-            <div className="Level1Page">
-
-
+            <div onClick={onClickHandleCard} className="Level1Page">
                 <h1>{requiredLetter}</h1>
-                <audio src={srcString} controls/>
+                <audio autoPlay src={text} controls/>
                 <TextField
                     id="outlined"
                     autoComplete="new-password"

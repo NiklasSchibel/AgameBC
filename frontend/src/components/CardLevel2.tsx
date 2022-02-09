@@ -1,6 +1,6 @@
-import "./Card.scss"
+import "./stylingComponents/CardLevel2.scss"
 import {useState} from "react";
-import AnswerButtonChoice from "./AnswerButtonChoice";
+import AnswerChoiceLevel2 from "./AnswerChoiceLevel2";
 
 interface cardProps {
     key: string
@@ -9,9 +9,9 @@ interface cardProps {
     imageLink: string
 }
 
-export default function Card({animalName, imageLink}: cardProps) {
+export default function CardLevel2({animalName, imageLink}: cardProps) {
     const LANGUAGE: string = "de-de";
-    const STANDARDTEXTVOICE: string = " ";
+    const STANDARDTEXTVOICE: string = "Welcher ist der erste Buchstabe, ich heiße:";
     const firstLetterOfAnimalName = getFirstLetter(animalName);
     const [text, setText] = useState<string>('');
 
@@ -54,15 +54,13 @@ export default function Card({animalName, imageLink}: cardProps) {
     }
 
 
-    //todo: images load to slow
-
 
     return (
         <div onClick={onClickHandleCard} className="card">
-            <img className="image" loading="lazy" src={imageLink} alt="Ein Bild"/>
-            <h4>{getFirstWord(animalName)}</h4>
+            <img className="image" src={imageLink} alt="Ein Bild"/>
+            <h4>{animalName}</h4>
             <audio autoPlay src={text} controls/>
-            <AnswerButtonChoice
+            <AnswerChoiceLevel2
                 animal_name={animalName}
                 firstLetterOfAnimalName={firstLetterOfAnimalName}
             />

@@ -1,5 +1,5 @@
 import {Reorder} from "framer-motion"
-import React, {Dispatch, useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {LevelContext} from "../context/LevelProvider";
 import smile from "../images/iconSmile.png";
 
@@ -10,7 +10,7 @@ interface DragableItemsProps {
     imageLink: string
 }
 
-export default function DragableItems(props: DragableItemsProps) {
+export default function DragableItemsLevel3(props: DragableItemsProps) {
     const [answer, setAnswer] = useState<boolean>(false);
     const letterString: String = new String(props.animalName); // the constructor leads to a warning but no work around found yet
     // const letterstring:string = props.animalName; // does not work because of "can not read properties of undefined"

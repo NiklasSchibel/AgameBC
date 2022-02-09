@@ -1,6 +1,6 @@
-import "./AnswerButtonChoice.scss"
+import "./stylingComponents/AnswerChoiceLevel2.scss"
 import {Button} from "@mui/material";
-import React, {Dispatch, useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import smile from "../images/iconSmile.png";
 import {LevelContext} from "../context/LevelProvider";
 
@@ -10,7 +10,7 @@ interface AnswerButtonChoiceProps {
     firstLetterOfAnimalName: string
 }
 
-export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
+export default function AnswerChoiceLevel2(props: AnswerButtonChoiceProps) {
     const {levelOfPlayer, setNewlevelOfPlayer} = useContext(LevelContext)
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -23,18 +23,11 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
     useEffect(() => {
         setFirstRandomLetter(generateNewRandomLetter(ALPHABET,
             props.firstLetterOfAnimalName));
-    }, [])
-
-    useEffect(() => {
         setSecondRandomLetter(generateNewRandomLetter(ALPHABET,
             props.firstLetterOfAnimalName,
             firstRandomLetter));
-    }, [firstRandomLetter])
-
-
-    useEffect(() => {
         setChoicesShuffled(shuffleArray(choices));
-    }, [secondRandomLetter])
+    }, [])
 
 
     /**
@@ -78,7 +71,6 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
     const onClickHandleButton = (letter: string | undefined) => {
         if (letter === props.firstLetterOfAnimalName) {
             setAnswer(true)
-            console.log("clickHandleButton ture")
             setTimeout(function () {
                 setAnswer(false)
                 levelUp()

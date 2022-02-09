@@ -1,7 +1,7 @@
 import "./stylingPages/Level2.scss"
 import {useContext, useEffect, useState} from "react";
 import {fetchRandomAnimal} from "../services/RequestService";
-import Card from "../components/Card";
+import CardLevel2 from "../components/CardLevel2";
 import {LevelContext} from "../context/LevelProvider";
 import NavBar from "../components/NavBar";
 
@@ -10,12 +10,13 @@ export default function Level2() {
     const [animal, setAnimal] = useState<any>([]);
     const {levelOfPlayer} = useContext(LevelContext)
 
+
     useEffect(() => {
         fetchRandomAnimal().then(data => setAnimal(data)).catch(e => console.log(e.message))
     }, [levelOfPlayer])
 
     if (!animal) {
-        return <div className="gallery">
+        return <div>
             <h1>loading...</h1>
         </div>
     }
@@ -24,7 +25,7 @@ export default function Level2() {
         <div>
             <NavBar/>
             <div className="Level2Page">
-                {animal ? <Card
+                {animal ? <CardLevel2
                     id={animal.id}
                     key={animal.id}
                     imageLink={animal.imageLink}

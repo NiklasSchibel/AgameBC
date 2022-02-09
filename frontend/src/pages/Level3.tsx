@@ -1,6 +1,6 @@
 import "./stylingPages/Level3.scss"
 import React, {useEffect, useState} from 'react';
-import DragableItems from "../components/DragableItems";
+import DragableItemsLevel3 from "../components/DragableItemsLevel3";
 import {fetchRandomAnimal} from "../services/RequestService";
 import NavBar from "../components/NavBar";
 
@@ -23,7 +23,7 @@ export default function Level3() {
         <div>
             <NavBar></NavBar>
             <div className={"Level3Page"}>
-                <DragableItems
+                <DragableItemsLevel3
                     id={animal.id}
                     key={animal.id}
                     imageLink={animal.imageLink}
