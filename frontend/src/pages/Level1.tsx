@@ -1,4 +1,4 @@
-import './Level1Page.scss';
+import './Level1.scss';
 import React, {ChangeEventHandler, useContext, useEffect, useState} from "react";
 import {TextField} from "@mui/material";
 import smile from "../images/iconSmile.png";
@@ -8,7 +8,7 @@ import NavBar from "../components/NavBar";
 export interface Level1PageProps {
 }
 
-export default function Level1Page(props: Level1PageProps) {
+export default function Level1(props: Level1PageProps) {
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     const LANGUAGE: string = "de-de"
     const STANDARDTEXTVOICE: string = "das ist der Buchstabe "
@@ -24,7 +24,7 @@ export default function Level1Page(props: Level1PageProps) {
 
     useEffect(() => {
         setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
-    }, [])
+    }, [levelOfPlayer])
 
 
     //todo: set key later in environment
@@ -42,7 +42,6 @@ export default function Level1Page(props: Level1PageProps) {
             setTimeout(function () {
                 setAnswer(false)
                 levelUp()
-                setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
             }, 3000);
             console.log("same letter true in on change function")
         }

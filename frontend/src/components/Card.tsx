@@ -1,5 +1,5 @@
 import "./Card.scss"
-import {Dispatch, useState} from "react";
+import {useState} from "react";
 import AnswerButtonChoice from "./AnswerButtonChoice";
 
 interface cardProps {
