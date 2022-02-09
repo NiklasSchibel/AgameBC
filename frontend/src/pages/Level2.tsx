@@ -31,6 +31,7 @@ export default function Level2() {
                     animalName={animal.deName}
                 /> : "No animal to show"}
             </div>
+            <div className="filledBody"></div>
         </div>
     )
 }
