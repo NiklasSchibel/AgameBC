@@ -1,5 +1,6 @@
 import {Reorder} from "framer-motion"
-import {Dispatch, useEffect, useState} from "react";
+import {Dispatch, useContext, useEffect, useState} from "react";
+import {LevelContext} from "../context/LevelProvider";
 
 interface DragableItemsProps {
     key: string
@@ -15,13 +16,14 @@ export default function DragableItems(props: DragableItemsProps) {
     // const [letters, setLetters] = useState(letterArray)
     const [choicesShuffled, setChoicesShuffled] = useState<Array<string>>([]);
     // const [answerTrue, setAnswerTrue] = useState<boolean>(false);
+    const {level,setNewLevel} = useContext(LevelContext)
 
     useEffect(() => {
         setChoicesShuffled(shuffleArray(letterArray))
     }, [])
 
 
-
+// put this in onChange prop of renderComponten
     useEffect(() => {
         checkIfArraysAreTheSame(choicesShuffled, letterArray)
         // console.log(letters)
@@ -50,10 +52,15 @@ export default function DragableItems(props: DragableItemsProps) {
         return (JSON.stringify(stringArray1) === JSON.stringify(stringArray2))
     }
 
+    function handleChange(){
+        console.log(choicesShuffled)
+        console.log("handleChange run")
+    }
+
     return (
         <div>
             <h4>{props.animalName}</h4>
-            <Reorder.Group as="ol" axis="y" values={choicesShuffled} onReorder={setChoicesShuffled}>
+            <Reorder.Group as="ol" axis="y" values={choicesShuffled} onChange={handleChange} onReorder={setChoicesShuffled}>
                 {choicesShuffled.map((item, index) => (
                     <Reorder.Item key={item+index} value={item}>
                         {item}
