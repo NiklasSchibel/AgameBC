@@ -3,6 +3,7 @@ import React, {ChangeEventHandler, Dispatch, useContext, useEffect, useState} fr
 import {TextField} from "@mui/material";
 import smile from "../images/iconSmile.png";
 import {LevelContext} from "../context/LevelProvider";
+import NavBar from "../components/NavBar";
 
 export interface Level1PageProps {
     rightAnswer: string
@@ -74,6 +75,7 @@ export default function Level1Page(props: Level1PageProps) {
 
     return (
         <div className="Level1Page">
+            <NavBar></NavBar>
             <div>levelpoints and time Left to play Feature</div>
             <h1>{randomLetter}</h1>
             <audio src={srcString} controls/>

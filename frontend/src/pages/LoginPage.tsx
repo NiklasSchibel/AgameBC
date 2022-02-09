@@ -125,7 +125,7 @@ export default function LoginPage() {
                     value={timevalue}
                     onChange={handleSliderChange}
                     valueLabelDisplay="auto"
-                    min={3}
+                    min={1}
                     max={40}
             />
             <Button className="button-submit"
