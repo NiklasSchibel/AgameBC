@@ -25,8 +25,6 @@ export default function Gallery(){
                     key = {animal.id}
                     imageLink = {animal.imageLink}
                     animalName = {animal.deName}
-                    rightAnswer = {rightAnswer}
-                    setRightAnswer = {setRightAnswer}
                 /> : "No animal to show"}
         </div>
     )

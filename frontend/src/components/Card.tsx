@@ -7,11 +7,9 @@ interface cardProps {
     animalName: string
     id: string
     imageLink: string
-    rightAnswer: string
-    setRightAnswer:  Dispatch<React.SetStateAction<string>>
 }
 
-export default function Card({animalName, imageLink, rightAnswer, setRightAnswer}: cardProps) {
+export default function Card({animalName, imageLink}: cardProps) {
     const LANGUAGE: string = "de-de";
     const STANDARDTEXTVOICE: string = " ";
     const firstLetterOfAnimalName = getFirstLetter(animalName);
@@ -67,8 +65,6 @@ export default function Card({animalName, imageLink, rightAnswer, setRightAnswer
             <AnswerButtonChoice
                 animal_name={animalName}
                 firstLetterOfAnimalName={firstLetterOfAnimalName}
-                rightAnswer={rightAnswer}
-                setRightAnswer={setRightAnswer}
             />
         </div>
     )

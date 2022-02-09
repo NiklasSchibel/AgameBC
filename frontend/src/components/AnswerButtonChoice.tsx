@@ -8,8 +8,6 @@ import {LevelContext} from "../context/LevelProvider";
 interface AnswerButtonChoiceProps {
     animal_name: string
     firstLetterOfAnimalName: string
-    rightAnswer: string
-    setRightAnswer:  Dispatch<React.SetStateAction<string>>
 }
 
 export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
@@ -80,16 +78,11 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
     const onClickHandleButton = (letter: string | undefined) => {
         if (letter === props.firstLetterOfAnimalName) {
             setAnswer(true)
-            if (levelOfPlayer === undefined) {
-                setNewlevelOfPlayer(1)
-            } else {
-                const newLevel: number = levelOfPlayer + 1;
-                setNewlevelOfPlayer(newLevel)
-            }
-            setTimeout(function(){
-                props.setRightAnswer(letter)
-            }, 2000);
-
+            console.log("clickHandleButton ture")
+            setTimeout(function () {
+                setAnswer(false)
+                levelUp()
+            }, 3000);
         } else {
             const newReducedChoices = [...choicesShuffled]
             const index = choicesShuffled.indexOf(letter)
@@ -109,19 +102,27 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
             </div>)
     }
 
+    const levelUp = () => {
+        if (levelOfPlayer === undefined) {
+            setNewlevelOfPlayer(1)
+        } else {
+            const newLevel: number = levelOfPlayer + 1;
+            setNewlevelOfPlayer(newLevel)
+        }
+    }
 
     return (
         <div className="ButtonsAndAnswerTrueComponent">
             <div className="ButtonsSelection">
                 {choicesShuffled[0] ? <Button onClick={() => onClickHandleButton(choicesShuffled[0])}
                                               className="ButtonText" variant="outlined"
-                                              color="success">{choicesShuffled[0]}</Button> : <div></div>}
+                                              color="success">{choicesShuffled[0]}</Button> : <div/>}
                 {choicesShuffled[1] ? <Button onClick={() => onClickHandleButton(choicesShuffled[1])}
                                               className="ButtonText" variant="outlined"
-                                              color="success">{choicesShuffled[1]}</Button> : <div></div>}
+                                              color="success">{choicesShuffled[1]}</Button> : <div/>}
                 {choicesShuffled[2] ? <Button onClick={() => onClickHandleButton(choicesShuffled[2])}
                                               className="ButtonText" variant="outlined"
-                                              color="success">{choicesShuffled[2]}</Button> : <div></div>}
+                                              color="success">{choicesShuffled[2]}</Button> : <div/>}
             </div>
             {answer && <AnswerTrueComponent/>}
 

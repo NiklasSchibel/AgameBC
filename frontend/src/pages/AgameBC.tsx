@@ -16,10 +16,10 @@ export default function AgameBC(){
     if(levelOfPlayer === undefined){
         setNewlevelOfPlayer(1)
         return<div>reload Page please</div>
-    } else if(levelOfPlayer < 5) {
+    } else if(levelOfPlayer < 3) {
         return <Level1Page
         />
-    } else if(levelOfPlayer<8) {
+    } else if(levelOfPlayer<80) {
         return <Level2Page/>
     }
         else {
