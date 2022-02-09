@@ -11,6 +11,7 @@ export default function Level3Page() {
 
     useEffect( () => {
         fetchRandomAnimal().then(data => setAnimal(data)).catch(e => console.log(e.message))
+        // setRightAnswer("")
     },[])
 
     if (!animal){

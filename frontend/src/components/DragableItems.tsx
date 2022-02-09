@@ -11,23 +11,23 @@ interface DragableItemsProps {
 }
 
 export default function DragableItems(props: DragableItemsProps) {
-    const [items, setItems] = useState([0, 1, 2, 3])
+    // const [items, setItems] = useState([0, 1, 2, 3])
     const letterString: String = new String(props.animalName); // the constructor leads to a warning but no work around found yet
     // const letterstring:string = props.animalName; // does not work because of "can not read properties of undefined"
-    const letterArray = letterString.split(''); //this is an string string[]
-    const [letters, setLetters] = useState(letterArray)
+    const letterArray = letterString.split(''); //this is an string[]
+    // const [letters, setLetters] = useState(letterArray)
     const [choicesShuffled, setChoicesShuffled] = useState<Array<string>>([]);
-    const [answerTrue, setAnswerTrue] = useState<boolean>(false);
+    // const [answerTrue, setAnswerTrue] = useState<boolean>(false);
 
     useEffect(() => {
         setChoicesShuffled(shuffleArray(letterArray))
     }, [])
 
     useEffect(() => {
-        console.log(checkIfArraysAreTheSame(choicesShuffled,letterArray))
-        console.log(letters)
-        console.log(choicesShuffled)
-        console.log(letterArray)
+        checkIfArraysAreTheSame(choicesShuffled, letterArray)
+        // console.log(letters)
+        // console.log(choicesShuffled)
+        // console.log(letterArray)
     }, [choicesShuffled])
 
     /**
@@ -55,15 +55,8 @@ export default function DragableItems(props: DragableItemsProps) {
         <div>
             <h4>{props.animalName}</h4>
             <Reorder.Group as="ol" axis="y" values={choicesShuffled} onReorder={setChoicesShuffled}>
-                {choicesShuffled.map(letter => (
-                    <Reorder.Item key={letter} value={letter}>
-                        {letter}
-                    </Reorder.Item>
-                ))}
-            </Reorder.Group>
-            <Reorder.Group axis="y" values={items} onReorder={setItems}>
-                {items.map(item => (
-                    <Reorder.Item key={item} value={item}>
+                {choicesShuffled.map((item, index) => (
+                    <Reorder.Item key={index} value={item}>
                         {item}
                     </Reorder.Item>
                 ))}
