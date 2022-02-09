@@ -6,8 +6,6 @@ import {LevelContext} from "../context/LevelProvider";
 import NavBar from "../components/NavBar";
 
 export interface Level1PageProps {
-    rightAnswer: string
-    setRightAnswer: Dispatch<React.SetStateAction<string>>
 }
 
 export default function Level1Page(props: Level1PageProps) {
@@ -17,6 +15,7 @@ export default function Level1Page(props: Level1PageProps) {
 
     const {levelOfPlayer, setNewlevelOfPlayer} = useContext(LevelContext)
     const [randomLetter, setRandomLetter] = useState<string>(" ")
+    const requiredLetter: string = randomLetter;
     const [answer, setAnswer] = useState<boolean>(false)
 
 
@@ -38,13 +37,12 @@ export default function Level1Page(props: Level1PageProps) {
     const handleChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
         = (event) => {
         event.preventDefault();
-        const requiredLetter:string = randomLetter;
-        if(requiredLetter === event.target.value.toUpperCase()){
+        if (requiredLetter === event.target.value.toUpperCase()) {
             setAnswer(true)
             setTimeout(function () {
                 setAnswer(false)
-                setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
                 levelUp()
+                setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
             }, 3000);
             console.log("same letter true in on change function")
         }
@@ -53,13 +51,13 @@ export default function Level1Page(props: Level1PageProps) {
 
 
     const levelUp = () => {
-            if (levelOfPlayer === undefined) {
-                setNewlevelOfPlayer(1)
-            } else {
-                const newLevel: number = levelOfPlayer + 1;
-                setNewlevelOfPlayer(newLevel)
-            }
+        if (levelOfPlayer === undefined) {
+            setNewlevelOfPlayer(1)
+        } else {
+            const newLevel: number = levelOfPlayer + 1;
+            setNewlevelOfPlayer(newLevel)
         }
+    }
 
 
     /**
@@ -77,19 +75,26 @@ export default function Level1Page(props: Level1PageProps) {
         <div className="Level1Page">
             <NavBar></NavBar>
             <div>levelpoints and time Left to play Feature</div>
-            <h1>{randomLetter}</h1>
+            <h1>{requiredLetter}</h1>
             <audio src={srcString} controls/>
-            <TextField
-                id="outlined"
-                placeholder={randomLetter}
-                value={inputText}
-                color="success"
-                onChange={handleChange}
-                type="text"
-                inputProps={{
-                    maxLength: 1
-                }}
-            />
+            <form autoComplete={"new-password"}>
+                <TextField
+                    id="outlined"
+                    autoComplete="new-password"
+                    placeholder={requiredLetter}
+                    value={inputText}
+                    color="success"
+                    onChange={handleChange}
+                    type="text"
+                    inputProps={{
+                        maxLength: 1,
+                        form: {
+                            // autoComplete: 'off',
+                            autoComplete: 'new-password',
+                        },
+                    }}
+                />
+            </form>
             {answer && <AnswerTrueComponent/>}
         </div>
     )

@@ -18,8 +18,6 @@ export default function AgameBC(){
         return<div>reload Page please</div>
     } else if(levelOfPlayer < 5) {
         return <Level1Page
-        rightAnswer={rightAnswer}
-        setRightAnswer={setRightAnswer}
         />
     } else if(levelOfPlayer<8) {
         return <Level2Page/>
