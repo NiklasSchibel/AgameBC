@@ -24,19 +24,19 @@ export default function Level1Page(props: Level1PageProps) {
         setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
     }, [])
 
-    useEffect(() => {
-        if(checkTypedAnswerNew()){
-            setAnswer(true)
-            setTimeout(function () {
-                setAnswer(false)
-                setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
-                setInputText("")
-                levelUp()
-            }, 3000);
-        } else {
-            setInputText("")
-        }
-    }, [inputText])
+    // useEffect(() => {
+    //     if(checkTypedAnswerNew()){
+    //         setAnswer(true)
+    //         setTimeout(function () {
+    //             setAnswer(false)
+    //             setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
+    //             setInputText("")
+    //             levelUp()
+    //         }, 3000);
+    //     } else {
+    //         setInputText("")
+    //     }
+    // }, [inputText])
 
 
     //todo: set key later in environment
@@ -49,11 +49,26 @@ export default function Level1Page(props: Level1PageProps) {
     const handleChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
         = (event) => {
         event.preventDefault();
-        setInputText(event.target.value.toUpperCase());
+        if(checkTypedAnswerNewNew(randomLetter,event.target.value.toUpperCase())){
+            setInputText(event.target.value.toUpperCase());
+            setAnswer(true)
+            setTimeout(function () {
+                setAnswer(false)
+                setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
+                setInputText("")
+                levelUp()
+            }, 3000);
+            console.log("same letter true in on change function")
+        }
+        setInputText("")
+        console.log("onChange function lief")
     }
 
     const checkTypedAnswerNew = ():boolean => {
         return (inputText===randomLetter)
+    }
+    const checkTypedAnswerNewNew = (string1:string,string2:string):boolean => {
+        return (string1===string2)
     }
 
     const levelUp = () => {
@@ -80,7 +95,6 @@ export default function Level1Page(props: Level1PageProps) {
     return (
         <div className="Level1Page">
             <div>levelpoints and time Left to play Feature</div>
-            <h3>so far this is Level1Page</h3>
             <h1>{randomLetter}</h1>
             <audio src={srcString} controls/>
             <TextField
