@@ -29,6 +29,16 @@ export default function AnswerChoiceLevel2(props: AnswerButtonChoiceProps) {
         setChoicesShuffled(shuffleArray(choices));
     }, [])
 
+    useEffect(() => {
+        setSecondRandomLetter(generateNewRandomLetter(ALPHABET,
+            props.firstLetterOfAnimalName,
+            firstRandomLetter));
+    }, [firstRandomLetter])
+
+    useEffect(() => {
+        setChoicesShuffled(shuffleArray(choices));
+    }, [secondRandomLetter])
+
 
     /**
      * returns a random Capital Letter of the Alphabet which is different from other provided letters
