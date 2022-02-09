@@ -12,6 +12,11 @@ interface DragableItemsProps{
 
 export default function DragableItems(props:DragableItemsProps) {
     const [items, setItems] = useState([0, 1, 2, 3])
+    const letterArray = Array.of(props.animalName)
+    const letterArrayMap = new Map(JSON.parse(JSON.stringify([...letterArray])));
+
+    console.log("letterArray:",letterArray)
+    // console.log("LetterArrayMap", letterArrayMap)
 
     return (
         <div>
