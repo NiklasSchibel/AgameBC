@@ -14,18 +14,18 @@ export default function App() {
             <LevelProvider>
                 <BrowserRouter>
                     <Routes>
-                        <Route path="*" element={<LoginPage
-                        />}/>
-                        <Route path="/Login" element={<LoginPage
-                        />}/>
 
-                        <Route path="/AgameBC" element={<AgameBC
-                        />}/>
+                        <Route path="*" element={<LoginPage/>}/>
+                        <Route path="/Login" element={<LoginPage/>}/>
+                        <Route path="/AgameBC" element={
+                            <RequireAuth>
+                                <AgameBC/>
+                            </RequireAuth>}/>
+                        <Route path="/TestPage" element={
+                            <RequireAuth>
+                                <TestPageAfterLogin/>
+                            </RequireAuth>}/>
 
-                        <Route path="/TestPage" element={<RequireAuth>
-                            <TestPageAfterLogin/>
-                        </RequireAuth>}
-                        />
                     </Routes>
                 </BrowserRouter>
             </LevelProvider>

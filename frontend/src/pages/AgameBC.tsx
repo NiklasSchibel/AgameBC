@@ -21,7 +21,7 @@ export default function AgameBC(){
         rightAnswer={rightAnswer}
         setRightAnswer={setRightAnswer}
         />
-    } else if(levelOfPlayer<30) {
+    } else if(levelOfPlayer<8) {
         return <Level2Page/>
     }
         else {

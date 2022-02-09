@@ -26,6 +26,7 @@ interface State {
 
 
 export default function LoginPage() {
+    const now = new Date();
     const [values, setValues] = useState<State>({
         amount: '',
         password: '',
@@ -64,6 +65,7 @@ export default function LoginPage() {
     const onSubmitButton: () => void = () => {
         console.log("This is the Username: " + usernameValue + ", for the LoginRequest")
         console.log("Timelimit for Login: " + timevalue)
+        console.log("jetzt hat es so viele Minuten:" , now.getMinutes())
         const login: LoginData = {
             name: usernameValue,
             password: values.password,
@@ -72,7 +74,7 @@ export default function LoginPage() {
         loginRequest(login)
             .then((data)=>{
                 setJwt(data)
-                navigate('/TestPage')
+                navigate('/AgameBC')
             })
     }
 
