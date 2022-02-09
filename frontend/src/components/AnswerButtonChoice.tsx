@@ -1,9 +1,8 @@
 import "./AnswerButtonChoice.scss"
 import {Button} from "@mui/material";
 import React, {Dispatch, useContext, useEffect, useState} from "react";
-import {AuthContext} from "../context/AuthProvider";
 import smile from "../images/iconSmile.png";
-// import {useNavigate} from "react-router-dom";
+import {LevelContext} from "../context/LevelProvider";
 
 
 interface AnswerButtonChoiceProps {
@@ -14,8 +13,7 @@ interface AnswerButtonChoiceProps {
 }
 
 export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
-    // const navigate = useNavigate();
-    const {level, setNewLevel} = useContext(AuthContext)
+    const {level, setNewLevel} = useContext(LevelContext)
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     const [answer, setAnswer] = useState<boolean>(false);

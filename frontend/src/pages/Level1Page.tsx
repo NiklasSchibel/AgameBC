@@ -2,7 +2,7 @@ import './Level1Page.scss';
 import React, {ChangeEventHandler, Dispatch, useContext, useEffect, useState} from "react";
 import {TextField} from "@mui/material";
 import smile from "../images/iconSmile.png";
-import {AuthContext} from "../context/AuthProvider";
+import {LevelContext} from "../context/LevelProvider";
 
 export interface Level1PageProps {
     rightAnswer: string
@@ -14,7 +14,7 @@ export default function Level1Page(props: Level1PageProps) {
     const [randomLetter, setRandomLetter] = useState<string>(" ")
     const [inputText, setInputText] = useState<string>("");
     const [answer, setAnswer] = useState<boolean>(false);
-    const {level, setNewLevel} = useContext(AuthContext)
+    const {level, setNewLevel} = useContext(LevelContext)
 
     const LANGUAGE: string = "de-de";
     const STANDARDTEXTVOICE: string = "das ist der Buchstabe ";
