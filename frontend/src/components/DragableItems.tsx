@@ -23,6 +23,8 @@ export default function DragableItems(props: DragableItemsProps) {
         setChoicesShuffled(shuffleArray(letterArray))
     }, [])
 
+
+
     useEffect(() => {
         checkIfArraysAreTheSame(choicesShuffled, letterArray)
         // console.log(letters)
@@ -56,7 +58,7 @@ export default function DragableItems(props: DragableItemsProps) {
             <h4>{props.animalName}</h4>
             <Reorder.Group as="ol" axis="y" values={choicesShuffled} onReorder={setChoicesShuffled}>
                 {choicesShuffled.map((item, index) => (
-                    <Reorder.Item key={index} value={item}>
+                    <Reorder.Item key={item+index} value={item}>
                         {item}
                     </Reorder.Item>
                 ))}

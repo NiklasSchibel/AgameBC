@@ -27,11 +27,11 @@ export default function Level1Page(props: Level1PageProps) {
     useEffect(() => {
         if(checkTypedAnswerNew()){
             setAnswer(true)
-            levelUp()
             setTimeout(function () {
                 setAnswer(false)
                 setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
                 setInputText("")
+                levelUp()
             }, 3000);
         } else {
             setInputText("")
