@@ -6,22 +6,22 @@ import {LevelContext} from "../context/LevelProvider";
 
 export default function AgameBC(){
 
-    const {level, setNewLevel} = useContext(LevelContext)
+    const {levelOfPlayer, setNewlevelOfPlayer} = useContext(LevelContext)
     const [rightAnswer, setRightAnswer] = useState<string>("")
 
     useEffect( () => {
         setRightAnswer("")
     },[rightAnswer])
 
-    if(level === undefined){
-        setNewLevel(1)
+    if(levelOfPlayer === undefined){
+        setNewlevelOfPlayer(1)
         return<div>reload Page please</div>
-    } else if(level < 5) {
+    } else if(levelOfPlayer < 5) {
         return <Level1Page
         rightAnswer={rightAnswer}
         setRightAnswer={setRightAnswer}
         />
-    } else if(level<30) {
+    } else if(levelOfPlayer<30) {
         return <Level2Page/>
     }
         else {

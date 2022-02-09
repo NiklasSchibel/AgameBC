@@ -18,7 +18,7 @@ export default function DragableItems(props: DragableItemsProps) {
     // const [letters, setLetters] = useState(letterArray)
     const [choicesShuffled, setChoicesShuffled] = useState<Array<string>>([]);
     // const [answerTrue, setAnswerTrue] = useState<boolean>(false);
-    const {level, setNewLevel} = useContext(LevelContext)
+    const {levelOfPlayer, setNewlevelOfPlayer} = useContext(LevelContext)
 
     useEffect(() => {
         setChoicesShuffled(shuffleArray(letterArray))
@@ -30,10 +30,10 @@ export default function DragableItems(props: DragableItemsProps) {
         if (checkIfArraysAreTheSame(choicesShuffled, letterArray)) {
             setAnswer(true)
             setTimeout(function(){
-                if (level === undefined) {
-                    setNewLevel(1)
+                if (levelOfPlayer === undefined) {
+                    setNewlevelOfPlayer(1)
                 } else {
-                    setNewLevel(level + 1)
+                    setNewlevelOfPlayer(levelOfPlayer + 1)
                 }
             }, 2000);
         }

@@ -13,7 +13,7 @@ interface AnswerButtonChoiceProps {
 }
 
 export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
-    const {level, setNewLevel} = useContext(LevelContext)
+    const {levelOfPlayer, setNewlevelOfPlayer} = useContext(LevelContext)
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     const [answer, setAnswer] = useState<boolean>(false);
@@ -80,11 +80,11 @@ export default function AnswerButtonChoice(props: AnswerButtonChoiceProps) {
     const onClickHandleButton = (letter: string | undefined) => {
         if (letter === props.firstLetterOfAnimalName) {
             setAnswer(true)
-            if (level === undefined) {
-                setNewLevel(1)
+            if (levelOfPlayer === undefined) {
+                setNewlevelOfPlayer(1)
             } else {
-                const newLevel: number = level + 1;
-                setNewLevel(newLevel)
+                const newLevel: number = levelOfPlayer + 1;
+                setNewlevelOfPlayer(newLevel)
             }
             setTimeout(function(){
                 props.setRightAnswer(letter)

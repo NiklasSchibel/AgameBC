@@ -10,33 +10,21 @@ export interface Level1PageProps {
 }
 
 export default function Level1Page(props: Level1PageProps) {
-    const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const [randomLetter, setRandomLetter] = useState<string>(" ")
-    const [inputText, setInputText] = useState<string>("");
-    const [answer, setAnswer] = useState<boolean>(false);
-    const {level, setNewLevel} = useContext(LevelContext)
+    const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    const LANGUAGE: string = "de-de"
+    const STANDARDTEXTVOICE: string = "das ist der Buchstabe "
 
-    const LANGUAGE: string = "de-de";
-    const STANDARDTEXTVOICE: string = "das ist der Buchstabe ";
+    const {levelOfPlayer, setNewlevelOfPlayer} = useContext(LevelContext)
+    const [randomLetter, setRandomLetter] = useState<string>(" ")
+    const [answer, setAnswer] = useState<boolean>(false)
+
+
+    const [inputText, setInputText] = useState<string>("")
 
 
     useEffect(() => {
         setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
     }, [])
-
-    // useEffect(() => {
-    //     if(checkTypedAnswerNew()){
-    //         setAnswer(true)
-    //         setTimeout(function () {
-    //             setAnswer(false)
-    //             setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
-    //             setInputText("")
-    //             levelUp()
-    //         }, 3000);
-    //     } else {
-    //         setInputText("")
-    //     }
-    // }, [inputText])
 
 
     //todo: set key later in environment
@@ -49,34 +37,26 @@ export default function Level1Page(props: Level1PageProps) {
     const handleChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
         = (event) => {
         event.preventDefault();
-        if(checkTypedAnswerNewNew(randomLetter,event.target.value.toUpperCase())){
-            setInputText(event.target.value.toUpperCase());
+        const requiredLetter:string = randomLetter;
+        if(requiredLetter === event.target.value.toUpperCase()){
             setAnswer(true)
             setTimeout(function () {
                 setAnswer(false)
                 setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
-                setInputText("")
                 levelUp()
             }, 3000);
             console.log("same letter true in on change function")
         }
-        setInputText("")
         console.log("onChange function lief")
     }
 
-    const checkTypedAnswerNew = ():boolean => {
-        return (inputText===randomLetter)
-    }
-    const checkTypedAnswerNewNew = (string1:string,string2:string):boolean => {
-        return (string1===string2)
-    }
 
     const levelUp = () => {
-            if (level === undefined) {
-                setNewLevel(1)
+            if (levelOfPlayer === undefined) {
+                setNewlevelOfPlayer(1)
             } else {
-                const newLevel: number = level + 1;
-                setNewLevel(newLevel)
+                const newLevel: number = levelOfPlayer + 1;
+                setNewlevelOfPlayer(newLevel)
             }
         }
 

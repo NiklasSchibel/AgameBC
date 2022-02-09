@@ -1,26 +1,26 @@
 import {createContext, ReactElement, useState} from "react";
 
 export interface LevelContextType {
-    level?: number
-    setNewLevel: (newLevel: number) => void
+    levelOfPlayer?: number
+    setNewlevelOfPlayer: (newLevel: number) => void
 }
 
 export const LevelContext = createContext<LevelContextType>({
-    setNewLevel: () => {
+    setNewlevelOfPlayer: () => {
         throw Error("defaut setNewLevel function has not been initialized")
     }
 })
 
 export default function LevelProvider({children}: { children: ReactElement<any, any> }) {
 
-    const [level, setLevel] = useState<number>(1)
+    const [levelOfPlayer, setLevelOfPlayer] = useState<number>(1)
 
-    const setNewLevel = (newLevel: number) => {
-        setLevel(newLevel)
+    const setNewlevelOfPlayer = (newLevel: number) => {
+        setLevelOfPlayer(newLevel)
     }
 
     return (
-        <LevelContext.Provider value={{level, setNewLevel}}>
+        <LevelContext.Provider value={{levelOfPlayer: levelOfPlayer, setNewlevelOfPlayer: setNewlevelOfPlayer}}>
             {children}
         </LevelContext.Provider>
     )
