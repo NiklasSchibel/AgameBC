@@ -1,5 +1,5 @@
 import './Level1Page.scss';
-import React, {ChangeEventHandler, Dispatch, useContext, useEffect, useState} from "react";
+import React, {ChangeEventHandler, useContext, useEffect, useState} from "react";
 import {TextField} from "@mui/material";
 import smile from "../images/iconSmile.png";
 import {LevelContext} from "../context/LevelProvider";
@@ -19,7 +19,7 @@ export default function Level1Page(props: Level1PageProps) {
     const [answer, setAnswer] = useState<boolean>(false)
 
 
-    const [inputText, setInputText] = useState<string>("")
+    const [inputText] = useState<string>("")
 
 
     useEffect(() => {
@@ -77,7 +77,6 @@ export default function Level1Page(props: Level1PageProps) {
             <div>levelpoints and time Left to play Feature</div>
             <h1>{requiredLetter}</h1>
             <audio src={srcString} controls/>
-            <form autoComplete={"new-password"}>
                 <TextField
                     id="outlined"
                     autoComplete="new-password"
@@ -89,12 +88,10 @@ export default function Level1Page(props: Level1PageProps) {
                     inputProps={{
                         maxLength: 1,
                         form: {
-                            // autoComplete: 'off',
                             autoComplete: 'new-password',
                         },
                     }}
                 />
-            </form>
             {answer && <AnswerTrueComponent/>}
         </div>
     )
