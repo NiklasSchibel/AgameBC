@@ -1,3 +1,4 @@
+import "./Level3Page.scss"
 import React from 'react';
 import DragableItems from "../components/DragableItems";
 
