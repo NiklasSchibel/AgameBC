@@ -6,12 +6,9 @@ interface DragableItemsProps {
     animalName: string
     id: string
     imageLink: string
-    rightAnswer: string
-    setRightAnswer: Dispatch<React.SetStateAction<string>>
 }
 
 export default function DragableItems(props: DragableItemsProps) {
-    // const [items, setItems] = useState([0, 1, 2, 3])
     const letterString: String = new String(props.animalName); // the constructor leads to a warning but no work around found yet
     // const letterstring:string = props.animalName; // does not work because of "can not read properties of undefined"
     const letterArray = letterString.split(''); //this is an string[]

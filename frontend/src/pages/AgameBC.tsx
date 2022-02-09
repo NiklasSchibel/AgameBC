@@ -1,12 +1,12 @@
 import Level2Page from "./Level2Page";
 import Level1Page from "./Level1Page";
 import {useContext, useEffect, useState} from "react";
-import {AuthContext} from "../context/AuthProvider";
 import Level3Page from "./Level3Page";
+import {LevelContext} from "../context/LevelProvider";
 
-export default function MainPage(){
+export default function AgameBC(){
 
-    const {level, setNewLevel} = useContext(AuthContext)
+    const {level, setNewLevel} = useContext(LevelContext)
     const [rightAnswer, setRightAnswer] = useState<string>("")
 
     useEffect( () => {

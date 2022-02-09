@@ -6,12 +6,10 @@ import {fetchRandomAnimal} from "../services/RequestService";
 
 export default function Level3Page() {
     const [animal, setAnimal] = useState<any>([]);
-    const [rightAnswer,setRightAnswer] =useState<string>("");
 
 
     useEffect( () => {
         fetchRandomAnimal().then(data => setAnimal(data)).catch(e => console.log(e.message))
-        // setRightAnswer("")
     },[])
 
     if (!animal){
@@ -27,8 +25,6 @@ export default function Level3Page() {
             key = {animal.id}
             imageLink = {animal.imageLink}
             animalName = {animal.deName}
-            rightAnswer = {rightAnswer}
-            setRightAnswer = {setRightAnswer}
         />
     </div>
         )
