@@ -4,20 +4,20 @@ import {useContext} from "react";
 import Level3 from "./Level3";
 import {LevelContext} from "../context/LevelProvider";
 
-export default function AgameBC(){
+export default function AgameBC() {
 
     const {levelOfPlayer, setNewlevelOfPlayer} = useContext(LevelContext)
 
-    if(levelOfPlayer === undefined){
+    if (levelOfPlayer === undefined) {
         setNewlevelOfPlayer(1)
-        return<div>reload Page please</div>
-    } else if(levelOfPlayer < 3) {
+        return <div>reload Page please</div>
+    } else if (levelOfPlayer < 0) {
         return <Level1
         />
-    } else if(levelOfPlayer<6) {
+    } else if (levelOfPlayer < 0) {
         return <Level2/>
+    } else {
+        return <Level3/>
     }
-        else {
-        return <Level3/>}
 
 }

@@ -10,34 +10,55 @@ interface DragableItemsProps {
     imageLink: string
 }
 
-export default function DragableItemsLevel3(props: DragableItemsProps) {
+export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
     const [answer, setAnswer] = useState<boolean>(false);
-    const letterString: String = new String(props.animalName); // the constructor leads to a warning but no work around found yet
-    // const letterstring:string = props.animalName; // does not work because of "can not read properties of undefined"
-    const letterArray = letterString.split(''); //this is an string[]
+    // const letterString: String = new String(props.animalName); // the constructor leads to a warning but no work around found yet
+    const letterstring: string = getStringOfAnimalName(animalName); // does not work because of "can not read properties of undefined"
+    const letterArray = letterstring.split(''); //this is an string[]
     // const [letters, setLetters] = useState(letterArray)
     const [choicesShuffled, setChoicesShuffled] = useState<Array<string>>([]);
-    // const [answerTrue, setAnswerTrue] = useState<boolean>(false);
     const {levelOfPlayer, setNewlevelOfPlayer} = useContext(LevelContext)
 
     useEffect(() => {
         setChoicesShuffled(shuffleArray(letterArray))
+        // eslint-disable-next-line
     }, [])
 
 
-// put this in onChange prop of renderComponten does not work
+    // but this in on change prop or switcht to different library?
     useEffect(() => {
         if (checkIfArraysAreTheSame(choicesShuffled, letterArray)) {
             setAnswer(true)
-            setTimeout(function(){
-                if (levelOfPlayer === undefined) {
-                    setNewlevelOfPlayer(1)
-                } else {
-                    setNewlevelOfPlayer(levelOfPlayer + 1)
-                }
-            }, 2000);
+            setTimeout(function () {
+                setAnswer(false)
+                levelUp()
+            }, 3000);
         }
-    }, [choicesShuffled])
+        // eslint-disable-next-line
+    }, [])
+
+
+    /**
+     * returns an array of string from the param input, and handling the undefined case
+     * @param word
+     * */
+    function getStringOfAnimalName(word: string): string {
+        if (word !== undefined && word.length > 1) {
+            return word;
+        } else {
+            return "Gecko";
+        }
+    }
+
+    const levelUp = () => {
+        if (levelOfPlayer === undefined) {
+            setNewlevelOfPlayer(1)
+        } else {
+            const newLevel: number = levelOfPlayer + 1;
+            setNewlevelOfPlayer(newLevel)
+        }
+    }
+
 
     /**
      * shuffle Function from W3 Schools
@@ -62,22 +83,21 @@ export default function DragableItemsLevel3(props: DragableItemsProps) {
 
 
     /**
-     * this function returns a smile when
-     * @param givenAnswer is true
+     * this function returns a smile when called
      */
     const AnswerTrueComponent = () => {
         return (
             <div>
-                <img className="SmileImage" src={smile} alt = "smile"/>
+                <img className="SmileImage" src={smile} alt="smile"/>
             </div>)
     }
 
     return (
         <div>
-            <h4>{props.animalName}</h4>
-            <Reorder.Group as="ol" axis="y" values={choicesShuffled} onReorder={setChoicesShuffled}>
-                {choicesShuffled.map((item, index) => (
-                    <Reorder.Item key={item + index} value={item}>
+            <h4>{animalName}</h4>
+            <Reorder.Group axis="y" values={choicesShuffled} onReorder={setChoicesShuffled}>
+                {choicesShuffled.map((item,key) => (
+                    <Reorder.Item key={key} value={item}>
                         {item}
                     </Reorder.Item>
                 ))}
