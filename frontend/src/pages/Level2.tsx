@@ -1,20 +1,19 @@
 import "./stylingPages/Level2.scss"
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {fetchRandomAnimal} from "../services/RequestService";
 import CardLevel2 from "../components/CardLevel2";
-import {LevelContext} from "../context/LevelProvider";
 import NavBar from "../components/NavBar";
 import {AnimalData} from "../models/AnimalData";
 
 export default function Level2() {
 
     const [animal, setAnimal] = useState<AnimalData>();
-    const {levelOfPlayer} = useContext(LevelContext)
+    // const {levelOfPlayer} = useContext(LevelContext)
 
 
     useEffect(() => {
         fetchRandomAnimal().then(data => setAnimal(data)).catch(e => console.log(e.message))
-    }, [levelOfPlayer])
+    }, [])
 
     if (!animal) {
         return <div>

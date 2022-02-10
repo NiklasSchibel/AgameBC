@@ -3,21 +3,21 @@ import React, {ChangeEventHandler, useContext, useEffect, useState} from "react"
 import {TextField} from "@mui/material";
 import smile from "../images/iconSmile.png";
 import {LevelContext} from "../context/LevelProvider";
+import {useNavigate} from "react-router-dom";
 
 
-export interface Level1PageProps {
-}
-
-export default function Level1(props: Level1PageProps) {
+export default function Level1() {
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     const LANGUAGE: string = "de-de"
     const STANDARDTEXTVOICE: string = "das ist der Buchstabe "
-
-    const {levelOfPlayer, levelUp} = useContext(LevelContext)
+    const navigate = useNavigate()
+    const {levelUp} = useContext(LevelContext)
     const [randomLetter, setRandomLetter] = useState<string>(" ")
+
     const requiredLetter: string = randomLetter;
     const [answer, setAnswer] = useState<boolean>(false)
     const [text, setText] = useState<string>('');
+
 
 
     const [inputText] = useState<string>("")
@@ -25,7 +25,7 @@ export default function Level1(props: Level1PageProps) {
 
     useEffect(() => {
         setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
-    }, [levelOfPlayer])
+    }, [])
 
 
     //todo: set key later in environment
@@ -43,6 +43,7 @@ export default function Level1(props: Level1PageProps) {
             setTimeout(function () {
                 setAnswer(false)
                 levelUp()
+                navigate("/AgameBC")
             }, 3000);
             console.log("same letter true in on change function")
         }

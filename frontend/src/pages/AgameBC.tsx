@@ -1,25 +1,47 @@
-import Level2 from "./Level2";
-import Level1 from "./Level1";
-import {useContext} from "react";
-import Level3 from "./Level3";
+import React, {useContext, useEffect} from "react";
 import {LevelContext} from "../context/LevelProvider";
-// import {useNavigate} from "react-router-dom";
+import smile from "../images/iconSmile.png";
+import {useNavigate} from "react-router-dom";
 
 export default function AgameBC() {
 
     const {levelOfPlayer, setNewlevelOfPlayer} = useContext(LevelContext)
-    // const navigate = useNavigate()
-    if (levelOfPlayer === undefined) {
-        setNewlevelOfPlayer(1)
-        return<Level1></Level1>
-    } else if (levelOfPlayer < 3) {
-        return<Level1></Level1>
-    } else if (levelOfPlayer < 6) {
-        return<Level2></Level2>
-    } else if (levelOfPlayer < 10) {
-        return<Level3></Level3>
-    } else {
-        return <div>no more levels</div>
-    }
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (levelOfPlayer === undefined) {
+            setNewlevelOfPlayer(1)
+        } else if (levelOfPlayer > 8) {
+            navigate("/Level3")
+        } else if (levelOfPlayer > 4) {
+            navigate("/Level2")
+        } else if (levelOfPlayer > 0) {
+            navigate("/Level1")
+        }
+        // eslint-disable-next-line
+        }, [])
+
+    return (<div>
+
+        <img className="SmileImage" src={smile} alt="smile"/>
+
+    </div>)
+
 
 }
+
+// das geht so: (ohne Auth)
+// const {levelOfPlayer, setNewlevelOfPlayer} = useContext(LevelContext)
+// // const navigate = useNavigate()
+// if (levelOfPlayer === undefined) {
+//     setNewlevelOfPlayer(1)
+//     return<Level1></Level1>
+// } else if (levelOfPlayer < 3) {
+//     return<Level1></Level1>
+// } else if (levelOfPlayer < 6) {
+//     return<Level2></Level2>
+// } else if (levelOfPlayer < 10) {
+//     return<Level3></Level3>
+// } else {
+//     return <div>no more levels</div>
+// }

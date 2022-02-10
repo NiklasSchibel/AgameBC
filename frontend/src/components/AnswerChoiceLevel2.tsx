@@ -3,40 +3,43 @@ import {Button} from "@mui/material";
 import React, {useContext, useEffect, useState} from "react";
 import smile from "../images/iconSmile.png";
 import {LevelContext} from "../context/LevelProvider";
-
+import {useNavigate} from "react-router-dom";
 
 interface AnswerButtonChoiceProps {
     animal_name: string
     firstLetterOfAnimalName: string
 }
 
-export default function AnswerChoiceLevel2(props: AnswerButtonChoiceProps) {
-    const {levelOfPlayer, setNewlevelOfPlayer, levelUp} = useContext(LevelContext)
+export default function AnswerChoiceLevel2({animal_name,firstLetterOfAnimalName}: AnswerButtonChoiceProps) {
+    const {levelUp} = useContext(LevelContext)
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
+    const navigate =  useNavigate()
     const [answer, setAnswer] = useState<boolean>(false);
     const [firstRandomLetter, setFirstRandomLetter] = useState<string>("");
     const [secondRandomLetter, setSecondRandomLetter] = useState<string>("");
-    const choices: string[] = [props.firstLetterOfAnimalName, firstRandomLetter, secondRandomLetter]
+    const choices: string[] = [firstLetterOfAnimalName, firstRandomLetter, secondRandomLetter]
     const [choicesShuffled, setChoicesShuffled] = useState<Array<string | undefined>>([]);
 
     useEffect(() => {
         setFirstRandomLetter(generateNewRandomLetter(ALPHABET,
-            props.firstLetterOfAnimalName));
+            firstLetterOfAnimalName));
         setSecondRandomLetter(generateNewRandomLetter(ALPHABET,
-            props.firstLetterOfAnimalName,
+            firstLetterOfAnimalName,
             firstRandomLetter));
         setChoicesShuffled(shuffleArray(choices));
+        // eslint-disable-next-line
     }, [])
 
     useEffect(() => {
         setSecondRandomLetter(generateNewRandomLetter(ALPHABET,
-            props.firstLetterOfAnimalName,
+            firstLetterOfAnimalName,
             firstRandomLetter));
+        // eslint-disable-next-line
     }, [firstRandomLetter])
 
     useEffect(() => {
         setChoicesShuffled(shuffleArray(choices));
+        // eslint-disable-next-line
     }, [secondRandomLetter])
 
 
@@ -79,11 +82,12 @@ export default function AnswerChoiceLevel2(props: AnswerButtonChoiceProps) {
      * @param letter
      */
     const onClickHandleButton = (letter: string | undefined) => {
-        if (letter === props.firstLetterOfAnimalName) {
+        if (letter === firstLetterOfAnimalName) {
             setAnswer(true)
             setTimeout(function () {
                 setAnswer(false)
                 levelUp()
+                navigate("/AgameBC")
             }, 3000);
         } else {
             const newReducedChoices = [...choicesShuffled]

@@ -1,19 +1,19 @@
 import "./stylingPages/Level3.scss"
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import DragableItemsLevel3 from "../components/DragableItemsLevel3";
 import {fetchRandomAnimal} from "../services/RequestService";
 import NavBar from "../components/NavBar";
-import {LevelContext} from "../context/LevelProvider";
 import {AnimalData} from "../models/AnimalData";
 
 
 export default function Level3() {
     const [animal, setAnimal] = useState<AnimalData>();
-    const {levelOfPlayer} =useContext(LevelContext)
 
     useEffect(() => {
         fetchRandomAnimal().then(data => setAnimal(data)).catch(e => console.log(e.message))
-    }, [levelOfPlayer])
+    }, [])
+
+    //todo check here if fetched animal is ok (length,letters) for DragAbleItems
 
     if (!animal) {
         return <div>

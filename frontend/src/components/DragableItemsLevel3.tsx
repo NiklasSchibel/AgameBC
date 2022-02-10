@@ -2,6 +2,7 @@ import {Reorder} from "framer-motion"
 import React, {useContext, useEffect, useState} from "react";
 import {LevelContext} from "../context/LevelProvider";
 import smile from "../images/iconSmile.png";
+import {useNavigate} from "react-router-dom";
 
 interface DragableItemsProps {
     key: string
@@ -12,6 +13,7 @@ interface DragableItemsProps {
 
 export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
     const [answer, setAnswer] = useState<boolean>(false);
+    const navigate = useNavigate();
     // const letterString: String = new String(props.animalName); // the constructor leads to a warning but no work around found yet
     const letterstring: string = getStringOfAnimalName(animalName); // does not work because of "can not read properties of undefined"
     const letterArray = letterstring.split(''); //this is an string[]
@@ -31,6 +33,7 @@ export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
             setTimeout(function () {
                 setAnswer(false)
                 levelUp()
+                navigate("/AgameBC")
             }, 3000);
         }
         // eslint-disable-next-line
@@ -86,7 +89,7 @@ export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
         <div>
             <h2>{animalName}</h2>
             <Reorder.Group axis="y" values={choicesShuffled} onReorder={setChoicesShuffled}>
-                {choicesShuffled.map((item,key) => (
+                {choicesShuffled.map((item, key) => (
                     <Reorder.Item key={item} value={item}>
                         {item}
                     </Reorder.Item>
