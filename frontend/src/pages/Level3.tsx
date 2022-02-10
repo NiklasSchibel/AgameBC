@@ -11,11 +11,10 @@ export default function Level3() {
     const [animal, setAnimal] = useState<AnimalData>();
     const navigate = useNavigate();
     const LANGUAGE: string = "de-de"
-    const STANDARDTEXTVOICE: string =  "Ordne die Buchstaben von oben nach unten wie bei, "
+    const STANDARDTEXTVOICE: string = "Ordne die Buchstaben von oben nach unten wie bei, "
 
     useEffect(() => {
         fetchRandomAnimal().then(data => setAnimal(data)).catch(e => console.log(e.message))
-
         // eslint-disable-next-line
     }, [])
 
@@ -26,7 +25,7 @@ export default function Level3() {
         + key + "hl=" + LANGUAGE + "&src="
         + STANDARDTEXTVOICE + animal?.deName;
 
-    if (animal === undefined || checkOnDoubleLetterInAnimalName(animal.deName)) {
+    if (animal === undefined || checkOnDoubleLetterInAnimalName(animal.deName) || animal.deName.length > 7) {
         console.log("test: gleiche buchstaben, deswegen wechsel zu AGameBC und anschließend neuer fetch")
         navigate("/AGameBC")
     }
@@ -52,7 +51,6 @@ export default function Level3() {
             return "Gecko";
         }
     }
-
 
 
     if (!animal) {
