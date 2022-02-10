@@ -13,19 +13,43 @@ export default function Level3() {
 
     useEffect(() => {
         fetchRandomAnimal().then(data => setAnimal(data)).catch(e => console.log(e.message))
-        if (animal === undefined || animal.deName.length > 5){ navigate("/AGameBC")}
         // eslint-disable-next-line
     }, [])
 
     //todo check here if fetched animal is ok (length,letters) for DragAbleItems
+
+    if (animal === undefined || checkOnDoubleLetterInAnimalName (animal.deName)) {
+        console.log("test: gleiche buchstaben, deswegen wechsel zu AGameBC und anschließend neuer fetch")
+        navigate("/AGameBC")
+    }
+
+    function checkOnDoubleLetterInAnimalName(AnimalName: string): boolean {
+        const animalstring = getStringOfAnimalName(AnimalName)
+        const letterArray = animalstring.split('');
+        const setOfletterArray = new Set(letterArray);
+        console.log(letterArray.length);
+        console.log(setOfletterArray.size);
+        return (letterArray.length !== setOfletterArray.size)
+    }
+
+    //todo Gecko Fallback anders lösen
+    /**
+     * returns an array of string from the param input, and handling the undefined case
+     * @param word
+     * */
+    function getStringOfAnimalName(word: string): string {
+        if (word !== undefined && word.length > 1) {
+            return word;
+        } else {
+            return "Gecko";
+        }
+    }
 
     if (!animal) {
         return <div>
             <h1>loading...</h1>
         </div>
     }
-
-
 
     return (
         <div>

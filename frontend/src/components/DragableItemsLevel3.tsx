@@ -40,6 +40,7 @@ export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
     }, [choicesShuffled])
 
 
+    //todo Gecko Fallback anders lösen
     /**
      * returns an array of string from the param input, and handling the undefined case
      * @param word
