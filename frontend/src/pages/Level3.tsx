@@ -13,12 +13,12 @@ export default function Level3() {
 
     useEffect(() => {
         fetchRandomAnimal().then(data => setAnimal(data)).catch(e => console.log(e.message))
+
         // eslint-disable-next-line
     }, [])
 
-    //todo check here if fetched animal is ok (length,letters) for DragAbleItems
 
-    if (animal === undefined || checkOnDoubleLetterInAnimalName (animal.deName)) {
+    if (animal === undefined || checkOnDoubleLetterInAnimalName(animal.deName)) {
         console.log("test: gleiche buchstaben, deswegen wechsel zu AGameBC und anschließend neuer fetch")
         navigate("/AGameBC")
     }
