@@ -11,7 +11,7 @@ export default function Level3() {
     const [animal, setAnimal] = useState<AnimalData>();
     const navigate = useNavigate();
     const LANGUAGE: string = "de-de"
-    const STANDARDTEXTVOICE: string = "das ist der Buchstabe "
+    const STANDARDTEXTVOICE: string =  "Ordne die Buchstaben von oben nach unten wie bei, "
 
     useEffect(() => {
         fetchRandomAnimal().then(data => setAnimal(data)).catch(e => console.log(e.message))
@@ -24,7 +24,7 @@ export default function Level3() {
     const key: string = "a7aae25de0b446c7adc2571316a7ddfc&";
     const srcString: string = "https://api.voicerss.org/?key="
         + key + "hl=" + LANGUAGE + "&src="
-        + STANDARDTEXTVOICE + "Ordne die Buchstaben von oben nach unten wie bei,"+ animal?.deName;
+        + STANDARDTEXTVOICE + animal?.deName;
 
     if (animal === undefined || checkOnDoubleLetterInAnimalName(animal.deName)) {
         console.log("test: gleiche buchstaben, deswegen wechsel zu AGameBC und anschließend neuer fetch")
@@ -64,8 +64,9 @@ export default function Level3() {
     return (
         <div>
             <NavBar></NavBar>
-            <audio autoPlay src={srcString} controls/>
+
             <div className={"Level3Page"}>
+                <audio autoPlay src={srcString} controls/>
                 <DragableItemsLevel3
                     id={animal.id}
                     key={animal.id}
