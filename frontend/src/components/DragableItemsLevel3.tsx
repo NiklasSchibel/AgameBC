@@ -25,7 +25,6 @@ export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
     }, [])
 
 
-    // but this in on change prop or switcht to different library?
     useEffect(() => {
         if (checkIfArraysAreTheSame(choicesShuffled, letterArray)) {
             setAnswer(true)
@@ -35,7 +34,7 @@ export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
             }, 3000);
         }
         // eslint-disable-next-line
-    }, [])
+    }, [choicesShuffled])
 
 
     /**
@@ -94,10 +93,10 @@ export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
 
     return (
         <div>
-            <h4>{animalName}</h4>
+            <h2>{animalName}</h2>
             <Reorder.Group axis="y" values={choicesShuffled} onReorder={setChoicesShuffled}>
                 {choicesShuffled.map((item,key) => (
-                    <Reorder.Item key={key} value={item}>
+                    <Reorder.Item key={item} value={item}>
                         {item}
                     </Reorder.Item>
                 ))}
