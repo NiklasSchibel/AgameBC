@@ -74,7 +74,7 @@ export default function Login() {
         loginRequest(login)
             .then((data)=>{
                 setJwt(data)
-                navigate('/AgameBC')
+                navigate('/TestPage')
             })
     }
 
