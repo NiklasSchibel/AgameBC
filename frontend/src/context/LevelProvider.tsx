@@ -4,6 +4,7 @@ export interface LevelContextType {
     levelOfPlayer?: number
     setNewlevelOfPlayer: (newLevel: number) => void
     levelUp: () => void
+    checkIfNextLevelIsReached:(levelPointsNeeded: number)=>boolean
 }
 
 export const LevelContext = createContext<LevelContextType>({
@@ -12,12 +13,19 @@ export const LevelContext = createContext<LevelContextType>({
     },
     levelUp: () => {
         throw Error("defaut levelUp function has not been initialized")
+    },
+    checkIfNextLevelIsReached: () => {
+        throw Error("defaut checkIfNextLevelIsReached function has not been initialized")
     }
 })
 
 export default function LevelProvider({children}: { children: ReactElement<any, any> }) {
 
     const [levelOfPlayer, setLevelOfPlayer] = useState<number>(1)
+
+    const setNewlevelOfPlayer = (newLevel: number) => {
+        setLevelOfPlayer(newLevel)
+    }
 
     const levelUp = () => {
         if (levelOfPlayer === undefined) {
@@ -28,12 +36,17 @@ export default function LevelProvider({children}: { children: ReactElement<any, 
         }
     }
 
-    const setNewlevelOfPlayer = (newLevel: number) => {
-        setLevelOfPlayer(newLevel)
+    const checkIfNextLevelIsReached = (levelPointsNeeded: number): boolean => {
+        return (levelOfPlayer > levelPointsNeeded)
     }
 
+
     return (
-        <LevelContext.Provider value={{levelOfPlayer: levelOfPlayer, setNewlevelOfPlayer: setNewlevelOfPlayer, levelUp:levelUp}}>
+        <LevelContext.Provider
+            value={{levelOfPlayer: levelOfPlayer,
+                setNewlevelOfPlayer: setNewlevelOfPlayer,
+                levelUp: levelUp,
+                checkIfNextLevelIsReached:checkIfNextLevelIsReached}}>
             {children}
         </LevelContext.Provider>
     )
