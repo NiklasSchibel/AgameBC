@@ -17,7 +17,7 @@ export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
     const letterArray = letterstring.split(''); //this is an string[]
     // const [letters, setLetters] = useState(letterArray)
     const [choicesShuffled, setChoicesShuffled] = useState<Array<string>>([]);
-    const {levelOfPlayer, setNewlevelOfPlayer} = useContext(LevelContext)
+    const {levelUp} = useContext(LevelContext)
 
     useEffect(() => {
         setChoicesShuffled(shuffleArray(letterArray))
@@ -46,15 +46,6 @@ export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
             return word;
         } else {
             return "Gecko";
-        }
-    }
-
-    const levelUp = () => {
-        if (levelOfPlayer === undefined) {
-            setNewlevelOfPlayer(1)
-        } else {
-            const newLevel: number = levelOfPlayer + 1;
-            setNewlevelOfPlayer(newLevel)
         }
     }
 

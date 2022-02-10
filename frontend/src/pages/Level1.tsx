@@ -12,7 +12,7 @@ export default function Level1(props: Level1PageProps) {
     const LANGUAGE: string = "de-de"
     const STANDARDTEXTVOICE: string = "das ist der Buchstabe "
 
-    const {levelOfPlayer, setNewlevelOfPlayer} = useContext(LevelContext)
+    const {levelOfPlayer, levelUp} = useContext(LevelContext)
     const [randomLetter, setRandomLetter] = useState<string>(" ")
     const requiredLetter: string = randomLetter;
     const [answer, setAnswer] = useState<boolean>(false)
@@ -48,15 +48,6 @@ export default function Level1(props: Level1PageProps) {
         console.log("onChange function lief")
     }
 
-
-    const levelUp = () => {
-        if (levelOfPlayer === undefined) {
-            setNewlevelOfPlayer(1)
-        } else {
-            const newLevel: number = levelOfPlayer + 1;
-            setNewlevelOfPlayer(newLevel)
-        }
-    }
 
     //todo: this works for the first time clicking on the picture than only clicking on the play button
     const onClickHandleCard = () => {

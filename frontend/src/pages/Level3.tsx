@@ -4,10 +4,11 @@ import DragableItemsLevel3 from "../components/DragableItemsLevel3";
 import {fetchRandomAnimal} from "../services/RequestService";
 import NavBar from "../components/NavBar";
 import {LevelContext} from "../context/LevelProvider";
+import {AnimalData} from "../models/AnimalData";
 
 
 export default function Level3() {
-    const [animal, setAnimal] = useState<any>([]);
+    const [animal, setAnimal] = useState<AnimalData>();
     const {levelOfPlayer} =useContext(LevelContext)
 
     useEffect(() => {

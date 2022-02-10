@@ -11,7 +11,7 @@ interface AnswerButtonChoiceProps {
 }
 
 export default function AnswerChoiceLevel2(props: AnswerButtonChoiceProps) {
-    const {levelOfPlayer, setNewlevelOfPlayer} = useContext(LevelContext)
+    const {levelOfPlayer, setNewlevelOfPlayer, levelUp} = useContext(LevelContext)
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     const [answer, setAnswer] = useState<boolean>(false);
@@ -104,14 +104,6 @@ export default function AnswerChoiceLevel2(props: AnswerButtonChoiceProps) {
             </div>)
     }
 
-    const levelUp = () => {
-        if (levelOfPlayer === undefined) {
-            setNewlevelOfPlayer(1)
-        } else {
-            const newLevel: number = levelOfPlayer + 1;
-            setNewlevelOfPlayer(newLevel)
-        }
-    }
 
     return (
         <div className="ButtonsAndAnswerTrueComponent">

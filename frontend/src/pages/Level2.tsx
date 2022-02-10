@@ -4,10 +4,11 @@ import {fetchRandomAnimal} from "../services/RequestService";
 import CardLevel2 from "../components/CardLevel2";
 import {LevelContext} from "../context/LevelProvider";
 import NavBar from "../components/NavBar";
+import {AnimalData} from "../models/AnimalData";
 
 export default function Level2() {
 
-    const [animal, setAnimal] = useState<any>([]);
+    const [animal, setAnimal] = useState<AnimalData>();
     const {levelOfPlayer} = useContext(LevelContext)
 
 
