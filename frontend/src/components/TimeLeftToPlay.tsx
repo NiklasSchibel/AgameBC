@@ -58,7 +58,7 @@ export default function TimeLeftToPlay() {
 
     return (
             <div className="timeLeftToPlay">
-                {counter === 0 ? "Time over" : <div>Countdown: {format(counter)}</div>}
+                {counter === 0 ? "Time over" : <div> {format(counter)}</div>}
             </div>
     )
 }

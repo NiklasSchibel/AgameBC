@@ -4,6 +4,7 @@ import {TextField} from "@mui/material";
 import smile from "../images/iconSmile.png";
 import {LevelContext} from "../context/LevelProvider";
 import {useNavigate} from "react-router-dom";
+import TimeLeftToPlay from "../components/TimeLeftToPlay";
 
 
 export default function Level1() {
@@ -18,13 +19,12 @@ export default function Level1() {
     const [answer, setAnswer] = useState<boolean>(false)
     const [text, setText] = useState<string>('');
 
-
-
     const [inputText] = useState<string>("")
 
 
     useEffect(() => {
         setRandomLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
+// eslint-disable-next-line
     }, [])
 
 
@@ -35,6 +35,7 @@ export default function Level1() {
         + STANDARDTEXTVOICE + randomLetter + ".schreibe ihn in dem Feld unten selbst";
 
     //todo: set to new format
+    // eslint-disable-next-line
     const srcString2 = `https://api.voicerss.org/?key=: ${key} ${LANGUAGE} ${STANDARDTEXTVOICE}... this format approximately`;
 
     const handleChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
@@ -72,8 +73,7 @@ export default function Level1() {
 
     return (
         <div>
-            {/*<NavBar></NavBar>*/}
-            <div>levelpoints and time Left to play Feature</div>
+            <TimeLeftToPlay/>
             <div onClick={onClickHandleCard} className="Level1Page">
                 <h1>{requiredLetter}</h1>
                 <audio autoPlay src={text} controls/>

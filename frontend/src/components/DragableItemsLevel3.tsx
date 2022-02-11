@@ -3,6 +3,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {LevelContext} from "../context/LevelProvider";
 import smile from "../images/iconSmile.png";
 import {useNavigate} from "react-router-dom";
+import "./stylingComponents/DragableItemsLevel3.scss"
 
 interface DragableItemsProps {
     key: string
@@ -88,7 +89,6 @@ export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
 
     return (
         <div>
-            <h2>{animalName}</h2>
             <Reorder.Group axis="y" as="ol" values={choicesShuffled} onReorder={setChoicesShuffled}>
                 {choicesShuffled.map((item, key) => (
                     <Reorder.Item className="itemReorder" key={item} value={item}>
