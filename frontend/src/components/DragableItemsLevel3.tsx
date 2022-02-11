@@ -92,6 +92,7 @@ export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
             <Reorder.Group axis="y" as="ol" values={choicesShuffled} onReorder={setChoicesShuffled}>
                 {choicesShuffled.map((item, key) => (
                     <Reorder.Item className="itemReorder" key={item} value={item}>
+
                         {item}
                     </Reorder.Item>
                 ))}
