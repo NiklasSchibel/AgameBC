@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {fetchRandomAnimal} from "../services/RequestService";
 import CardLevel2 from "../components/CardLevel2";
 import {AnimalData} from "../models/AnimalData";
-import TimeLeftToPlay from "../components/TimeLeftToPlay";
+import TimeLeftToPlayAndLevel from "../components/TimeLeftToPlayAndLevel";
 
 export default function Level2() {
 
@@ -22,7 +22,7 @@ export default function Level2() {
 
     return (
         <div>
-            <TimeLeftToPlay/>
+            <TimeLeftToPlayAndLevel/>
             <div className="Level2Page">
                 {animal ? <CardLevel2
                     id={animal.id}

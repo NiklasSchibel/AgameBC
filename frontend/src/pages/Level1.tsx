@@ -4,7 +4,7 @@ import {TextField} from "@mui/material";
 import smile from "../images/iconSmile.png";
 import {LevelContext} from "../context/LevelProvider";
 import {useNavigate} from "react-router-dom";
-import TimeLeftToPlay from "../components/TimeLeftToPlay";
+import TimeLeftToPlayAndLevel from "../components/TimeLeftToPlayAndLevel";
 
 
 export default function Level1() {
@@ -73,7 +73,7 @@ export default function Level1() {
 
     return (
         <div>
-            <TimeLeftToPlay/>
+            <TimeLeftToPlayAndLevel/>
             <div onClick={onClickHandleCard} className="Level1Page">
                 <h1>{requiredLetter}</h1>
                 <audio autoPlay src={text} controls/>

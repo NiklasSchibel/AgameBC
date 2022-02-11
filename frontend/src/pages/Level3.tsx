@@ -4,7 +4,7 @@ import DragableItemsLevel3 from "../components/DragableItemsLevel3";
 import {fetchRandomAnimal} from "../services/RequestService";
 import {AnimalData} from "../models/AnimalData";
 import {useNavigate} from "react-router-dom";
-import TimeLeftToPlay from "../components/TimeLeftToPlay";
+import TimeLeftToPlayAndLevel from "../components/TimeLeftToPlayAndLevel";
 
 
 export default function Level3() {
@@ -61,7 +61,7 @@ export default function Level3() {
 
     return (
         <div>
-            <TimeLeftToPlay/>
+            <TimeLeftToPlayAndLevel/>
             <div className={"level3Page"}>
                 <audio autoPlay src={srcString} controls/>
                 <DragableItemsLevel3

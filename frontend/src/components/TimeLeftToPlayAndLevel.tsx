@@ -1,9 +1,11 @@
 import React, {useContext} from "react";
-import './stylingComponents/TimeLeftToPlay.scss';
+import './stylingComponents/TimeLeftToPlayAndLevel.scss';
 import {AuthContext} from "../context/AuthProvider";
+import {LevelContext} from "../context/LevelProvider";
 
-export default function TimeLeftToPlay() {
+export default function TimeLeftToPlayAndLevel() {
     const {jwtDecoded} = useContext(AuthContext)
+    const {levelOfPlayer} = useContext(LevelContext)
 
 
     //returns just different formats of time maybe usefull for further feature
@@ -57,8 +59,9 @@ export default function TimeLeftToPlay() {
 
 
     return (
-            <div className="timeLeftToPlay">
-                {counter === 0 ? "Time over" : <div> {format(counter)}</div>}
+            <div className="timeLeftToPlayAndLevel">
+                {counter === 0 ? "Time over" : <div className="timeLeft"> {format(counter)}</div>}
+                <div className="levelOfPlayer">{levelOfPlayer}</div>
             </div>
     )
 }
