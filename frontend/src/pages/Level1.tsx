@@ -7,9 +7,9 @@ import {useNavigate} from "react-router-dom";
 
 
 export default function Level1() {
-    const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    const LANGUAGE: string = "de-de"
-    const STANDARDTEXTVOICE: string = "das ist der Buchstabe "
+    const ALPHABET = `ABCDEFGHIJKLMNOPQRSTUVWXYZ`
+    const LANGUAGE: string = `de-de`
+    const STANDARDTEXTVOICE: string = `das ist der Buchstabe `
     const navigate = useNavigate()
     const {levelUp} = useContext(LevelContext)
     const [randomLetter, setRandomLetter] = useState<string>(" ")
@@ -29,11 +29,13 @@ export default function Level1() {
 
 
     //todo: set key later in environment
-    const key: string = "a7aae25de0b446c7adc2571316a7ddfc&";
+    const key: string = `a7aae25de0b446c7adc2571316a7ddfc&`;
     const srcString: string = "https://api.voicerss.org/?key="
         + key + "hl=" + LANGUAGE + "&src="
         + STANDARDTEXTVOICE + randomLetter + ".schreibe ihn in dem Feld unten selbst";
 
+    //todo: set to new format
+    const srcString2 = `https://api.voicerss.org/?key=: ${key} ${LANGUAGE} ${STANDARDTEXTVOICE}... this format approximately`;
 
     const handleChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
         = (event) => {
