@@ -63,6 +63,7 @@ export default function Level3() {
         <div>
             <TimeLeftToPlayAndLevel/>
             <div className={"level3Page"}>
+
                 <audio autoPlay src={srcString} controls/>
                 <DragableItemsLevel3
                     id={animal.id}
