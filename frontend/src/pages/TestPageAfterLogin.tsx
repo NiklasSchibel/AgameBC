@@ -5,6 +5,24 @@ import {AuthContext} from "../context/AuthProvider";
 
 export default function TestPageAfterLogin() {
     const {jwtDecoded} = useContext(AuthContext)
+
+
+    //returns just different formats of time maybe usefull for further feature
+    //@ts-ignore
+    const DateNumber: number = jwtDecoded?.exp * 1000
+    //@ts-ignore
+    const ExpirationDate = new Date(DateNumber);
+
+    const now = new Date();
+
+
+
+    const diff = ExpirationDate.getTime() - now.getTime()
+
+
+
+
+
     //@ts-ignore
     const padTime = time => {
         return String(time).length === 1 ? `0${time}` : `${time}`;
@@ -16,12 +34,13 @@ export default function TestPageAfterLogin() {
         const minutes = Math.floor(time / 60);
 
         // Get the seconds left after converting minutes
-        const seconds = time % 60;
+        const seconds = Math.round(time % 60);
 
         //Return combined values as string in format mm:ss
         return `${minutes}:${padTime(seconds)}`;
     };
-    const [counter, setCounter] = React.useState(120);
+    const [counter, setCounter] = React.useState(diff/1000);
+
     React.useEffect(() => {
         let timer:any;
         if (counter > 0) {
@@ -40,13 +59,7 @@ export default function TestPageAfterLogin() {
 
 
 
-    //returns just different formats of time maybe usefull for further feature
-    //@ts-ignore
-    const DateNumber: number = jwtDecoded?.exp * 1000
-    //@ts-ignore
-    const ExpirationDate = new Date(DateNumber);
 
-    const now = new Date();
 
 
     return (
