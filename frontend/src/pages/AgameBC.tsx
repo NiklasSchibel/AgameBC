@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from "react";
 import {LevelContext} from "../context/LevelProvider";
-import smile from "../images/iconSmile.png";
 import {useNavigate} from "react-router-dom";
+import {POINTSNEEDEDFORLEVEL2, POINTSNEEDEDFORLEVEL3} from "../constants/Constants";
 
 export default function AgameBC() {
 
@@ -11,11 +11,12 @@ export default function AgameBC() {
     useEffect(() => {
         if (levelOfPlayer === undefined) {
             setNewlevelOfPlayer(1)
-        } else if (levelOfPlayer > 10) {
+            navigate("/Level1")
+        } else if (levelOfPlayer > POINTSNEEDEDFORLEVEL3) {
             navigate("/Level3")
-        } else if (levelOfPlayer > 1) {
+        } else if (levelOfPlayer > POINTSNEEDEDFORLEVEL2) {
             navigate("/Level2")
-        } else if (levelOfPlayer > 0) {
+        } else {
             navigate("/Level1")
         }
         // eslint-disable-next-line
@@ -23,9 +24,5 @@ export default function AgameBC() {
 
     return (<div className="smileImage">
 
-        {/*<img className="smileImage" src={smile} alt="smile"/>*/}
-
     </div>)
-
-
 }
