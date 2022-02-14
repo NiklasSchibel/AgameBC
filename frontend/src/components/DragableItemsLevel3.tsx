@@ -15,10 +15,8 @@ interface DragableItemsProps {
 export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
     const [answer, setAnswer] = useState<boolean>(false);
     const navigate = useNavigate();
-    // const letterString: String = new String(props.animalName); // the constructor leads to a warning but no work around found yet
-    const letterstring: string = getStringOfAnimalName(animalName); // does not work because of "can not read properties of undefined"
-    const letterArray = letterstring.split(''); //this is an string[]
-    // const [letters, setLetters] = useState(letterArray)
+    const letterString: string = getStringOfAnimalName(animalName); // does not work because of "can not read properties of undefined"
+    const letterArray = letterString.split(''); //this is an string[]
     const [choicesShuffled, setChoicesShuffled] = useState<Array<string>>([]);
     const {levelUp} = useContext(LevelContext)
 
@@ -92,7 +90,6 @@ export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
             <Reorder.Group axis="y" as="ol" values={choicesShuffled} onReorder={setChoicesShuffled}>
                 {choicesShuffled.map((item, key) => (
                     <Reorder.Item className="itemReorder" key={item} value={item}>
-
                         {item}
                     </Reorder.Item>
                 ))}
