@@ -29,9 +29,9 @@ export default function Level1() {
 
 
     //todo: set key later in environment
-    const key: string = `a7aae25de0b446c7adc2571316a7ddfc&`;
+    const key: string | undefined = process.env.REACT_APP_VOICERSS_API_KEY;
     const srcString: string = "https://api.voicerss.org/?key="
-        + key + "hl=" + LANGUAGE + "&src="
+        + key + "&hl=" + LANGUAGE + "&src="
         + STANDARDTEXTVOICE + randomLetter + ".schreibe ihn in dem Feld unten selbst";
 
     //todo: set to new format
