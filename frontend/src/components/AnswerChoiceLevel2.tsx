@@ -15,28 +15,17 @@ export default function AnswerChoiceLevel2({animal_name,firstLetterOfAnimalName}
     const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const navigate =  useNavigate()
     const [answer, setAnswer] = useState<boolean>(false);
-    const [firstRandomLetter, setFirstRandomLetter] = useState<string>("");
-    const [secondRandomLetter, setSecondRandomLetter] = useState<string>("");
-    const choices: string[] = [firstLetterOfAnimalName, firstRandomLetter, secondRandomLetter]
     const [choicesShuffled, setChoicesShuffled] = useState<Array<string | undefined>>([]);
 
     useEffect(() => {
-        setFirstRandomLetter(generateNewRandomLetter(ALPHABET,
-            firstLetterOfAnimalName));
+        const firstRandomLetterTemp = generateNewRandomLetter(ALPHABET,
+            firstLetterOfAnimalName)
+        const secondRandomLetterTemp = generateNewRandomLetter(ALPHABET,
+            firstLetterOfAnimalName,
+            firstRandomLetterTemp)
+        setChoicesShuffled(shuffleArray([firstLetterOfAnimalName,firstRandomLetterTemp,secondRandomLetterTemp]));
         // eslint-disable-next-line
     }, [])
-
-    useEffect(() => {
-        setSecondRandomLetter(generateNewRandomLetter(ALPHABET,
-            firstLetterOfAnimalName,
-            firstRandomLetter));
-        // eslint-disable-next-line
-    }, [firstRandomLetter])
-
-    useEffect(() => {
-        setChoicesShuffled(shuffleArray(choices));
-        // eslint-disable-next-line
-    }, [secondRandomLetter])
 
 
     /**
