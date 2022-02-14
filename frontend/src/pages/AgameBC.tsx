@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from "react";
 import {LevelContext} from "../context/LevelProvider";
 import {useNavigate} from "react-router-dom";
-import {POINTSNEEDEDFORLEVEL2, POINTSNEEDEDFORLEVEL3} from "../constants/Constants";
+import {POINTS_NEEDED_FOR_LEVEL_2, POINTS_NEEDED_FOR_LEVEL_3} from "../constants/Constants";
 
 export default function AgameBC() {
 
@@ -12,9 +12,9 @@ export default function AgameBC() {
         if (levelOfPlayer === undefined) {
             setNewlevelOfPlayer(1)
             navigate("/Level1")
-        } else if (levelOfPlayer > POINTSNEEDEDFORLEVEL3) {
+        } else if (levelOfPlayer > POINTS_NEEDED_FOR_LEVEL_3) {
             navigate("/Level3")
-        } else if (levelOfPlayer > POINTSNEEDEDFORLEVEL2) {
+        } else if (levelOfPlayer > POINTS_NEEDED_FOR_LEVEL_2) {
             navigate("/Level2")
         } else {
             navigate("/Level1")
