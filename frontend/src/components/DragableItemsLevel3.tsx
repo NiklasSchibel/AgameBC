@@ -15,8 +15,8 @@ interface DragableItemsProps {
 export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
     const [answer, setAnswer] = useState<boolean>(false);
     const navigate = useNavigate();
-    const letterString: string = getStringOfAnimalName(animalName); // does not work because of "can not read properties of undefined"
-    const letterArray = letterString.split(''); //this is an string[]
+    const letterString: string = getStringOfAnimalName(animalName);
+    const letterArray = letterString.split('');
     const [choicesShuffled, setChoicesShuffled] = useState<Array<string>>([]);
     const {levelUp} = useContext(LevelContext)
 
