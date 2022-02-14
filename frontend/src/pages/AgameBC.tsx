@@ -11,7 +11,7 @@ export default function AgameBC() {
     useEffect(() => {
         if (levelOfPlayer === undefined) {
             setNewlevelOfPlayer(1)
-        } else if (levelOfPlayer > 2) {
+        } else if (levelOfPlayer > 10) {
             navigate("/Level3")
         } else if (levelOfPlayer > 1) {
             navigate("/Level2")
