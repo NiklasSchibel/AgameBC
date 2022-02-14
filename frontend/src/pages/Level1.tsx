@@ -6,11 +6,13 @@ import {LevelContext} from "../context/LevelProvider";
 import {useNavigate} from "react-router-dom";
 import TimeLeftToPlayAndLevel from "../components/TimeLeftToPlayAndLevel";
 import {ALPHABET, LANGUAGE, BASEURL_TTS} from "../constants/Constants";
+import UseLevelStates from "../customHook/UseLevelStates";
 
 export default function Level1() {
+    const {randomLetterForTask,setRandomLetterForTask} = UseLevelStates()
     const navigate = useNavigate()
     const {levelUp} = useContext(LevelContext)
-    const [randomLetterForTask, setRandomLetterForTask] = useState<string>(" ")
+    // const [randomLetterForTask, setRandomLetterForTask] = useState<string>(" ")
     const [answer, setAnswer] = useState<boolean>(false)
     const [inputTextField, setInputTextField] = useState<string>("")
 
