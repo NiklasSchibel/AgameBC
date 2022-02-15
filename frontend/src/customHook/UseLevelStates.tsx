@@ -14,6 +14,10 @@ export default function UseLevelStates() {
             setAnswer,
             inputTextField,
             setInputTextField
+        },
+        level2States:{
+            answer,
+            setAnswer
         }
     }
 }

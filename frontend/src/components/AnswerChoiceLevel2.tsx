@@ -4,18 +4,18 @@ import React, {useContext, useEffect, useState} from "react";
 import smile from "../images/iconSmile.png";
 import {LevelContext} from "../context/LevelProvider";
 import {useNavigate} from "react-router-dom";
+import {ALPHABET} from "../constants/Constants";
+import UseLevelStates from "../customHook/UseLevelStates";
 
 interface AnswerButtonChoiceProps {
-    animal_name: string
     firstLetterOfAnimalName: string
 }
 
-export default function AnswerChoiceLevel2({animal_name,firstLetterOfAnimalName}: AnswerButtonChoiceProps) {
+export default function AnswerChoiceLevel2({firstLetterOfAnimalName}: AnswerButtonChoiceProps) {
     const {levelUp} = useContext(LevelContext)
-    const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const navigate =  useNavigate()
-    const [answer, setAnswer] = useState<boolean>(false);
-    const [choicesShuffled, setChoicesShuffled] = useState<Array<string | undefined>>([]);
+    const {level2States} = UseLevelStates()
+    const [choicesShuffled, setChoicesShuffled] = useState<Array<string | undefined>>([])
 
     useEffect(() => {
         const firstRandomLetterTemp = generateNewRandomLetter(ALPHABET,
@@ -63,14 +63,15 @@ export default function AnswerChoiceLevel2({animal_name,firstLetterOfAnimalName}
 
 
     /**
-     * this function checks if clicked Button is the correct answer and setAnswer true, if that is the case
+     * this function checks if clicked Button is the correct answer and setAnswer true if that is the case,
+     * else reduces the answer choices
      * @param letter
      */
     const onClickHandleButton = (letter: string | undefined) => {
         if (letter === firstLetterOfAnimalName) {
-            setAnswer(true)
+            level2States.setAnswer(true)
             setTimeout(function () {
-                setAnswer(false)
+                level2States.setAnswer(false)
                 levelUp()
                 navigate("/AgameBC")
             }, 3000);
@@ -107,7 +108,7 @@ export default function AnswerChoiceLevel2({animal_name,firstLetterOfAnimalName}
                                               className="ButtonText" variant="outlined"
                                               color="success">{choicesShuffled[2]}</Button> : <div/>}
             </div>
-            {answer && <AnswerTrueComponent/>}
+            {level2States.answer && <AnswerTrueComponent/>}
 
         </div>
     )

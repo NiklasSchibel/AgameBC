@@ -9,7 +9,6 @@ export default function Level2() {
 
     const [animal, setAnimal] = useState<AnimalData>();
 
-
     useEffect(() => {
         fetchRandomAnimal().then(data => setAnimal(data)).catch(e => console.log(e.message))
     }, [])
@@ -25,8 +24,6 @@ export default function Level2() {
             <TimeLeftToPlayAndLevel/>
             <div className="Level2Page">
                 {animal ? <CardLevel2
-                    id={animal.id}
-                    key={animal.id}
                     imageLink={animal.imageLink}
                     animalName={animal.deName}
                 /> : "No animal to show"}
