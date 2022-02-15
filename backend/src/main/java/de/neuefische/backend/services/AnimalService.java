@@ -2,6 +2,7 @@ package de.neuefische.backend.services;
 
 import de.neuefische.backend.BackendApplication;
 import de.neuefische.backend.dto.AnimalDTO;
+import de.neuefische.backend.exception.AnimalDoesNotExistException;
 import de.neuefische.backend.models.AnimalData;
 import de.neuefische.backend.repositories.AnimalRepository;
 import org.apache.juli.logging.Log;
@@ -37,12 +38,12 @@ public class AnimalService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Animal with id " + id + " not found!")));
     }
 
-    public AnimalDTO getRandomAnimal() throws Exception {
+    public AnimalDTO getRandomAnimal() throws AnimalDoesNotExistException {
         int min = 1;
         int max = animalRepository.findAll().size() - 1;
         int randomNumber = random.nextInt(max + min) + min;
         String searchID = Integer.toString(randomNumber);
         return new AnimalDTO(animalRepository.findById(searchID)
-                .orElseThrow(() -> new Exception("problem: could not get random animal from mongoDB")));
+                .orElseThrow(() -> new AnimalDoesNotExistException("problem: could not get random animal from mongoDB")));
     }
 }

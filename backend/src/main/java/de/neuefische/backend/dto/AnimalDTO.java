@@ -2,8 +2,6 @@ package de.neuefische.backend.dto;
 
 import de.neuefische.backend.models.AnimalData;
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 public class AnimalDTO {
