@@ -20,9 +20,9 @@ export default function AgameBC() {
             navigate("/Level1")
         }
         // eslint-disable-next-line
-        }, [])
+    }, [])
 
-    if(KEY === undefined){
+    if (KEY === undefined) {
         console.warn("environment key for API connection is undefined")
         return <div>Problem mit API-Key: Verbindung zu Text-To-Speech API nicht möglich</div>
     }

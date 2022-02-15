@@ -39,3 +39,14 @@ export const sendResult = (resultData: ResultsData, token?: string) =>
     } : {}).catch((error) => {
         console.log(error)
     })
+
+export const getResult = (userName: string, token?: string) =>
+    axios.get('api/abc/results/{userName}', token ? {
+        headers: {
+            "Authorization": "Bearer " + token
+        }
+    } : {})
+        .then(response => response.data)
+        .catch((error) => {
+            console.log(error)
+        })
