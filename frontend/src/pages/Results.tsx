@@ -1,15 +1,31 @@
 import {getResult} from "../services/RequestService";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/AuthProvider";
+import {ResultsData} from "../models/ResultsData";
 
 export default function Results() {
-    const {token} = useContext(AuthContext)
+    const {token, jwtDecoded} = useContext(AuthContext)
+    const [results, setResults] = useState<ResultsData>();
 
-    const data = getResult("klaus", token).then(result => result.data)
 
-    console.log(data)
+    useEffect(() => {
+        getResult(jwtDecoded?.sub || " ", token)
+            .then(result => setResults(result))
+            .catch(error => console.log(error))
+        // eslint-disable-next-line
+    }, [])
+
+    if (jwtDecoded?.sub === undefined) {
+        console.warn("most likely getResult Request was made with an empty string or rather blank space")
+        return (<div>
+            kein Spieler angemeldet, deswegen können keine results angezeigt werden!
+        </div>)
+    }
+
+    console.log(results)
+
 
     return (<div>
-
+        {results?.a}
     </div>)
 }
