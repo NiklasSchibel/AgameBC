@@ -25,10 +25,10 @@ public class ResultsController {
     }
 
 
-    @GetMapping(path = "/klaus")
-    public ResponseEntity<ResultsData> getAllResultsForKlaus() {
+    @GetMapping(path = "/{userName}")
+    public ResponseEntity<ResultsData> getAllResultsForKlaus(@PathVariable ("userName") String userName) {
         ResultsData test =new ResultsData("fehler",11,1,1);
-        ResultsData allResults = resultsService.getResultsByName("klaus")
+        ResultsData allResults = resultsService.getResultsByName(userName)
                 .orElse(test);
         return ok(allResults);
     }

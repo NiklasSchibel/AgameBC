@@ -5,7 +5,7 @@ import {AuthContext} from "../context/AuthProvider";
 export default function Results() {
     const {token} = useContext(AuthContext)
 
-    const data = getResult("klaus", token)
+    const data = getResult("klaus", token).then(result => result.data)
 
     console.log(data)
 
