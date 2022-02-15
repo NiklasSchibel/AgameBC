@@ -34,24 +34,16 @@ public class AnimalController {
     }
 
     @GetMapping(path = "/rand")
-    public ResponseEntity<AnimalData> getRandomAnimal() throws Exception {
-        Optional<AnimalData> animal = animalService.getRandomAnimal();
-        if (animal.isPresent()) {
-            return new ResponseEntity<>(animal.get(), HttpStatus.OK);
-        } else {
-            throw new Exception("random animal could not be found");
-        }
+    public AnimalDTO getRandomAnimal() throws Exception {
+        LOG.info("get one random animal from Database");
+        return animalService.getRandomAnimal();
     }
 
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<AnimalData> getAnimalByID(@PathVariable("id") String id) throws Exception {
-        Optional<AnimalData> animal = animalService.getAnimalByID(id);
-        if (animal.isPresent()) {
-            return new ResponseEntity<>(animal.get(), HttpStatus.OK);
-        } else {
-            throw new Exception("animal ID was not found in MongoDB");
-        }
+    public AnimalDTO getAnimalByIDfromDB(@PathVariable("id") String id) throws Exception {
+        LOG.info("get one animal by id from Database");
+        return animalService.getAnimalByID(id);
     }
 }
 
