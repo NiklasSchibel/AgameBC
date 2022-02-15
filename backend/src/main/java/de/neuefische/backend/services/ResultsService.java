@@ -1,6 +1,8 @@
 package de.neuefische.backend.services;
 
 import de.neuefische.backend.BackendApplication;
+import de.neuefische.backend.dto.ResultsDTO;
+import de.neuefische.backend.exception.ResultDoesNotExistException;
 import de.neuefische.backend.models.ResultsData;
 import de.neuefische.backend.repositories.ResultsRepository;
 import org.apache.juli.logging.Log;
@@ -16,14 +18,14 @@ public class ResultsService {
 
     private final ResultsRepository resultsRepository;
 
-
     public ResultsService(ResultsRepository resultsRepository) {
         this.resultsRepository = resultsRepository;
     }
 
 
-    public Optional<ResultsData> getResultsByName(String id) {
-        return resultsRepository.findById(id);
+    public ResultsDTO getResultsByName(String id) throws ResultDoesNotExistException {
+        return new ResultsDTO(resultsRepository.findById(id)
+                .orElseThrow(() -> new ResultDoesNotExistException("no results found for user: " + id)));
     }
 
 }

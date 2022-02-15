@@ -28,7 +28,7 @@ public class AnimalController {
 
     @GetMapping(path = "/rand")
     @ResponseBody
-    public AnimalDTO getRandomAnimal() throws Exception {
+    public AnimalDTO getRandomAnimal() {
         LOG.info("get one random animal from Database");
         return animalService.getRandomAnimal();
     }
@@ -36,7 +36,7 @@ public class AnimalController {
 
     @GetMapping(path = "/{id}")
     @ResponseBody
-    public AnimalDTO getAnimalByIDfromDB(@PathVariable("id") String id) throws Exception {
+    public AnimalDTO getAnimalByIDfromDB(@PathVariable("id") String id) {
         LOG.info("get one animal by id from Database");
         return animalService.getAnimalByID(id);
     }

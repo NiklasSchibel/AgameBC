@@ -33,17 +33,17 @@ public class AnimalService {
         return animalRepository.findAll().stream().map(AnimalDTO::new).collect(Collectors.toList());
     }
 
-    public AnimalDTO getAnimalByID(String id) throws ResponseStatusException {
+    public AnimalDTO getAnimalByID(String id) throws AnimalDoesNotExistException {
         return new AnimalDTO(animalRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Animal with id " + id + " not found!")));
+                .orElseThrow(() -> new AnimalDoesNotExistException("Animal with id " + id + " not found!")));
     }
 
-    public AnimalDTO getRandomAnimal() throws AnimalDoesNotExistException {
+    public AnimalDTO getRandomAnimal() throws ResponseStatusException {
         int min = 1;
         int max = animalRepository.findAll().size() - 1;
         int randomNumber = random.nextInt(max + min) + min;
         String searchID = Integer.toString(randomNumber);
         return new AnimalDTO(animalRepository.findById(searchID)
-                .orElseThrow(() -> new AnimalDoesNotExistException("problem: could not get random animal from mongoDB")));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "problem: could not get random animal from mongoDB")));
     }
 }
