@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
+
 import './stylingComponents/TimeLeftToPlayAndLevel.scss';
 import {AuthContext} from "../context/AuthProvider";
 import {LevelContext} from "../context/LevelProvider";
@@ -48,5 +49,6 @@ export default function TimeLeftToPlayAndLevel() {
             {counter === 0 ? "Time over" : <div className="timeLeft"> {format(counter)}</div>}
             <div className="levelOfPlayer">{levelOfPlayer}</div>
         </div>
+
     )
 }

@@ -4,7 +4,9 @@ import {LevelContext} from "../context/LevelProvider";
 import smile from "../images/iconSmile.png";
 import {useNavigate} from "react-router-dom";
 import "./stylingComponents/DragableItemsLevel3.scss"
+
 import UseLevelStates from "../customHook/UseLevelStates";
+
 
 interface DragableItemsProps {
     animalName: string
@@ -16,6 +18,7 @@ export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
         answer,
         setAnswer,
     } = level3States
+
     const {levelUp} = useContext(LevelContext)
     const navigate = useNavigate();
     const letterArrayAnimalName = animalName.split('');
@@ -77,6 +80,7 @@ export default function DragableItemsLevel3({animalName}: DragableItemsProps) {
         <div>
             <Reorder.Group axis="y" as="ol" values={shuffledLettersOfAnimalName} onReorder={setShuffledLettersOfAnimalName}>
                 {shuffledLettersOfAnimalName.map((item, key) => (
+
                     <Reorder.Item className="itemReorder" key={item} value={item}>
                         {item}
                     </Reorder.Item>

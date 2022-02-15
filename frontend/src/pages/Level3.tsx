@@ -9,8 +9,8 @@ import {LANGUAGE, BASEURL_TTS, KEY} from "../constants/Constants";
 
 
 export default function Level3() {
-    const [animal, setAnimal] = useState<AnimalData>();
-    const navigate = useNavigate();
+    const [animal, setAnimal] = useState<AnimalData>()
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetchRandomAnimal().then(data => setAnimal(data)).catch(e => console.log(e.message))
