@@ -1,5 +1,5 @@
 import './stylingPages/Level1.scss';
-import React, {ChangeEventHandler, useContext, useEffect, useState} from "react";
+import React, {ChangeEventHandler, useContext, useEffect} from "react";
 import {TextField} from "@mui/material";
 import smile from "../images/iconSmile.png";
 import {LevelContext} from "../context/LevelProvider";
@@ -9,17 +9,21 @@ import {ALPHABET, LANGUAGE, BASEURL_TTS} from "../constants/Constants";
 import UseLevelStates from "../customHook/UseLevelStates";
 
 export default function Level1() {
-    const {randomLetterForTask,setRandomLetterForTask} = UseLevelStates()
+    const {level1States} = UseLevelStates()
+    const {
+        randomLetterForTask,
+        setRandomLetterForTask,
+        answer,
+        setAnswer,
+        inputTextField,
+        setInputTextField
+    } = level1States
     const navigate = useNavigate()
     const {levelUp} = useContext(LevelContext)
-    // const [randomLetterForTask, setRandomLetterForTask] = useState<string>(" ")
-    const [answer, setAnswer] = useState<boolean>(false)
-    const [inputTextField, setInputTextField] = useState<string>("")
 
     const key: string | undefined = process.env.REACT_APP_VOICERSS_API_KEY;
     const srcStringForVoiceRSS: string = BASEURL_TTS + key + LANGUAGE + "das ist der Buchstabe: " +
         randomLetterForTask + " schreibe ihn in das Feld unten selbst"
-
 
     useEffect(() => {
         setRandomLetterForTask(ALPHABET[Math.floor(Math.random() * ALPHABET.length)])
@@ -28,7 +32,7 @@ export default function Level1() {
 
 
     /**
-     * this function checks the input value and sets answer and levels player up if correct
+     * this function checks the input value and if correct sets answer true(3sec) and levels up player
      */
     const handleChangeOfInputField: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
         = (event) => {

@@ -1,11 +1,19 @@
 import {useState} from "react";
 
-export default function UseLevelStates(){
+export default function UseLevelStates() {
 
     const [randomLetterForTask, setRandomLetterForTask] = useState<string>(" ")
+    const [answer, setAnswer] = useState<boolean>(false)
+    const [inputTextField, setInputTextField] = useState<string>("")
 
-    return{
+    return {
+        level1States: {
             randomLetterForTask,
-            setRandomLetterForTask
+            setRandomLetterForTask,
+            answer,
+            setAnswer,
+            inputTextField,
+            setInputTextField
+        }
     }
 }
