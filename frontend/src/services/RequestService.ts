@@ -42,7 +42,7 @@ export const sendResult = (resultData: ResultsData, token?: string) =>
     })
 
 export const getResult = (userName: string, token?: string) =>
-    axios.get('api/abc/results/{userName}', token ? {
+    axios.get(`api/abc/results/${userName}`, token ? {
         headers: {
             "Authorization": "Bearer " + token
         }

@@ -69,7 +69,7 @@ export default function Login() {
         loginRequest(login)
             .then((data)=>{
                 setJwt(data)
-                navigate('/Level1') //todo: change navigation back to Level1
+                navigate('/results') //todo: change navigation back to Level1
             })
     }
 
