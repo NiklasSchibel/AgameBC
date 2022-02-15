@@ -32,14 +32,15 @@ export const fetchRandomAnimal = (token?: string) =>
             console.log(error);
         })
 
-export const sendResult = (resultData: ResultsData, token?: string) =>
-    axios.post('api/abc/results/', token ? {
+export const sendResult = (userName: string, resultLetter: string, token?: string) =>
+    axios.post(`api/abc/results/${userName}/${resultLetter}`, token ? {
         headers: {
             "Authorization": "Bearer " + token
         }
-    } : {}).catch((error) => {
-        console.log(error)
-    })
+    } : {})
+        .catch((error) => {
+            console.log(error)
+        })
 
 export const getResult = (userName: string, token?: string) =>
     axios.get(`api/abc/results/${userName}`, token ? {

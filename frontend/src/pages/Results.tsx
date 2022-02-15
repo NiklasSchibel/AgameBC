@@ -2,6 +2,8 @@ import {getResult} from "../services/RequestService";
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/AuthProvider";
 import {ResultsData} from "../models/ResultsData";
+// @ts-ignore
+import {TagCloud} from 'react-tagcloud';
 
 export default function Results() {
     const {token, jwtDecoded} = useContext(AuthContext)
@@ -24,8 +26,21 @@ export default function Results() {
 
     console.log(results)
 
-
+    const data = [
+        {value: 'A', count: results?.a},
+        {value: 'B', count: results?.b},
+        {value: 'C', count: results?.c},
+        {value: 'D', count: 10},
+        {value: 'E', count: 2},
+        {value: 'F', count: 3},
+        {value: 'G', count: 1},
+    ]
     return (<div>
-        {results?.a}
+        <TagCloud
+            minSize={10}
+            maxSize={120}
+            tags={data}
+            onClick={(tag: { value: any; }) => alert(`'${tag.value}' was selected!`)}
+        />
     </div>)
 }

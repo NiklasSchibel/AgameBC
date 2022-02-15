@@ -18,5 +18,16 @@ public class ResultsData {
     int a;
     int b;
     int c;
+    int d;
+    int e;
+    int f;
+    int g;
+    int h;
+    int i;
+
+    int l;
+    int m;
+    int n;
+    int s;
 }
 

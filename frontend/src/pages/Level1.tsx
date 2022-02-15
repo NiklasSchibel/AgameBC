@@ -7,6 +7,8 @@ import {useNavigate} from "react-router-dom";
 import TimeLeftToPlayAndLevel from "../components/TimeLeftToPlayAndLevel";
 import {ALPHABET, LANGUAGE, BASEURL_TTS, KEY} from "../constants/Constants";
 import UseLevelStates from "../customHook/UseLevelStates";
+import {sendResult} from "../services/RequestService";
+import {AuthContext} from "../context/AuthProvider";
 
 export default function Level1() {
     const {level1States} = UseLevelStates()
@@ -20,6 +22,7 @@ export default function Level1() {
     } = level1States
     const navigate = useNavigate()
     const {levelUp} = useContext(LevelContext)
+    const {token, jwtDecoded} = useContext(AuthContext)
 
     const srcStringForVoiceRSS: string = BASEURL_TTS + KEY + LANGUAGE + "das ist der Buchstabe: " +
         randomLetterForTask + " schreibe ihn in das Feld unten selbst"
@@ -38,6 +41,7 @@ export default function Level1() {
         event.preventDefault();
         if (randomLetterForTask === event.target.value.toUpperCase()) {
             setAnswer(true)
+            sendResult(jwtDecoded?.sub || " ", randomLetterForTask, token).then(r => console.log(r))
             setInputTextField(randomLetterForTask)
             setTimeout(function () {
                 setAnswer(false)

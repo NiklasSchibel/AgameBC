@@ -28,6 +28,13 @@ public class ResultsController {
         LOG.info("get all results for user" + userName);
         return resultsService.getResultsByName(userName);
     }
+
+    @PostMapping(path = "/{userName}/{letter}")
+    @ResponseBody
+    public ResultsDTO sendLetterResultToBackend(@PathVariable("userName") String userName, @PathVariable("letter") String letter) {
+        LOG.info("send one letter " + letter + ", result for user " + userName + "to backend");
+        return resultsService. ();
+    }
 }
 
 
