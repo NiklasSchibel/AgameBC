@@ -26,7 +26,8 @@ export const fetchRandomAnimal = (token?: string) =>
         headers: {
             "Authorization": "Bearer " + token
         }
-    } : {}).then(response => response.data)
+    } : {})
+        .then(response => response.data)
         .catch((error) => {
             console.log(error);
         })
