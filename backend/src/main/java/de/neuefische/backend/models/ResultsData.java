@@ -15,8 +15,8 @@ public class ResultsData {
     @Id
     String id;
 
-//    String deName;
-//    String imageLink;
-//    String startingLetter;
+    int a;
+    int b;
+    int c;
 }
 

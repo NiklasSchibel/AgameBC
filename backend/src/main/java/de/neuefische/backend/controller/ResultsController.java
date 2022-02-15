@@ -1,5 +1,6 @@
 package de.neuefische.backend.controller;
 
+import de.neuefische.backend.models.ResultsData;
 import de.neuefische.backend.services.ResultsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +25,13 @@ public class ResultsController {
     }
 
 
-//    @GetMapping(path = "/")
-//    public ResponseEntity<List<AnimalData>> getAllShoppingListItemsMongo() {
-//        List<AnimalData> allAnimals = animalService.findAllAnimals();
-//        return ok(allAnimals);
-//    }
+    @GetMapping(path = "/klaus")
+    public ResponseEntity<ResultsData> getAllResultsForKlaus() {
+        ResultsData test =new ResultsData("fehler",11,1,1);
+        ResultsData allResults = resultsService.getResultsByName("klaus")
+                .orElse(test);
+        return ok(allResults);
+    }
 //
 //    @GetMapping(path = "/rand")
 //    public ResponseEntity<AnimalData> getRandomAnimal() throws Exception {
