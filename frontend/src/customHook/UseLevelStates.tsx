@@ -18,6 +18,10 @@ export default function UseLevelStates() {
         level2States:{
             answer,
             setAnswer
+        },
+        level3States:{
+            answer,
+            setAnswer
         }
     }
 }

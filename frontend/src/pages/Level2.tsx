@@ -11,6 +11,7 @@ export default function Level2() {
 
     useEffect(() => {
         fetchRandomAnimal().then(data => setAnimal(data)).catch(e => console.log(e.message))
+        // eslint-disable-next-line
     }, [])
 
     if (!animal) {

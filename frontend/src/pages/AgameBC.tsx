@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from "react";
 import {LevelContext} from "../context/LevelProvider";
 import {useNavigate} from "react-router-dom";
-import {POINTS_NEEDED_FOR_LEVEL_2, POINTS_NEEDED_FOR_LEVEL_3} from "../constants/Constants";
+import {KEY, POINTS_NEEDED_FOR_LEVEL_2, POINTS_NEEDED_FOR_LEVEL_3} from "../constants/Constants";
 
 export default function AgameBC() {
 
@@ -21,6 +21,11 @@ export default function AgameBC() {
         }
         // eslint-disable-next-line
         }, [])
+
+    if(KEY === undefined){
+        console.warn("environment key for API connection is undefined")
+        return <div>Problem mit API-Key: Verbindung zu Text-To-Speech API nicht möglich</div>
+    }
 
     return (<div className="smileImage">
 
