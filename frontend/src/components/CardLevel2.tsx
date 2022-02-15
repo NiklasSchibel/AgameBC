@@ -1,6 +1,6 @@
 import "./stylingComponents/CardLevel2.scss"
 import AnswerChoiceLevel2 from "./AnswerChoiceLevel2";
-import {BASEURL_TTS, LANGUAGE} from "../constants/Constants";
+import {BASEURL_TTS, KEY, LANGUAGE} from "../constants/Constants";
 
 interface cardProps {
     animalName: string
@@ -11,8 +11,7 @@ export default function CardLevel2({animalName, imageLink}: cardProps) {
     const firstLetterOfAnimalName = getFirstLetter(animalName);
 
 
-    const key: string | undefined = process.env.REACT_APP_VOICERSS_API_KEY;
-    const srcStringForVoiceRSS: string = BASEURL_TTS + key + LANGUAGE
+    const srcStringForVoiceRSS: string = BASEURL_TTS + KEY + LANGUAGE
         + "Welcher ist der erste Buchstabe, ich heiße:" + getFirstWord(animalName)
 
 

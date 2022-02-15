@@ -5,7 +5,7 @@ import smile from "../images/iconSmile.png";
 import {LevelContext} from "../context/LevelProvider";
 import {useNavigate} from "react-router-dom";
 import TimeLeftToPlayAndLevel from "../components/TimeLeftToPlayAndLevel";
-import {ALPHABET, LANGUAGE, BASEURL_TTS} from "../constants/Constants";
+import {ALPHABET, LANGUAGE, BASEURL_TTS, KEY} from "../constants/Constants";
 import UseLevelStates from "../customHook/UseLevelStates";
 
 export default function Level1() {
@@ -21,8 +21,7 @@ export default function Level1() {
     const navigate = useNavigate()
     const {levelUp} = useContext(LevelContext)
 
-    const key: string | undefined = process.env.REACT_APP_VOICERSS_API_KEY;
-    const srcStringForVoiceRSS: string = BASEURL_TTS + key + LANGUAGE + "das ist der Buchstabe: " +
+    const srcStringForVoiceRSS: string = BASEURL_TTS + KEY + LANGUAGE + "das ist der Buchstabe: " +
         randomLetterForTask + " schreibe ihn in das Feld unten selbst"
 
     useEffect(() => {
