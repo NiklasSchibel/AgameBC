@@ -12,7 +12,7 @@ export default function Results() {
 
 //todo: nur token mitschicken und im Backend über principal datenbankabfrage laufen lassen
     useEffect(() => {
-        getResult("herbert", token)// todo : jwtDecoded?.sub || " " instead of "herbert" later
+        getResult("klaus", token)// todo : jwtDecoded?.sub || " " instead of "herbert" later
             .then(result => {
                 console.log(result)
                 return result;
@@ -21,6 +21,8 @@ export default function Results() {
             .catch(error => console.log(error))
         // eslint-disable-next-line
     }, [])
+
+    console.log(token)
 
 
     // todo: commment this in later

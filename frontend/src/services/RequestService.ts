@@ -33,7 +33,7 @@ export const fetchRandomAnimal = (token?: string) =>
         })
 
 export const sendResult = (userName: string, resultLetter: string, token?: string) =>
-    axios.post(`api/abc/results/${userName}/${resultLetter}`, token ? {
+    axios.post(`api/abc/results/${userName}`, {resultLetter},token ? {
         headers: {
             "Authorization": "Bearer " + token
         }

@@ -41,7 +41,7 @@ export default function Level1() {
         event.preventDefault();
         if (randomLetterForTask === event.target.value.toUpperCase()) {
             setAnswer(true)
-            sendResult(jwtDecoded?.sub || " ", randomLetterForTask, token).then(r => console.log(r))
+            sendResult("klaus", randomLetterForTask, token).then(r => console.log(r)) //todo: oder anstatt herbert/falls nicht über token klappt: jwtDecoded?.sub || " "
             setInputTextField(randomLetterForTask)
             setTimeout(function () {
                 setAnswer(false)

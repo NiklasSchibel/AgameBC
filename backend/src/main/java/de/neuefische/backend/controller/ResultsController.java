@@ -1,6 +1,7 @@
 package de.neuefische.backend.controller;
-
-import de.neuefische.backend.dto.ResultsDTO;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import de.neuefische.backend.services.JWTUtils;
 import de.neuefische.backend.models.ResultsData;
 import de.neuefische.backend.services.ResultsService;
 import org.apache.juli.logging.Log;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class ResultsController {
     private static final Log LOG = LogFactory.getLog(ResultsController.class);
     private final ResultsService resultsService;
+    private final JWTUtils jwtutils = new JWTUtils();
 
     public ResultsController(ResultsService resultsService) {
         this.resultsService = resultsService;
@@ -25,6 +27,8 @@ public class ResultsController {
     @GetMapping(path = "/{userName}")
     @ResponseBody
     public ResultsData getAllResultsForUser(@PathVariable("userName") String userName) {
+        LOG.info("user from token:" ); // jwtutils.extractUserName(token) , //todo: geht noch nicht
+//        LOG.info(token);
         LOG.info("get all results for user" + userName);
         return resultsService.getResultsByName(userName);
     }

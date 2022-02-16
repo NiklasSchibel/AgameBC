@@ -32,13 +32,17 @@ public class ResultsService {
                 .orElseThrow(() -> new ResultDoesNotExistException("no results found for user: " + userName));
     }
 
-    public void sentLetterResultToDB(String letter, String userName) throws ResultDoesNotExistException{
-        ResultsDTO result = new ResultsDTO(resultsRepository.findById(userName)
-                .orElseThrow(()->new ResultDoesNotExistException("no results found for user: " + userName)));
+    public void sentLetterResultToDB(String letter, String userName) throws ResultDoesNotExistException {
+        ResultsData result = resultsRepository.findById(userName)
+                .orElseThrow(() -> new ResultDoesNotExistException("no results found for user: " + userName));
         LOG.info(result);
+        result.getLettersCount().put(letter, result.getLettersCount().get(letter) + 1);
+        resultsRepository.save(result);
+
+        LOG.info(result.getLettersCount().get(letter) + 1);
     }
 
-    public void sendDBEntry(String userName) throws ResultDoesNotExistException{
+    public void sendDBEntry(String userName) throws ResultDoesNotExistException {
         ResultsData resultdata = new ResultsData(userName);
 //        ResultsDTO result = new ResultsDTO(resultdata);
         resultsRepository.save(resultdata);
