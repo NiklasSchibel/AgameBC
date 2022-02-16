@@ -1,6 +1,7 @@
 package de.neuefische.backend.controller;
 
 import de.neuefische.backend.dto.ResultsDTO;
+import de.neuefische.backend.models.ResultsData;
 import de.neuefische.backend.services.ResultsService;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
@@ -23,7 +24,7 @@ public class ResultsController {
 
     @GetMapping(path = "/{userName}")
     @ResponseBody
-    public ResultsDTO getAllResultsForUser(@PathVariable("userName") String userName) {
+    public ResultsData getAllResultsForUser(@PathVariable("userName") String userName) {
         LOG.info("get all results for user" + userName);
         return resultsService.getResultsByName(userName);
     }
