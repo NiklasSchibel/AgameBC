@@ -35,7 +35,6 @@ public class ResultsService {
     public void sentLetterResultToDB(String letter, String userName) throws ResultDoesNotExistException {
         ResultsData result = resultsRepository.findById(userName)
                 .orElseThrow(() -> new ResultDoesNotExistException("no results found for user: " + userName));
-        LOG.info(result);
         result.getLettersCount().put(letter, result.getLettersCount().get(letter) + 1);
         resultsRepository.save(result);
 

@@ -1,4 +1,5 @@
 package de.neuefische.backend.controller;
+import de.neuefische.backend.models.LetterObject;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import de.neuefische.backend.services.JWTUtils;
@@ -27,16 +28,17 @@ public class ResultsController {
     @GetMapping(path = "/{userName}")
     @ResponseBody
     public ResultsData getAllResultsForUser(@PathVariable("userName") String userName) {
-        LOG.info("user from token:" ); // jwtutils.extractUserName(token) , //todo: geht noch nicht
+        LOG.info("user from token:" ); // jwtutils.extractUserName(token) , //todo: geht , nur nocht nicht mit token user
 //        LOG.info(token);
         LOG.info("get all results for user" + userName);
         return resultsService.getResultsByName(userName);
     }
 
     @PostMapping(path = "/{userName}")
-    public String sendLetterResultToBackend(@PathVariable("userName") String userName, @RequestBody String letter) {
+    public String sendLetterResultToBackend(@PathVariable("userName") String userName, @RequestBody LetterObject letter) {
         LOG.info("send one letter " + letter + ", result for user " + userName + "to backend");
-        resultsService.sentLetterResultToDB(letter, userName);
+        resultsService.sentLetterResultToDB(letter.getLetter(), userName);
+        LOG.info("das ist der letter im Controller: "+letter);
         return "nice, request with letter: " + letter;
     }
 
