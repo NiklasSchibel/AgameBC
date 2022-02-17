@@ -1,12 +1,14 @@
 import React, {useContext, useEffect} from "react";
 import {LevelContext} from "../context/LevelProvider";
 import {useNavigate} from "react-router-dom";
+
 import {
     KEY,
     POINTS_NEEDED_FOR_LEVEL_2,
     POINTS_NEEDED_FOR_LEVEL_3,
     POINTS_NEEDED_FOR_RESULTS_PAGE
 } from "../constants/Constants";
+
 
 export default function AgameBC() {
 
@@ -28,6 +30,7 @@ export default function AgameBC() {
         }
         // eslint-disable-next-line
     }, [])
+
 
     if (KEY === undefined) {
         console.warn("environment key for API connection is undefined")

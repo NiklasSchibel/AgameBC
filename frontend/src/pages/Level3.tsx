@@ -14,6 +14,7 @@ export default function Level3() {
     const [animal, setAnimal] = useState<AnimalData>();
     const navigate = useNavigate();
 
+
     useEffect(() => {
         fetchRandomAnimal(token).then(data => setAnimal(data)).catch(e => console.log(e.message))
         // eslint-disable-next-line

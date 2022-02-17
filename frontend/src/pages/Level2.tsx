@@ -6,6 +6,7 @@ import {AnimalData} from "../models/AnimalData";
 import TimeLeftToPlayAndLevel from "../components/TimeLeftToPlayAndLevel";
 import {AuthContext} from "../context/AuthProvider";
 
+
 export default function Level2() {
     const {token} = useContext(AuthContext)
     const [animal, setAnimal] = useState<AnimalData>();

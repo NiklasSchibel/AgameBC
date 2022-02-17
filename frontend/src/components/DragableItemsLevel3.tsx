@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import "./stylingComponents/DragableItemsLevel3.scss"
 import UseLevelStates from "../customHook/UseLevelStates";
 
+
 interface DragableItemsProps {
     animalName: string
 }

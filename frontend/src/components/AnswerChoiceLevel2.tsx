@@ -9,6 +9,7 @@ import UseLevelStates from "../customHook/UseLevelStates";
 import {sendResultLetter} from "../services/RequestService";
 import {AuthContext} from "../context/AuthProvider";
 
+
 interface AnswerButtonChoiceProps {
     firstLetterOfAnimalName: string
 }
@@ -16,6 +17,7 @@ interface AnswerButtonChoiceProps {
 export default function AnswerChoiceLevel2({firstLetterOfAnimalName}: AnswerButtonChoiceProps) {
     const {levelUp} = useContext(LevelContext)
     const {token} = useContext(AuthContext)
+
     const navigate =  useNavigate()
     const {level2States} = UseLevelStates()
     const [choicesShuffled, setChoicesShuffled] = useState<Array<string | undefined>>([])

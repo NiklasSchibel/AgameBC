@@ -55,3 +55,4 @@ export const sendResultLetter = (resultLetter: letterData, token?: string) =>
         .catch((error) => {
             console.log(error)
         })
+

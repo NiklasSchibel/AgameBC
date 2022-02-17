@@ -10,6 +10,7 @@ import UseLevelStates from "../customHook/UseLevelStates";
 import {sendResultLetter} from "../services/RequestService";
 import {AuthContext} from "../context/AuthProvider";
 
+
 export default function Level1() {
     const {level1States} = UseLevelStates()
     const {

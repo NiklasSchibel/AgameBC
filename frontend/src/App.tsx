@@ -41,6 +41,7 @@ export default function App() {
                                 <Results/>
                             </RequireAuth>
                         }/>
+
                     </Routes>
                 </BrowserRouter>
             </LevelProvider>
