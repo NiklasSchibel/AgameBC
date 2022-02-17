@@ -1,14 +1,14 @@
 import {getResults} from "../services/RequestService";
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/AuthProvider";
-import './stylingPages/ResultsPage.scss';
+import './stylingPages/Results.scss';
 // @ts-ignore
 import {TagCloud} from 'react-tagcloud';
-import {LetterCount} from "../models/LetterCount";
+import {ResultData} from "../models/ResultData";
 
 export default function Results() {
     const {token} = useContext(AuthContext)
-    const [results, setResults] = useState<LetterCount>({});
+    const [results, setResults] = useState<ResultData>({});
 
     useEffect(() => {
         getResults(token)

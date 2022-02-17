@@ -1,6 +1,6 @@
-import {LetterCount} from "./LetterCount";
+import {ResultData} from "./ResultData";
 
 export interface ResultsData {
     id: string;
-    lettersCount: LetterCount;
+    lettersCount: ResultData;
 }

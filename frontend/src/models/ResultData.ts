@@ -1,4 +1,4 @@
-export interface LetterCount {
+export interface ResultData {
     A?:number;
     B?:number;
     C?:number;

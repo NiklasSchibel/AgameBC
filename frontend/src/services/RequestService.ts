@@ -1,6 +1,6 @@
 import axios from "axios";
 import {LoginData} from "../models/LoginData";
-import {letterObject} from "../models/letterObject";
+import {letterData} from "../models/LetterData";
 
 
 export const loginRequest = (login: LoginData) =>
@@ -33,7 +33,6 @@ export const fetchRandomAnimal = (token?: string) =>
         })
 
 
-
 export const getResults = (token?: string) =>
     axios.get(`api/abc/results`,token ? {
         headers: {
@@ -46,7 +45,7 @@ export const getResults = (token?: string) =>
         })
 
 
-export const sendResultLetter = (resultLetter: letterObject, token?: string) =>
+export const sendResultLetter = (resultLetter: letterData, token?: string) =>
     axios.post(`api/abc/results/`, resultLetter,token ? {
         headers: {
             "Authorization": token

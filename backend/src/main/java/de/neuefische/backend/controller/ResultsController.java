@@ -21,7 +21,6 @@ public class ResultsController {
         this.resultsService = resultsService;
     }
 
-    //todo hier jetzt ohne userName nur mit Token
 
     @GetMapping(path = "")
     @ResponseBody
@@ -32,11 +31,9 @@ public class ResultsController {
     }
 
     @PostMapping(path = "")
-    public String sendLetterResultToBackendForThisUser(@RequestBody LetterObject letter, @RequestHeader("Authorization") String token) {
-        LOG.info("send one letter " + letter + ", result for user " + jwtutils.extractUserName(token) + "to backend");
+    public void sendLetterResultToBackendForThisUser(@RequestBody LetterObject letter, @RequestHeader("Authorization") String token) {
+        LOG.info("send one letter: " + letter + ", result for user " + jwtutils.extractUserName(token) + "to backend");
         resultsService.sentLetterResultToDB(letter.getLetter(), jwtutils.extractUserName(token));
-        LOG.info("das ist der letter im Controller: " + letter);
-        return "nice, request with letter: " + letter;
     }
 
 }
