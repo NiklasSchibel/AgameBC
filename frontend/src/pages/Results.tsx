@@ -1,4 +1,4 @@
-import {getResult, getResultWithToken} from "../services/RequestService";
+import {getResultWithToken} from "../services/RequestService";
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/AuthProvider";
 import './stylingPages/ResultsPage.scss';
@@ -10,9 +10,7 @@ export default function Results() {
     const {token} = useContext(AuthContext)
     const [results, setResults] = useState<LetterCount>({});
 
-//todo: nur token mitschicken und im Backend über principal datenbankabfrage laufen lassen
     useEffect(() => {
-        // getResult("klaus", token)// todo : jwtDecoded?.sub || " " instead of "herbert" later
         getResultWithToken(token)
             .then(result => {
                 console.log(result)
@@ -22,17 +20,6 @@ export default function Results() {
             .catch(error => console.log(error))
         // eslint-disable-next-line
     }, [])
-
-    console.log(token)
-
-
-    // todo: commment this in later
-    // if (jwtDecoded?.sub === undefined) {
-    //     console.warn("most likely getResult Request was made with an empty string or rather blank space")
-    //     return (<div>
-    //         kein Spieler angemeldet, deswegen können keine results angezeigt werden!
-    //     </div>)
-    // }
 
 
     const data = [

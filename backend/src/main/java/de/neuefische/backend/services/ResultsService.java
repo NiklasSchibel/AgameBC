@@ -25,8 +25,6 @@ public class ResultsService {
         this.resultsRepository = resultsRepository;
     }
 
-//todo : prüft ob buchstabe in der DB vorhanden sonst neu anlegen
-
     public ResultsData getResultsByName(String userName) throws ResultDoesNotExistException {
         return resultsRepository.findById(userName)
                 .orElseThrow(() -> new ResultDoesNotExistException("no results found for user: " + userName));

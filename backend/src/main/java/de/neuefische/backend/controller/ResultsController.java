@@ -11,8 +11,6 @@ import org.apache.juli.logging.LogFactory;
 import org.springframework.web.bind.annotation.*;
 
 
-// throw response status exceptions for put and post mapping and work with try catch
-
 
 @RestController
 @RequestMapping("/api/abc/results")
@@ -29,8 +27,7 @@ public class ResultsController {
     @GetMapping(path = "/{userName}")
     @ResponseBody
     public ResultsData getAllResultsForUser(@PathVariable("userName") String userName) {
-        LOG.info("user from token:"); // jwtutils.extractUserName(token) , //todo: geht , nur nocht nicht mit token user
-//        LOG.info(token);
+        LOG.info("user from token:");
         LOG.info("get all results for user" + userName);
         return resultsService.getResultsByName(userName);
     }
@@ -44,7 +41,7 @@ public class ResultsController {
     }
 
 
-    //hier jetzt ohne userName nur mit Token
+    //todo hier jetzt ohne userName nur mit Token
 
     @GetMapping(path = "")
     @ResponseBody
