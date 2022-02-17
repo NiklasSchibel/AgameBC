@@ -1,14 +1,18 @@
 import {getResults} from "../services/RequestService";
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/AuthProvider";
 import './stylingPages/Results.scss';
 // @ts-ignore
 import {TagCloud} from 'react-tagcloud';
 import {ResultData} from "../models/ResultData";
+import {BASEURL_TTS, KEY, LANGUAGE} from "../constants/Constants";
 
 export default function Results() {
     const {token} = useContext(AuthContext)
-    const [results, setResults] = useState<ResultData>({});
+    const [results, setResults] = useState<ResultData>({})
+    const [text, setText] = useState<string>("das ist dein Alphabet, klicke auf einen Buchstaben")
+
+    const srcStringForVoiceRSS: string = BASEURL_TTS + KEY + LANGUAGE + text
 
     useEffect(() => {
         getResults(token)
@@ -51,13 +55,24 @@ export default function Results() {
         {value: 'Z', count: results.Z},
     ]
 
+    const allDataObject: ResultData = data.reduce(
+        (obj, item) => Object.assign(obj, {[item.value]: item.count}), {});
+
+    const letterCountMap = new Map(Object.entries(allDataObject));
+
+    function onClickHandle(letter: string) {
+        setText("das ist der Buchstabe: " + letter + "Du hast ihn schon" + letterCountMap.get(letter) + " mal gelernt.")
+    }
+
     return (
         <div className="resultsPage">
             <TagCloud className="tagCloud"
-                minSize={10}
-                maxSize={120}
-                tags={data}
-                onClick={(tag: { value: any; }) => alert(`'${tag.value}' was selected!`)}
+                      minSize={10}
+                      maxSize={120}
+                      tags={data}
+                      onClick={(tag: { value: any; }) => onClickHandle(tag.value)}
             />
+
+            <audio className="audioResult" autoPlay src={srcStringForVoiceRSS} controls/>
         </div>)
 }

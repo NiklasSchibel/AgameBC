@@ -22,7 +22,7 @@ export default function Level1() {
     } = level1States
     const navigate = useNavigate()
     const {levelUp} = useContext(LevelContext)
-    const {token, jwtDecoded} = useContext(AuthContext)
+    const {token} = useContext(AuthContext)
 
     const srcStringForVoiceRSS: string = BASEURL_TTS + KEY + LANGUAGE + "das ist der Buchstabe: " +
         randomLetterForTask + " schreibe ihn in das Feld unten selbst"
