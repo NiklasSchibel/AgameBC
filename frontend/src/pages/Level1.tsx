@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import TimeLeftToPlayAndLevel from "../components/TimeLeftToPlayAndLevel";
 import {ALPHABET, LANGUAGE, BASEURL_TTS, KEY} from "../constants/Constants";
 import UseLevelStates from "../customHook/UseLevelStates";
-import {sendResult, sendResultWithToken} from "../services/RequestService";
+import {sendResultLetter} from "../services/RequestService";
 import {AuthContext} from "../context/AuthProvider";
 
 export default function Level1() {
@@ -41,7 +41,7 @@ export default function Level1() {
         event.preventDefault();
         if (randomLetterForTask === event.target.value.toUpperCase()) {
             setAnswer(true)
-            sendResultWithToken( {letter: randomLetterForTask}, token)
+            sendResultLetter( {letter: randomLetterForTask}, token)
             console.log(randomLetterForTask)
             console.log(token)
             setInputTextField(randomLetterForTask)

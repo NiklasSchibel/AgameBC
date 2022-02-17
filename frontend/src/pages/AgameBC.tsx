@@ -12,9 +12,11 @@ export default function AgameBC() {
         if (levelOfPlayer === undefined) {
             setNewlevelOfPlayer(1)
             navigate("/Level1")
-        } else if (levelOfPlayer > POINTS_NEEDED_FOR_LEVEL_3) {
+        } else if (levelOfPlayer > 4) {
+            navigate("/results")
+        } else if (levelOfPlayer > 2) {
             navigate("/Level3")
-        } else if (levelOfPlayer > POINTS_NEEDED_FOR_LEVEL_2) {
+        } else if (levelOfPlayer > 1) {
             navigate("/Level2")
         } else {
             navigate("/Level1")

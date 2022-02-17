@@ -37,11 +37,10 @@ export default function App() {
                                 <Level3/>
                             </RequireAuth>}/>
                         <Route path="/results" element={
-                            // <RequireAuth>
+                            <RequireAuth>
                                 <Results/>
-                            // </RequireAuth>
-                            //todo: comment out RequireAuth later
-                            }/>
+                            </RequireAuth>
+                        }/>
                     </Routes>
                 </BrowserRouter>
             </LevelProvider>

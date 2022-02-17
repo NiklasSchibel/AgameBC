@@ -1,4 +1,4 @@
-import {getResultWithToken} from "../services/RequestService";
+import {getResults} from "../services/RequestService";
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/AuthProvider";
 import './stylingPages/ResultsPage.scss';
@@ -11,7 +11,7 @@ export default function Results() {
     const [results, setResults] = useState<LetterCount>({});
 
     useEffect(() => {
-        getResultWithToken(token)
+        getResults(token)
             .then(result => {
                 console.log(result)
                 return result;

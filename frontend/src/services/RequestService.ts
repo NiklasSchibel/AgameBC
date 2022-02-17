@@ -1,6 +1,5 @@
 import axios from "axios";
 import {LoginData} from "../models/LoginData";
-import {ResultsData} from "../models/ResultsData";
 import {letterObject} from "../models/letterObject";
 
 
@@ -33,31 +32,9 @@ export const fetchRandomAnimal = (token?: string) =>
             console.log(error);
         })
 
-export const sendResult = (userName: string, resultLetter: letterObject, token?: string) =>
-    axios.post(`api/abc/results/${userName}`, resultLetter,token ? {
-        headers: {
-            "Authorization": "Bearer " + token
-        }
-    } : {})
-        .then(()=>{console.log(resultLetter)})
-        .catch((error) => {
-            console.log(error)
-        })
-
-export const getResult = (userName: string, token?: string) =>
-    axios.get(`api/abc/results/${userName}`, token ? {
-        headers: {
-            "Authorization": "Bearer " + token
-        }
-    } : {})
-        .then(response => response.data)
-        .catch((error) => {
-            console.log(error)
-        })
 
 
-
-export const getResultWithToken = (token?: string) =>
+export const getResults = (token?: string) =>
     axios.get(`api/abc/results`,token ? {
         headers: {
             "Authorization": token
@@ -68,7 +45,8 @@ export const getResultWithToken = (token?: string) =>
             console.log(error)
         })
 
-export const sendResultWithToken = (resultLetter: letterObject, token?: string) =>
+
+export const sendResultLetter = (resultLetter: letterObject, token?: string) =>
     axios.post(`api/abc/results/`, resultLetter,token ? {
         headers: {
             "Authorization": token
