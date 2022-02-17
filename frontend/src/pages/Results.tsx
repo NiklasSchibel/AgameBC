@@ -1,4 +1,4 @@
-import {getResult} from "../services/RequestService";
+import {getResult, getResultWithToken} from "../services/RequestService";
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/AuthProvider";
 import './stylingPages/ResultsPage.scss';
@@ -12,7 +12,8 @@ export default function Results() {
 
 //todo: nur token mitschicken und im Backend über principal datenbankabfrage laufen lassen
     useEffect(() => {
-        getResult("klaus", token)// todo : jwtDecoded?.sub || " " instead of "herbert" later
+        // getResult("klaus", token)// todo : jwtDecoded?.sub || " " instead of "herbert" later
+        getResultWithToken(token)
             .then(result => {
                 console.log(result)
                 return result;

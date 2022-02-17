@@ -41,6 +41,9 @@ public class ResultsService {
         LOG.info(result.getLettersCount().get(letter) + 1);
     }
 
+
+
+
     public void sendDBEntry(String userName) throws ResultDoesNotExistException {
         ResultsData resultdata = new ResultsData(userName);
 //        ResultsDTO result = new ResultsDTO(resultdata);

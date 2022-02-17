@@ -54,3 +54,27 @@ export const getResult = (userName: string, token?: string) =>
         .catch((error) => {
             console.log(error)
         })
+
+
+
+export const getResultWithToken = (token?: string) =>
+    axios.get(`api/abc/results`,token ? {
+        headers: {
+            "Authorization": token
+        }
+    } : {})
+        .then(response => response.data)
+        .catch((error) => {
+            console.log(error)
+        })
+
+export const sendResultWithToken = (resultLetter: letterObject, token?: string) =>
+    axios.post(`api/abc/results/`, resultLetter,token ? {
+        headers: {
+            "Authorization": token
+        }
+    } : {})
+        .then(()=>{console.log(resultLetter)})
+        .catch((error) => {
+            console.log(error)
+        })

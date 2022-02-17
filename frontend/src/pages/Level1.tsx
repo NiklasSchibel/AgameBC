@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import TimeLeftToPlayAndLevel from "../components/TimeLeftToPlayAndLevel";
 import {ALPHABET, LANGUAGE, BASEURL_TTS, KEY} from "../constants/Constants";
 import UseLevelStates from "../customHook/UseLevelStates";
-import {sendResult} from "../services/RequestService";
+import {sendResult, sendResultWithToken} from "../services/RequestService";
 import {AuthContext} from "../context/AuthProvider";
 
 export default function Level1() {
@@ -41,7 +41,7 @@ export default function Level1() {
         event.preventDefault();
         if (randomLetterForTask === event.target.value.toUpperCase()) {
             setAnswer(true)
-            sendResult("klaus", {letter: randomLetterForTask}, token) //todo: oder anstatt herbert/falls nicht über token klappt: jwtDecoded?.sub || " "
+            sendResultWithToken( {letter: randomLetterForTask}, token)
             console.log(randomLetterForTask)
             console.log(token)
             setInputTextField(randomLetterForTask)

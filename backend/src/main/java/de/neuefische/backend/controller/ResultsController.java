@@ -1,4 +1,5 @@
 package de.neuefische.backend.controller;
+
 import de.neuefische.backend.models.LetterObject;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -28,7 +29,7 @@ public class ResultsController {
     @GetMapping(path = "/{userName}")
     @ResponseBody
     public ResultsData getAllResultsForUser(@PathVariable("userName") String userName) {
-        LOG.info("user from token:" ); // jwtutils.extractUserName(token) , //todo: geht , nur nocht nicht mit token user
+        LOG.info("user from token:"); // jwtutils.extractUserName(token) , //todo: geht , nur nocht nicht mit token user
 //        LOG.info(token);
         LOG.info("get all results for user" + userName);
         return resultsService.getResultsByName(userName);
@@ -38,7 +39,26 @@ public class ResultsController {
     public String sendLetterResultToBackend(@PathVariable("userName") String userName, @RequestBody LetterObject letter) {
         LOG.info("send one letter " + letter + ", result for user " + userName + "to backend");
         resultsService.sentLetterResultToDB(letter.getLetter(), userName);
-        LOG.info("das ist der letter im Controller: "+letter);
+        LOG.info("das ist der letter im Controller: " + letter);
+        return "nice, request with letter: " + letter;
+    }
+
+
+    //hier jetzt ohne userName nur mit Token
+
+    @GetMapping(path = "")
+    @ResponseBody
+    public ResultsData getAllResultsForUserJustWithToken(@RequestHeader("Authorization") String token) {
+        LOG.info("get all results for user");
+        LOG.info("this is the header token: " + token);
+        return resultsService.getResultsByName(jwtutils.extractUserName(token));
+    }
+
+    @PostMapping(path = "")
+    public String sendLetterResultToBackendJustWithToken(@RequestBody LetterObject letter, @RequestHeader("Authorization") String token) {
+        LOG.info("send one letter " + letter + ", result for user " + jwtutils.extractUserName(token) + "to backend");
+        resultsService.sentLetterResultToDB(letter.getLetter(), jwtutils.extractUserName(token));
+        LOG.info("das ist der letter im Controller: " + letter);
         return "nice, request with letter: " + letter;
     }
 
