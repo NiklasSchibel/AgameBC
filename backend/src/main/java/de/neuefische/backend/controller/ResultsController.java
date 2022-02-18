@@ -1,6 +1,6 @@
 package de.neuefische.backend.controller;
 
-import de.neuefische.backend.models.LetterObject;
+import de.neuefische.backend.models.LetterData;
 import de.neuefische.backend.services.JWTUtils;
 import de.neuefische.backend.models.ResultsData;
 import de.neuefische.backend.services.ResultsService;
@@ -31,7 +31,7 @@ public class ResultsController {
     }
 
     @PostMapping(path = "")
-    public void sendLetterResultToBackendForThisUser(@RequestBody LetterObject letter, Principal principal) {
+    public void sendLetterResultToBackendForThisUser(@RequestBody LetterData letter, Principal principal) {
         LOG.info("send one letter: " + letter + ", result for user " + principal.getName() + "to backend");
         resultsService.sentLetterResultToDB(letter.getLetter(), principal.getName());
     }
