@@ -14,6 +14,7 @@ import java.util.Map;
 @Service
 public class JWTUtils {
 
+
     @Value("${SECRET_KEY}")
     private String secret;
 
