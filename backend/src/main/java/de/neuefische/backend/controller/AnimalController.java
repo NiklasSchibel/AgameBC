@@ -39,9 +39,18 @@ public class AnimalController {
 
     @GetMapping(path = "/rand")
     @ResponseBody
-    public AnimalDTO getRandomAnimal() {
-        LOG.info("get one random animal from Database");
-        return animalService.getRandomAnimal();
+    public ResponseEntity<AnimalDTO> getRandomAnimal() {
+//        LOG.info("get one random animal from Database");
+//        return animalService.getRandomAnimal();
+//    }
+        try {
+            LOG.info("get random animal from mongoDB");
+            AnimalDTO response = animalService.getRandomAnimal();
+            return ResponseEntity.ok(response);
+        } catch (HttpStatusCodeException e) {
+            LOG.warn("couldn't receive random animal ");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
 
