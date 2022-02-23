@@ -52,8 +52,11 @@ class AnimalControllerTest {
                             .jsonPath("$.size()").value(3))
                     .andExpect(MockMvcResultMatchers
                             .jsonPath("$.[0].id").value("1"))
+                    .andExpect(MockMvcResultMatchers
+                            .jsonPath("$.[1].deName").value("Elefant"))
+                    .andExpect(MockMvcResultMatchers
+                            .jsonPath("$.[2].id").value("3"))
             ;
-
         }
 
         @Test
