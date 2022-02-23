@@ -6,6 +6,7 @@ import de.neuefische.backend.exception.AnimalDoesNotExistException;
 import de.neuefische.backend.models.AnimalData;
 import de.neuefische.backend.repositories.AnimalRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -30,6 +31,7 @@ class AnimalServiceTest {
 
 
     @Test
+    @DisplayName("Simple return of all animals should work")
     void shouldReturnAllAnimals() {
 
         //Given
@@ -71,6 +73,7 @@ class AnimalServiceTest {
         }
 
         @Test
+        @DisplayName("Ensure correct handling of AnimalDoesNotExistException")
         void shouldThrowErrorWhenAnimalByIDSearchDoesNotExist() {
             //Given
             String id = "111";
