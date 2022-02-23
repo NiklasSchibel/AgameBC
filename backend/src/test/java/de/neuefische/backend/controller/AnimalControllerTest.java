@@ -34,7 +34,7 @@ class AnimalControllerTest {
     }
 
     @Nested
-    class get_animals {
+    class get_animals_controller {
 
         @Test
         void shouldReturnAllAnimals() throws Exception {
