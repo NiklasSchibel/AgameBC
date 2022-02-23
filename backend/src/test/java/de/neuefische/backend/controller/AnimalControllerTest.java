@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.HttpServerErrorException;
 
 import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -32,6 +31,8 @@ class AnimalControllerTest {
 
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
+
+
 
     @Nested
     class get_animals_controller {
@@ -72,4 +73,16 @@ class AnimalControllerTest {
 
         }
     }
+
+
+
+    @Test
+    void getRandomAnimal() {
+    }
+
+    @Test
+    void getAnimalByIDfromDB() {
+    }
+
 }
+

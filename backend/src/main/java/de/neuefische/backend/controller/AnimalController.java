@@ -40,9 +40,6 @@ public class AnimalController {
     @GetMapping(path = "/rand")
     @ResponseBody
     public ResponseEntity<AnimalDTO> getRandomAnimal() {
-//        LOG.info("get one random animal from Database");
-//        return animalService.getRandomAnimal();
-//    }
         try {
             LOG.info("get random animal from mongoDB");
             AnimalDTO response = animalService.getRandomAnimal();
@@ -56,9 +53,15 @@ public class AnimalController {
 
     @GetMapping(path = "/{id}")
     @ResponseBody
-    public AnimalDTO getAnimalByIDfromDB(@PathVariable("id") String id) {
-        LOG.info("get one animal by id from Database");
-        return animalService.getAnimalByID(id);
+    public ResponseEntity<AnimalDTO> getAnimalByIDfromDB(@PathVariable("id") String id) {
+        try {
+            LOG.info("get one animal by id from Database");
+            AnimalDTO response = animalService.getAnimalByID(id);
+            return ResponseEntity.ok(response);
+        } catch (HttpStatusCodeException e) {
+            LOG.warn("couldn't receive animal by id: " + id);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 }
 
