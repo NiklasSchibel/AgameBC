@@ -36,10 +36,6 @@ public class AnimalController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-//oder vielleicht so und ohne ResponseEntity sondern mit List<AnimalDTO> als Rückgabewert :
-//        } catch (Exception e) {
-//            LOG.warn("couldn't find animals in mongoDB ");
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "couldn't find animals in mongoDB");
 
     @GetMapping(path = "/rand")
     @ResponseBody

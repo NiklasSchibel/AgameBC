@@ -10,7 +10,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -84,9 +86,9 @@ class AnimalServiceTest {
 
             //Then
             try {
-                Optional<AnimalData> returnedValue = animalRepository.findById(id);
+                AnimalDTO returnedValue = animalService.getAnimalByID(id);
                 fail("Expected exception was not thrown");
-            }catch (Exception e){
+            } catch (Exception e) {
                 assertTrue(e instanceof AnimalDoesNotExistException);
                 assertEquals(e.getMessage(), "Animal with id " + id + " not found!");
             }
@@ -94,6 +96,38 @@ class AnimalServiceTest {
     }
 
     @Test
-    void getRandomAnimal() {
+    @DisplayName("Ensure correct handling of exception if getRandomAnimal function does not work")
+    void shouldReturnErrorWhenGetRandomAnimalDoesNotWork() {
+        //Given
+        AnimalData animal1 = new AnimalData("1", "Affe", "imageLink1", "A");
+        AnimalData animal2 = new AnimalData("2", "Elefant", "imageLink2", "E");
+        List<AnimalData> underTestAnimalDataList = List.of(
+                animal1,
+                animal2
+        );
+        List<AnimalDTO> underTestAnimalDataDTOList = List.of(
+                new AnimalDTO(animal1),
+                new AnimalDTO(animal2)
+        );
+
+        String id = "111";
+
+        //When
+        Mockito.when(animalRepository.findAll())
+                .thenReturn(underTestAnimalDataList);
+        Mockito.when(animalRepository.findById(id))
+                .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "problem: could not get random animal from mongoDB"));
+
+        //Then
+        int max = animalRepository.findAll().size() - 1;
+        assertEquals(max, 1);
+        try {
+            AnimalDTO returnedValue = animalService.getRandomAnimal();
+            fail("Expected exception was not thrown");
+        } catch (Exception e) {
+            assertTrue(e instanceof ResponseStatusException);
+            assertEquals(((ResponseStatusException) e).getStatus(), HttpStatus.NOT_FOUND);
+        }
     }
+
 }
