@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class AnimalController {
             LOG.info("get all animals from mongoDB");
             List<AnimalDTO> response = animalService.findAllAnimals();
             return ResponseEntity.ok(response);
-        } catch (HttpStatusCodeException e) {
+        } catch (Exception e) {
             LOG.warn("couldn't find animals in mongoDB ");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -44,7 +43,7 @@ public class AnimalController {
             LOG.info("get random animal from mongoDB");
             AnimalDTO response = animalService.getRandomAnimal();
             return ResponseEntity.ok(response);
-        } catch (HttpStatusCodeException e) {
+        } catch (Exception e) {
             LOG.warn("couldn't receive random animal ");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -58,7 +57,7 @@ public class AnimalController {
             LOG.info("get one animal by id from Database");
             AnimalDTO response = animalService.getAnimalByID(id);
             return ResponseEntity.ok(response);
-        } catch (HttpStatusCodeException e) {
+        } catch (Exception e) {
             LOG.warn("couldn't receive animal by id: " + id);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }

@@ -1,9 +1,11 @@
 package de.neuefische.backend.controller;
 
 import de.neuefische.backend.dto.AnimalDTO;
+import de.neuefische.backend.exception.AnimalDoesNotExistException;
 import de.neuefische.backend.models.AnimalData;
 import de.neuefische.backend.models.LoginData;
 import de.neuefische.backend.models.UserMongo;
+import de.neuefische.backend.repositories.AnimalRepository;
 import de.neuefische.backend.repositories.MongoUserRepository;
 import de.neuefische.backend.services.AnimalService;
 import de.neuefische.backend.services.MongoUserDetailsService;
@@ -24,10 +26,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 import java.util.Optional;
+
 import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -114,57 +120,89 @@ class AnimalControllerTest {
     }
 
 
-    @Test
-    void shouldReturnAnRandomAnimal() {
-        //Given
-//        Mockito.when(animalService.getRandomAnimal())
-//                .thenReturn(new AnimalDTO(new AnimalData("1", "Affe", "test_link", "A")));
-        //When
+    @Nested
+    class get_animals_id_controller {
+        @Test
+        void ShouldReturnAnimalByIDfromDB() {
 
-        //Then
-    }
-
+            //Given
+            AnimalDTO animalUnderTest = new AnimalDTO(new AnimalData("1", "Affe", "test_link", "A"));
+            LoginData loginData = new LoginData("some-user", "secretPassword", 15);
 
 
+            //When
+            when(mongoUserRepository
+                    .findByUsername("some-user"))
+                    .thenReturn(Optional.of(setupUser()));
 
-    @Test
-    void ShouldReturnAnimalByIDfromDB() {
-
-        //Given
-        AnimalDTO animalUnderTest = new AnimalDTO(new AnimalData("1", "Affe", "test_link", "A"));
-
-        when(mongoUserRepository
-                        .findByUsername("some-user"))
-                .thenReturn(Optional.of(setupUser()));
-
-        when(animalService.getAnimalByID("1"))
-                .thenReturn(animalUnderTest);
+            when(animalService.getAnimalByID("1"))
+                    .thenReturn(animalUnderTest);
 
 
-        LoginData loginData = new LoginData("some-user", "secretPassword", 15);
+            ResponseEntity<String> login = webTestClient.post()
+                    .uri("http://localhost:" + port + "/auth/login")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .bodyValue(loginData)
+                    .retrieve()
+                    .toEntity(String.class)
+                    .block();
 
-        //WHEN
-        ResponseEntity<String> login = webTestClient.post()
-                .uri("http://localhost:" + port + "/auth/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(loginData)
-                .retrieve()
-                .toEntity(String.class)
-                .block();
+            String token = login.getBody();
 
-        String token = login.getBody();
+            ResponseEntity<AnimalDTO> animalTestDTO = webTestClient.get()
+                    .uri("http://localhost:" + port + "/api/animals/1")
+                    .header("Authorization", token)
+                    .retrieve()
+                    .toEntity(AnimalDTO.class)
+                    .block();
 
-        //When
-        ResponseEntity<AnimalDTO> animalTestDTO = webTestClient.get()
-                .uri("http://localhost:" + port + "/api/animals/1")
-                .header("Authorization", token)
-                .retrieve()
-                .toEntity(AnimalDTO.class)
-                .block();
+            //Then
+            assertEquals(animalTestDTO.getBody(), animalUnderTest);
 
-        //Then
-        assertEquals(animalTestDTO.getBody(),animalUnderTest);
+        }
 
+        @Test
+        public void shouldTurnErrorIntoBadRequest() throws Exception {
+            //Given
+            String id = "111";
+            LoginData loginData = new LoginData("some-user", "secretPassword", 15);
+
+            //When
+            when(animalService.getAnimalByID(id))
+                    .thenThrow(new AnimalDoesNotExistException("Animal with id " + id + " not found!"));
+
+            when(mongoUserRepository
+                    .findByUsername("some-user"))
+                    .thenReturn(Optional.of(setupUser()));
+
+            ResponseEntity<String> login = webTestClient.post()
+                    .uri("http://localhost:" + port + "/auth/login")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .bodyValue(loginData)
+                    .retrieve()
+                    .toEntity(String.class)
+                    .block();
+
+            String token = login.getBody();
+
+            try {
+                ResponseEntity<AnimalDTO> responseUnderTest = webTestClient.get()
+                        .uri("http://localhost:" + port + "/api/animals/" + id)
+                        .header("Authorization", token)
+                        .retrieve()
+                        .toEntity(AnimalDTO.class)
+                        .block();
+            } catch (WebClientResponseException e) {
+                //Then
+                assertEquals("Bad Request", e.getStatusText());
+            }
+
+        }
     }
 }
+
+
+
+
+
 

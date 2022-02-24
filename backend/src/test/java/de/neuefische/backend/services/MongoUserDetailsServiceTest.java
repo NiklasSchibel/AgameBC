@@ -3,14 +3,9 @@ package de.neuefische.backend.services;
 import de.neuefische.backend.models.UserMongo;
 import de.neuefische.backend.repositories.MongoUserRepository;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -29,7 +24,6 @@ class MongoUserDetailsServiceTest {
                         .newUser("Klaus"
                                 , "12345"
                                 , List.of("API_READWRITE"));
-//                User mockedUser = new User(mockUser);
 
         //When
         when(userRepository.findByUsername("Klaus")).thenReturn(Optional.ofNullable(mockUser));
