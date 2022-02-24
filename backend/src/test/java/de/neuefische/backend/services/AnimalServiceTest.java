@@ -1,5 +1,6 @@
 package de.neuefische.backend.services;
 
+import com.mongodb.lang.Nullable;
 import de.neuefische.backend.controller.AnimalController;
 import de.neuefische.backend.dto.AnimalDTO;
 import de.neuefische.backend.exception.AnimalDoesNotExistException;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.mockito.internal.matchers.Null;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.server.ResponseStatusException;
@@ -82,7 +84,7 @@ class AnimalServiceTest {
 
             //When
             Mockito.when(animalRepository.findById(id))
-                    .thenThrow(new AnimalDoesNotExistException("Animal with id " + id + " not found!"));
+                    .thenReturn(Optional.empty());
 
             //Then
             try {
@@ -116,17 +118,15 @@ class AnimalServiceTest {
         Mockito.when(animalRepository.findAll())
                 .thenReturn(underTestAnimalDataList);
         Mockito.when(animalRepository.findById(id))
-                .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "problem: could not get random animal from mongoDB"));
+                .thenReturn(Optional.empty());
 
         //Then
         int max = animalRepository.findAll().size() - 1;
         assertEquals(max, 1);
         try {
-            AnimalDTO returnedValue = animalService.getRandomAnimal();
-            fail("Expected exception was not thrown");
-        } catch (Exception e) {
-            assertTrue(e instanceof ResponseStatusException);
-            assertEquals(((ResponseStatusException) e).getStatus(), HttpStatus.NOT_FOUND);
+            animalService.getRandomAnimal();
+        } catch (ResponseStatusException e) {
+            assertEquals("problem: could not get random animal from mongoDB", e.getReason());
         }
     }
 
