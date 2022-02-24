@@ -10,9 +10,7 @@ import de.neuefische.backend.services.MongoUserDetailsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -22,30 +20,22 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.reactive.function.client.WebClient;
-
 import java.util.List;
 import java.util.Optional;
-
 import static java.util.Arrays.asList;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@ExtendWith(MockitoExtension.class)
 class AnimalControllerTest {
 
     private MockMvc mockMvc;
-    private AnimalService animalService = Mockito.mock(AnimalService.class);
 
     private final WebClient webTestClient = WebClient.create();
 
@@ -54,6 +44,9 @@ class AnimalControllerTest {
 
     @MockBean
     private MongoUserRepository mongoUserRepository;
+
+    @MockBean
+    private AnimalService animalService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -132,15 +125,20 @@ class AnimalControllerTest {
     }
 
 
+
+
     @Test
-    void ShouldReturnAnimalByIDfromDB() throws Exception {
+    void ShouldReturnAnimalByIDfromDB() {
 
         //Given
-        Mockito.when(mongoUserRepository
+        AnimalDTO animalUnderTest = new AnimalDTO(new AnimalData("1", "Affe", "test_link", "A"));
+
+        when(mongoUserRepository
                         .findByUsername("some-user"))
                 .thenReturn(Optional.of(setupUser()));
-        Mockito.when(animalService.getAnimalByID("1"))
-                .thenReturn(new AnimalDTO(new AnimalData("1", "Affe", "test_link", "A")));
+
+        when(animalService.getAnimalByID("1"))
+                .thenReturn(animalUnderTest);
 
 
         LoginData loginData = new LoginData("some-user", "secretPassword", 15);
@@ -165,9 +163,7 @@ class AnimalControllerTest {
                 .block();
 
         //Then
-        assertNotNull(animalTestDTO);
-//            assertThat(animalTestDTO.getStatusCode(),is(HttpStatus.OK));
-
+        assertEquals(animalTestDTO.getBody(),animalUnderTest);
 
     }
 }
