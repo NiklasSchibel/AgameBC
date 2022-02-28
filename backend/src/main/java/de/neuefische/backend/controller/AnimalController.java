@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
